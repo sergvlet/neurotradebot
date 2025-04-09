@@ -1,45 +1,37 @@
 package com.chicu.neurotradebot.trade.model;
 
-import com.chicu.neurotradebot.binance.model.OrderSide;
-import com.chicu.neurotradebot.binance.model.OrderType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
+@Table(name = "trade_order")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class TradeOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long chatId;
+    private Long tradeExecutionId;
+
     private String symbol;
-    private String exchange;
-    private boolean demo;
-    private String strategy;
 
-    @Enumerated(EnumType.STRING)
-    private OrderSide side;
+    private String side;  // BUY or SELL
 
-    @Enumerated(EnumType.STRING)
-    private OrderType type;
+    private BigDecimal price;
 
-    private String quantity;
-    private double price;
+    private BigDecimal quantity;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime orderTime;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<TradeExecution> executions;
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderCommission> commissions;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trade_execution_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private TradeExecution tradeExecution;
 }

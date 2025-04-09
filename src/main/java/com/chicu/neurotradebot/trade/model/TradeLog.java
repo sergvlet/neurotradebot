@@ -3,24 +3,33 @@ package com.chicu.neurotradebot.trade.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "trade_log")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class TradeLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long chatId;
-    private String symbol;
-    private String strategy;
-    private String message;
+    private Long tradeExecutionId;
 
-    private LocalDateTime timestamp;
+    private String action;  // BUY / SELL
+
+    private BigDecimal price;
+
+    private BigDecimal quantity;
+
+    private LocalDateTime logTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trade_execution_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private TradeExecution tradeExecution;
 }
