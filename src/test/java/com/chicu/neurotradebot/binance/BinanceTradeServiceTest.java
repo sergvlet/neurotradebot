@@ -1,0 +1,1 @@
+package com.chicu.neurotradebot.binance;// Test file for BinanceTradeServiceTest.java

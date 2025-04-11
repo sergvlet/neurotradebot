@@ -1,21 +1,93 @@
-2025-04-09T16:56:49.170+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : Starting NeuroTradeBotApplication using Java 23.0.2 with PID 25004 (C:\Users\schic\IdeaProjects\neuro-trade-bot\target\classes started by schic in C:\Users\schic\IdeaProjects\neuro-trade-bot)
-2025-04-09T16:56:49.172+02:00 DEBUG 25004 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : Running with Spring Boot v3.4.4, Spring v6.2.5
-2025-04-09T16:56:49.172+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : No active profile set, falling back to 1 default profile: "default"
-2025-04-09T16:56:49.220+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-04-09T16:56:49.221+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-04-09T16:56:49.809+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-04-09T16:56:49.867+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 5 JPA repository interfaces.
-2025-04-09T16:56:50.287+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-04-09T16:56:50.301+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-04-09T16:56:50.301+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
-2025-04-09T16:56:50.339+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-04-09T16:56:50.340+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1119 ms
-2025-04-09T16:56:50.388+02:00  WARN 25004 --- [neuro-trade-bot] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Failed to initialize dependency 'dataSourceScriptDatabaseInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to determine a suitable driver class
-2025-04-09T16:56:50.392+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-04-09T16:56:50.408+02:00  INFO 25004 --- [neuro-trade-bot] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+2025-04-11T11:21:58.757+02:00  INFO 20112 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : Starting NeuroTradeBotApplication using Java 23.0.2 with PID 20112 (C:\Users\schic\IdeaProjects\neuro-trade-bot\target\classes started by schic in C:\Users\schic\IdeaProjects\neuro-trade-bot)
+2025-04-11T11:21:58.760+02:00 DEBUG 20112 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-04-11T11:21:58.761+02:00  INFO 20112 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-04-11T11:21:58.834+02:00  INFO 20112 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-11T11:21:58.834+02:00  INFO 20112 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-11T11:21:58.998+02:00  WARN 20112 --- [neuro-trade-bot] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.chicu.neurotradebot.NeuroTradeBotApplication]
+2025-04-11T11:21:59.185+02:00 ERROR 20112 --- [neuro-trade-bot] [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.chicu.neurotradebot.NeuroTradeBotApplication]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:193) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:418) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:290) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:791) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:609) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.4.4.jar:3.4.4]
+	at com.chicu.neurotradebot.NeuroTradeBotApplication.main(NeuroTradeBotApplication.java:9) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.4.4.jar:3.4.4]
+Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'activeTradeService' for bean class [com.chicu.neurotradebot.trade.service.ActiveTradeService] conflicts with existing, non-compatible bean definition of same name and class [com.chicu.neurotradebot.trade.repository.ActiveTradeService]
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.checkCandidate(ClassPathBeanDefinitionScanner.java:361) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.doScan(ClassPathBeanDefinitionScanner.java:288) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ComponentScanAnnotationParser.parse(ComponentScanAnnotationParser.java:128) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:345) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:280) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:203) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:172) ~[spring-context-6.2.5.jar:6.2.5]
+	... 16 common frames omitted
+
+2025-04-11T11:23:38.737+02:00  INFO 27876 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : Starting NeuroTradeBotApplication using Java 23.0.2 with PID 27876 (C:\Users\schic\IdeaProjects\neuro-trade-bot\target\classes started by schic in C:\Users\schic\IdeaProjects\neuro-trade-bot)
+2025-04-11T11:23:38.739+02:00 DEBUG 27876 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-04-11T11:23:38.740+02:00  INFO 27876 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-04-11T11:23:38.782+02:00  INFO 27876 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-11T11:23:38.782+02:00  INFO 27876 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-11T11:23:38.873+02:00  WARN 27876 --- [neuro-trade-bot] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.chicu.neurotradebot.NeuroTradeBotApplication]
+2025-04-11T11:23:39.023+02:00 ERROR 27876 --- [neuro-trade-bot] [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.chicu.neurotradebot.NeuroTradeBotApplication]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:193) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:418) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:290) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:791) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:609) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.4.4.jar:3.4.4]
+	at com.chicu.neurotradebot.NeuroTradeBotApplication.main(NeuroTradeBotApplication.java:9) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.4.4.jar:3.4.4]
+Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'activeTradeService' for bean class [com.chicu.neurotradebot.trade.service.ActiveTradeService] conflicts with existing, non-compatible bean definition of same name and class [com.chicu.neurotradebot.trade.repository.ActiveTradeService]
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.checkCandidate(ClassPathBeanDefinitionScanner.java:361) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.doScan(ClassPathBeanDefinitionScanner.java:288) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ComponentScanAnnotationParser.parse(ComponentScanAnnotationParser.java:128) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:345) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:280) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:203) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:172) ~[spring-context-6.2.5.jar:6.2.5]
+	... 16 common frames omitted
+
+2025-04-11T11:27:05.927+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : Starting NeuroTradeBotApplication using Java 23.0.2 with PID 27868 (C:\Users\schic\IdeaProjects\neuro-trade-bot\target\classes started by schic in C:\Users\schic\IdeaProjects\neuro-trade-bot)
+2025-04-11T11:27:05.929+02:00 DEBUG 27868 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-04-11T11:27:05.929+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] c.c.n.NeuroTradeBotApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-04-11T11:27:05.983+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-11T11:27:05.984+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-11T11:27:06.515+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-11T11:27:06.582+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 6 JPA repository interfaces.
+2025-04-11T11:27:06.980+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-11T11:27:06.992+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-11T11:27:06.993+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-11T11:27:07.034+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-11T11:27:07.035+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1051 ms
+2025-04-11T11:27:07.088+02:00  WARN 27868 --- [neuro-trade-bot] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Failed to initialize dependency 'dataSourceScriptDatabaseInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to determine a suitable driver class
+2025-04-11T11:27:07.090+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-04-11T11:27:07.103+02:00  INFO 27868 --- [neuro-trade-bot] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-04-09T16:56:50.425+02:00 ERROR 25004 --- [neuro-trade-bot] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+2025-04-11T11:27:07.118+02:00 ERROR 27868 --- [neuro-trade-bot] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
 
 ***************************
 APPLICATION FAILED TO START
