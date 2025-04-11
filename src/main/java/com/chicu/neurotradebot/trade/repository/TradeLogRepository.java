@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface TradeLogRepository extends JpaRepository<TradeLog, Long> {
-    List<TradeLog> findByChatId(Long chatId);
+
+    // Получение всех логов для активной сделки по её id
+    List<TradeLog> findByActiveTradeId(Long activeTradeId);
 }
