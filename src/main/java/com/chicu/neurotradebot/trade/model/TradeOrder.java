@@ -7,9 +7,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "trade_order")
-@Getter
-@Setter
+@Table(name = "trade_orders")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -19,19 +18,17 @@ public class TradeOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long tradeExecutionId;
-
-    private String symbol;
-
-    private String side;  // BUY or SELL
-
-    private BigDecimal price;
-
-    private BigDecimal quantity;
-
-    private LocalDateTime orderTime;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trade_execution_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private TradeExecution tradeExecution;
+    @JoinColumn(name = "active_trade_id")
+    private ActiveTrade activeTrade; // Связь с активной сделкой
+
+    private LocalDateTime timestamp; // Время, когда был создан ордер
+    private String orderType; // Тип ордера (например, "LIMIT", "MARKET")
+    private String side; // Направление ордера: "BUY" или "SELL"
+    private BigDecimal price; // Цена ордера
+    private BigDecimal quantity; // Количество актива
+    private BigDecimal totalAmount; // Общая сумма ордера (цена * количество)
+    private String status; // Статус ордера (например, "FILLED", "PENDING", "CANCELED")
+    private String exchange; // Биржа, на которой был создан ордер (например, "BINANCE")
+
 }

@@ -7,9 +7,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "trade_log")
-@Getter
-@Setter
+@Table(name = "trade_logs")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -19,17 +18,15 @@ public class TradeLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long tradeExecutionId;
-
-    private String action;  // BUY / SELL
-
-    private BigDecimal price;
-
-    private BigDecimal quantity;
-
-    private LocalDateTime logTime;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trade_execution_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private TradeExecution tradeExecution;
+    @JoinColumn(name = "active_trade_id")
+    private ActiveTrade activeTrade; // Связь с активной сделкой, к которой относится лог
+
+    private LocalDateTime timestamp; // Время записи лога
+    private String action; // Тип действия, например, "BUY", "SELL", "CLOSE"
+    private BigDecimal price; // Цена актива, на которой было выполнено действие
+    private BigDecimal quantity; // Количество актива в сделке
+    private BigDecimal totalAmount; // Общая сумма сделки
+    private String status; // Статус сделки, например "SUCCESS", "FAIL"
+
 }

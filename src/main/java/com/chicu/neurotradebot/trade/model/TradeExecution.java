@@ -7,9 +7,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "trade_execution")
-@Getter
-@Setter
+@Table(name = "trade_executions")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -19,15 +18,14 @@ public class TradeExecution {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long tradeOrderId;
-
-    private BigDecimal executedPrice;
-
-    private BigDecimal executedQuantity;
-
-    private LocalDateTime executionTime;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trade_order_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private TradeOrder tradeOrder;
+    @JoinColumn(name = "trade_order_id")
+    private TradeOrder tradeOrder; // Связь с ордером, к которому относится выполнение
+
+    private LocalDateTime executionTime; // Время исполнения ордера
+    private BigDecimal executedQuantity; // Количество выполненной сделки
+    private BigDecimal executedPrice; // Цена, по которой был выполнен ордер
+
+    private String status; // Статус исполнения (например, "FILLED", "PENDING")
+
 }
