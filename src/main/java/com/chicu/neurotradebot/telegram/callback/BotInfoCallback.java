@@ -21,7 +21,7 @@ public class BotInfoCallback implements CallbackProcessor {
     @Override
     public void process(Long chatId, Integer messageId, AbsSender sender) {
         String text = """
-                🤖 <b>О боте</b>
+                🤖 О боте
 
                 Этот бот создан для автоматической AI-торговли на криптовалютных биржах.
 

@@ -1,6 +1,5 @@
 package com.chicu.neurotradebot.telegram.callback;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
