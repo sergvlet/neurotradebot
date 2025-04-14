@@ -1,1 +1,8 @@
-package com.chicu.neurotradebot.telegram.callback;// CallbackProcessor.java (placeholder)
+package com.chicu.neurotradebot.telegram.callback;
+
+import org.telegram.telegrambots.meta.bots.AbsSender;
+
+public interface CallbackProcessor {
+    BotCallback callback();
+    void process(Long chatId, Integer messageId, AbsSender sender);
+}
