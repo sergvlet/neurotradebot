@@ -32,20 +32,27 @@ public class TelegramBot extends TelegramLongPollingBot {
 
             if (text.equals("/start")) {
                 CallbackProcessor processor = callbackFactory.getProcessor(BotCallback.MAIN_MENU);
-                processor.process(chatId, null, this);
+                processor.process(chatId, null, "main_menu", this); // добавили callbackData
             }
         }
 
         if (update.hasCallbackQuery()) {
-            String data = update.getCallbackQuery().getData();
+            String data = update.getCallbackQuery().getData(); // пример: "TOGGLE_STRATEGY:SMA"
             Long chatId = update.getCallbackQuery().getMessage().getChatId();
             Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
 
-            BotCallback callback = BotCallback.fromValue(data);
+            // Получаем префикс до ":" — это наш тип кнопки
+            String callbackPrefix = data.split(":")[0];
+
+            BotCallback callback = BotCallback.fromValue(callbackPrefix);
             CallbackProcessor processor = callbackFactory.getProcessor(callback);
-            processor.process(chatId, messageId, this);
+
+            if (processor != null) {
+                processor.process(chatId, messageId, data, this); // прокидываем data
+            }
         }
     }
+
 
     @Override
     public String getBotUsername() {

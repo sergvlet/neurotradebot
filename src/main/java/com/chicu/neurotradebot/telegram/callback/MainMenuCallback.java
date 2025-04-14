@@ -13,17 +13,15 @@ public class MainMenuCallback implements CallbackProcessor {
     private final MessageUtils messageUtils;
     private final KeyboardService keyboardService;
 
-
     @Override
     public BotCallback callback() {
         return BotCallback.MAIN_MENU;
     }
 
     @Override
-    public void process(Long chatId, Integer messageId, AbsSender sender) {
+    public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
         String text = "🏠 Главное меню:\nВыберите действие ниже:";
         var keyboard = keyboardService.getMainMenu(chatId);
-
         messageUtils.editMessage(chatId, messageId, text, keyboard, sender);
     }
 }

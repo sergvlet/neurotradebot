@@ -22,8 +22,8 @@ public class SettingsCallback implements CallbackProcessor {
     }
 
     @Override
-    public void process(Long chatId, Integer messageId, AbsSender sender) {
-        // добавляем в историю текущий callback
+    public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
+        // сохраняем в историю переход
         historyService.push(chatId, callback());
 
         String text = "⚙️ Настройки:\nВыберите параметр для изменения:";

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -40,4 +41,11 @@ public class MessageUtils {
             log.error("❌ Ошибка при отправке/редактировании сообщения", e);
         }
     }
+    public String getLastCallbackData(Update update) {
+        if (update.hasCallbackQuery()) {
+            return update.getCallbackQuery().getData();
+        }
+        return null;
+    }
+
 }

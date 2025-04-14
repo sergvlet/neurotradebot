@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
-public class StrategyMenuCallback implements CallbackProcessor {
+public class StrategyToggleCallback implements CallbackProcessor {
 
     private final MessageUtils messageUtils;
     private final KeyboardService keyboardService;
@@ -20,14 +20,32 @@ public class StrategyMenuCallback implements CallbackProcessor {
 
     @Override
     public BotCallback callback() {
-        return BotCallback.STRATEGY_MENU;
+        return BotCallback.TOGGLE_STRATEGY;
     }
 
     @Override
     public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
+        // Пример callbackData: "toggle_strategy:SMA"
+        String[] parts = callbackData.split(":");
+        if (parts.length != 2) return;
+
+        String strategyKey = parts[1];
+        AvailableStrategy strategy;
+        try {
+            strategy = AvailableStrategy.valueOf(strategyKey);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+
+        // Переключаем стратегию
+        userSettingsService.toggleStrategy(chatId, strategy);
+
+        // Получаем обновлённые стратегии
         Set<AvailableStrategy> selected = userSettingsService.getSelectedStrategies(chatId);
-        var keyboard = keyboardService.getStrategySelectionMenu(selected);
         String text = "🧠 Выберите стратегии для торговли:";
+        var keyboard = keyboardService.getStrategySelectionMenu(selected);
+
+        // Обновляем сообщение
         messageUtils.editMessage(chatId, messageId, text, keyboard, sender);
     }
 }

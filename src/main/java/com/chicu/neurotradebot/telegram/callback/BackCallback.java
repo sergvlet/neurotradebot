@@ -19,8 +19,14 @@ public class BackCallback implements CallbackProcessor {
     }
 
     @Override
-    public void process(Long chatId, Integer messageId, AbsSender sender) {
-        messageUtils.editMessage(chatId, messageId, "🏠 Главное меню:\nВыберите действие ниже:",
-                keyboardService.getMainMenu(chatId), sender);
+    public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
+        // Для кнопки "Назад" callbackData не используется, просто возвращаем главное меню
+        messageUtils.editMessage(
+                chatId,
+                messageId,
+                "🏠 Главное меню:\nВыберите действие ниже:",
+                keyboardService.getMainMenu(chatId),
+                sender
+        );
     }
 }

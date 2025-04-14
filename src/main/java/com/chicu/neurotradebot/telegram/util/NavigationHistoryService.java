@@ -17,8 +17,8 @@ public class NavigationHistoryService {
     public BotCallback pop(Long chatId) {
         Deque<BotCallback> stack = history.getOrDefault(chatId, new ArrayDeque<>());
         if (!stack.isEmpty()) {
-            stack.pop(); // remove current
-            return stack.peek(); // return previous
+            stack.pop();
+            return stack.peek();
         }
         return BotCallback.MAIN_MENU;
     }
