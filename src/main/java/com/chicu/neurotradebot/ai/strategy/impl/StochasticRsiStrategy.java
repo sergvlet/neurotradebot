@@ -1,7 +1,7 @@
 package com.chicu.neurotradebot.ai.strategy.impl;
 
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
-import com.chicu.neurotradebot.ai.strategy.config.RsiConfig;
+import com.chicu.neurotradebot.ai.strategy.config.StochasticRsiConfig;
 import com.chicu.neurotradebot.trade.model.MarketCandle;
 import com.chicu.neurotradebot.trade.model.Signal;
 import com.chicu.neurotradebot.trade.service.MarketCandleService;
@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.ta4j.core.BarSeries;
-import org.ta4j.core.indicators.RSIIndicator;
+import org.ta4j.core.indicators.StochasticRSIIndicator;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
 
 import java.util.List;
@@ -17,38 +17,34 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class RsiStrategy implements AiStrategy {
+public class StochasticRsiStrategy implements AiStrategy {
 
     private final MarketCandleService candleService;
-    private final RsiConfig config = new RsiConfig();
+    private final StochasticRsiConfig config = new StochasticRsiConfig();
 
     @Override
     public String getName() {
-        return "RSI";
+        return "Stochastic RSI";
     }
 
     @Override
     public Signal analyze(List<MarketCandle> candles) {
-        if (candles.size() < config.getPeriod() + 1) {
-            log.warn("📉 Недостаточно данных для RSI анализа");
+        if (candles.size() < config.getRsiPeriod() + config.getStochasticPeriod()) {
+            log.warn("📉 Недостаточно данных для анализа Stochastic RSI");
             return Signal.HOLD;
         }
 
         BarSeries series = candleService.buildBarSeries(candles);
         ClosePriceIndicator closePrice = new ClosePriceIndicator(series);
-        RSIIndicator rsi = new RSIIndicator(closePrice, config.getPeriod());
+        StochasticRSIIndicator stochasticRsi = new StochasticRSIIndicator(closePrice, config.getRsiPeriod());
 
         int lastIndex = series.getEndIndex();
-        double rsiValue = rsi.getValue(lastIndex).doubleValue();
+        double stochasticRsiValue = stochasticRsi.getValue(lastIndex).doubleValue();
 
-        log.info("📊 RSI = {}", rsiValue);
+        log.info("📊 Stochastic RSI: {}", stochasticRsiValue);
 
-        if (rsiValue < config.getOversold()) {
-            return Signal.BUY;
-        } else if (rsiValue > config.getOverbought()) {
-            return Signal.SELL;
-        } else {
-            return Signal.HOLD;
-        }
+        if (stochasticRsiValue < 0.2) return Signal.BUY;
+        else if (stochasticRsiValue > 0.8) return Signal.SELL;
+        else return Signal.HOLD;
     }
 }
