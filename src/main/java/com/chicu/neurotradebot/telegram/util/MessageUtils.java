@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -41,11 +40,30 @@ public class MessageUtils {
             log.error("❌ Ошибка при отправке/редактировании сообщения", e);
         }
     }
-    public String getLastCallbackData(Update update) {
-        if (update.hasCallbackQuery()) {
-            return update.getCallbackQuery().getData();
+
+    public void sendMessage(Long chatId, String text, AbsSender sender) {
+        try {
+            SendMessage message = SendMessage.builder()
+                    .chatId(chatId.toString())
+                    .text(text)
+                    .build();
+            sender.execute(message);
+        } catch (TelegramApiException e) {
+            log.error("❌ Ошибка при отправке сообщения", e);
         }
-        return null;
     }
 
+    // 🆕 Новый метод: отправка сообщения с клавиатурой
+    public void sendMessage(Long chatId, String text, InlineKeyboardMarkup keyboard, AbsSender sender) {
+        try {
+            SendMessage message = SendMessage.builder()
+                    .chatId(chatId.toString())
+                    .text(text)
+                    .replyMarkup(keyboard)
+                    .build();
+            sender.execute(message);
+        } catch (TelegramApiException e) {
+            log.error("❌ Ошибка при отправке сообщения с клавиатурой", e);
+        }
+    }
 }

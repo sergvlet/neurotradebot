@@ -16,7 +16,6 @@ public class UserSettings {
 
     private String exchange; // Пример: "BINANCE", "BYBIT"
 
-    private boolean demoMode; // true = демо, false = реальный режим
 
     private String tradeLimit; // сумма сделки в USDT (как строка)
 
@@ -28,4 +27,8 @@ public class UserSettings {
     )
     @Column(name = "strategy")
     private Set<AvailableStrategy> strategies = new HashSet<>();
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "trade_mode")
+    private TradeMode tradeMode = TradeMode.DEMO;
 }
