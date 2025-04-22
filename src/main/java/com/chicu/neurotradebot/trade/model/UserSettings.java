@@ -1,6 +1,8 @@
 package com.chicu.neurotradebot.trade.model;
 
 import com.chicu.neurotradebot.ai.strategy.AvailableStrategy;
+import com.chicu.neurotradebot.trade.enums.Exchange;
+import com.chicu.neurotradebot.trade.enums.TradeMode;
 import jakarta.persistence.*;
 import lombok.Data;
 

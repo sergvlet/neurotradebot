@@ -1,4 +1,4 @@
-package com.chicu.neurotradebot.trade.model;
+package com.chicu.neurotradebot.trade.enums;
 
 public enum Exchange {
     BINANCE("Binance"),

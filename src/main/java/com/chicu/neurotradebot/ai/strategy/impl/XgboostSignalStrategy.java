@@ -4,7 +4,7 @@ import com.chicu.neurotradebot.ai.strategy.AiStrategy;
 import com.chicu.neurotradebot.ai.strategy.config.XgboostConfig;
 import com.chicu.neurotradebot.ai.strategy.ml.SignalClassifier;
 import com.chicu.neurotradebot.trade.model.MarketCandle;
-import com.chicu.neurotradebot.trade.model.Signal;
+import com.chicu.neurotradebot.trade.enums.Signal;
 import com.chicu.neurotradebot.trade.service.MarketCandleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

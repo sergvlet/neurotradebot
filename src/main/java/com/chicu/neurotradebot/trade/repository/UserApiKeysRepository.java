@@ -1,6 +1,6 @@
 package com.chicu.neurotradebot.trade.repository;
 
-import com.chicu.neurotradebot.trade.model.Exchange;
+import com.chicu.neurotradebot.trade.enums.Exchange;
 import com.chicu.neurotradebot.trade.model.UserApiKeys;
 import org.springframework.data.jpa.repository.JpaRepository;
 

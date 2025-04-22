@@ -1,4 +1,4 @@
-package com.chicu.neurotradebot.trade.model;
+package com.chicu.neurotradebot.trade.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

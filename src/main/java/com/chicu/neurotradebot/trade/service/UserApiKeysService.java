@@ -1,6 +1,6 @@
 package com.chicu.neurotradebot.trade.service;
 
-import com.chicu.neurotradebot.trade.model.Exchange;
+import com.chicu.neurotradebot.trade.enums.Exchange;
 import com.chicu.neurotradebot.trade.model.UserApiKeys;
 import com.chicu.neurotradebot.trade.repository.UserApiKeysRepository;
 import lombok.RequiredArgsConstructor;

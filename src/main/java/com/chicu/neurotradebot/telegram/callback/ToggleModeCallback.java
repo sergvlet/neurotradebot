@@ -2,7 +2,7 @@ package com.chicu.neurotradebot.telegram.callback;
 
 import com.chicu.neurotradebot.telegram.util.KeyboardService;
 import com.chicu.neurotradebot.telegram.util.MessageUtils;
-import com.chicu.neurotradebot.trade.model.TradeMode;
+import com.chicu.neurotradebot.trade.enums.TradeMode;
 import com.chicu.neurotradebot.trade.service.UserSettingsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

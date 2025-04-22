@@ -1,5 +1,6 @@
 package com.chicu.neurotradebot.trade.model;
 
+import com.chicu.neurotradebot.trade.enums.Exchange;
 import jakarta.persistence.*;
 import lombok.Data;
 

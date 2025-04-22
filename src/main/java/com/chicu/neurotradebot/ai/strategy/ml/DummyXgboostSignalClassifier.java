@@ -1,6 +1,6 @@
 package com.chicu.neurotradebot.ai.strategy.ml;
 
-import com.chicu.neurotradebot.trade.model.Signal;
+import com.chicu.neurotradebot.trade.enums.Signal;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

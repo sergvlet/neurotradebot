@@ -1,8 +1,8 @@
 package com.chicu.neurotradebot.trade.service;
 
 import com.chicu.neurotradebot.ai.strategy.AvailableStrategy;
-import com.chicu.neurotradebot.trade.model.Exchange;
-import com.chicu.neurotradebot.trade.model.TradeMode;
+import com.chicu.neurotradebot.trade.enums.Exchange;
+import com.chicu.neurotradebot.trade.enums.TradeMode;
 import com.chicu.neurotradebot.trade.model.UserSettings;
 import com.chicu.neurotradebot.trade.repository.UserSettingsRepository;
 import lombok.RequiredArgsConstructor;

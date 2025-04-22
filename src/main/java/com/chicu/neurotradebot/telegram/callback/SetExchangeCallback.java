@@ -1,7 +1,7 @@
 package com.chicu.neurotradebot.telegram.callback;
 
 import com.chicu.neurotradebot.telegram.util.MessageUtils;
-import com.chicu.neurotradebot.trade.model.Exchange;
+import com.chicu.neurotradebot.trade.enums.Exchange;
 import com.chicu.neurotradebot.trade.service.UserApiKeysService;
 import com.chicu.neurotradebot.trade.service.UserSettingsService;
 import lombok.RequiredArgsConstructor;

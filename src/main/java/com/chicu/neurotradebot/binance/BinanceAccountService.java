@@ -1,7 +1,7 @@
 package com.chicu.neurotradebot.binance;
 
-import com.chicu.neurotradebot.trade.model.Exchange;
-import com.chicu.neurotradebot.trade.model.TradeMode;
+import com.chicu.neurotradebot.trade.enums.Exchange;
+import com.chicu.neurotradebot.trade.enums.TradeMode;
 import com.chicu.neurotradebot.trade.model.UserApiKeys;
 import com.chicu.neurotradebot.trade.service.UserApiKeysService;
 import com.chicu.neurotradebot.trade.service.UserSettingsService;

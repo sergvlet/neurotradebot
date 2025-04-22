@@ -1,7 +1,7 @@
 package com.chicu.neurotradebot.trade.service;
 
 import com.chicu.neurotradebot.trade.model.ActiveTrade;
-import com.chicu.neurotradebot.trade.model.Signal;
+import com.chicu.neurotradebot.trade.enums.Signal;
 import com.chicu.neurotradebot.trade.repository.ActiveTradeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

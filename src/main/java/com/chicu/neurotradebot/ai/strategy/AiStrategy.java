@@ -1,7 +1,7 @@
 package com.chicu.neurotradebot.ai.strategy;
 
 import com.chicu.neurotradebot.trade.model.MarketCandle;
-import com.chicu.neurotradebot.trade.model.Signal;
+import com.chicu.neurotradebot.trade.enums.Signal;
 
 
 import java.util.List;
