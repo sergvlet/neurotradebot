@@ -18,6 +18,13 @@ public enum BotCallback {
     SELECT_MODE("select_mode"),
     TOGGLE_MODE("toggle_mode"),
     TRADE_LIMIT("trade_limit"),
+    SHOW_STRATEGY_GRAPH("SHOW_STRATEGY_GRAPH"),
+    SYMBOL_SELECT("SYMBOL_SELECT"),
+    SYMBOL_SET("SYMBOL_SET"),
+    TIMEFRAME_SELECT("TIMEFRAME_SELECT"),
+    TIMEFRAME_SET("TIMEFRAME_SET"),
+    EXCHANGE_SELECT("exchange_select"),
+
 
     BACK("back");
 

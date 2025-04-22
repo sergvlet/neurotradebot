@@ -1,0 +1,32 @@
+package com.chicu.neurotradebot.telegram.callback;
+
+import com.chicu.neurotradebot.telegram.util.KeyboardService;
+import com.chicu.neurotradebot.telegram.util.MessageUtils;
+import com.chicu.neurotradebot.trade.service.UserSettingsService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.bots.AbsSender;
+
+@Component
+@RequiredArgsConstructor
+public class SymbolSetCallback implements CallbackProcessor {
+
+    private final MessageUtils messageUtils;
+    private final KeyboardService keyboardService;
+    private final UserSettingsService userSettingsService;
+
+    @Override
+    public BotCallback callback() {
+        return BotCallback.SYMBOL_SET;
+    }
+
+    @Override
+    public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
+        String symbol = callbackData.split(":")[1];
+        userSettingsService.setExchangeSymbol(chatId, symbol);
+
+        String text = "✅ Символ установлен: " + symbol;
+        var keyboard = keyboardService.getSettingsMenu(chatId);
+        messageUtils.editMessage(chatId, messageId, text, keyboard, sender);
+    }
+}

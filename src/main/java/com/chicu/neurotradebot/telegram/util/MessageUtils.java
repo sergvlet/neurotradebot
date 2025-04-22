@@ -53,7 +53,7 @@ public class MessageUtils {
         }
     }
 
-    // 🆕 Новый метод: отправка сообщения с клавиатурой
+    //  отправка сообщения с клавиатурой
     public void sendMessage(Long chatId, String text, InlineKeyboardMarkup keyboard, AbsSender sender) {
         try {
             SendMessage message = SendMessage.builder()

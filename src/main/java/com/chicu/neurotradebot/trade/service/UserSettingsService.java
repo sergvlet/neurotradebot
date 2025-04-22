@@ -99,4 +99,21 @@ public class UserSettingsService {
     public Double getTradeLimit(Long chatId) {
         return Double.valueOf(getOrCreate(chatId).getTradeLimit());
     }
+    public String getExchangeSymbol(Long chatId) {
+        return getOrCreate(chatId).getExchangeSymbol();
+    }
+
+    public void setExchangeSymbol(Long chatId, String symbol) {
+        UserSettings settings = getOrCreate(chatId);
+        settings.setExchangeSymbol(symbol);
+        repository.save(settings);
+    }
+
+    public void setTimeframe(Long chatId, String tf) {
+        UserSettings settings = getOrCreate(chatId);
+        settings.setTimeframe(tf);
+        repository.save(settings);
+    }
+
+
 }

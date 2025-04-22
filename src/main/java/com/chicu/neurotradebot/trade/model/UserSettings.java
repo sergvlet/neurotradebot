@@ -16,6 +16,9 @@ public class UserSettings {
 
     private String exchange; // Пример: "BINANCE", "BYBIT"
 
+    private String exchangeSymbol = "BTCUSDT"; // ⚠️ новое поле по умолчанию
+
+    private String timeframe = "1h"; // ⚠️ новое поле по умолчанию
 
     private String tradeLimit; // сумма сделки в USDT (как строка)
 
