@@ -10,4 +10,12 @@ public enum TradeMode {
     REAL("Реальный режим");
 
     private final String title;
+
+    public boolean isDemo() {
+        return this == DEMO;
+    }
+
+    public boolean isReal() {
+        return this == REAL;
+    }
 }

@@ -15,7 +15,7 @@ public class SymbolSelectCallback implements CallbackProcessor {
 
     @Override
     public BotCallback callback() {
-        return BotCallback.SYMBOL_SELECT;
+        return BotCallback. SYMBOL_MENU;
     }
 
     @Override

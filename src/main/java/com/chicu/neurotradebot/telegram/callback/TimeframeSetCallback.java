@@ -17,7 +17,7 @@ public class TimeframeSetCallback implements CallbackProcessor {
 
     @Override
     public BotCallback callback() {
-        return BotCallback.TIMEFRAME_SET;
+        return BotCallback.SET_TIMEFRAME;
     }
 
     @Override

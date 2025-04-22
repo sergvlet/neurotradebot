@@ -1,6 +1,7 @@
 package com.chicu.neurotradebot.trade.service;
 
 import com.chicu.neurotradebot.ai.strategy.AvailableStrategy;
+import com.chicu.neurotradebot.trade.model.Exchange;
 import com.chicu.neurotradebot.trade.model.TradeMode;
 import com.chicu.neurotradebot.trade.model.UserSettings;
 import com.chicu.neurotradebot.trade.repository.UserSettingsRepository;
@@ -15,12 +16,13 @@ public class UserSettingsService {
 
     private final UserSettingsRepository repository;
 
-    // ⏳ Хранилище ожиданий текстового ввода по chatId
+    // ⏳ Ожидание текстового ввода (тип действия)
     private final Map<Long, String> waitingInputs = new HashMap<>();
 
-    /**
-     * Получить или создать настройки пользователя
-     */
+    // 💾 Временное хранилище данных (например, API Key перед Secret Key)
+    private final Map<Long, Map<String, String>> tempData = new HashMap<>();
+
+    // 📌 Получить или создать настройки пользователя
     public UserSettings getOrCreate(Long chatId) {
         return repository.findByChatId(chatId)
                 .orElseGet(() -> {
@@ -31,9 +33,7 @@ public class UserSettingsService {
                 });
     }
 
-    /**
-     * Переключить стратегию
-     */
+    // 🧠 Управление стратегиями
     public void toggleStrategy(Long chatId, AvailableStrategy strategy) {
         UserSettings settings = getOrCreate(chatId);
         Set<AvailableStrategy> strategies = settings.getStrategies();
@@ -52,12 +52,8 @@ public class UserSettingsService {
         return getOrCreate(chatId).getStrategies();
     }
 
-    public void setStrategies(Long chatId, Set<AvailableStrategy> strategies) {
-        UserSettings settings = getOrCreate(chatId);
-        settings.setStrategies(strategies);
-        repository.save(settings);
-    }
 
+    // 💼 Режим торговли
     public void setTradeMode(Long chatId, TradeMode mode) {
         UserSettings settings = getOrCreate(chatId);
         settings.setTradeMode(mode);
@@ -68,11 +64,13 @@ public class UserSettingsService {
         return getOrCreate(chatId).getTradeMode();
     }
 
-    /**
-     * Ожидание текстового ввода
-     */
+    // ⌨️ Ожидание текстового ввода
     public void setWaitingForInput(Long chatId, String inputType) {
         waitingInputs.put(chatId, inputType);
+    }
+
+    public String getWaitingFor(Long chatId) {
+        return waitingInputs.get(chatId);
     }
 
     public boolean isWaitingFor(Long chatId, String inputType) {
@@ -83,25 +81,33 @@ public class UserSettingsService {
         waitingInputs.remove(chatId);
     }
 
-    public String getWaitingInputType(Long chatId) {
-        return waitingInputs.get(chatId);
+    // 💾 Временное хранение данных
+    public void setTemp(Long chatId, String key, String value) {
+        tempData.computeIfAbsent(chatId, k -> new HashMap<>()).put(key, value);
     }
 
-    /**
-     * Лимит сделки
-     */
+    public String getTemp(Long chatId, String key) {
+        return tempData.getOrDefault(chatId, new HashMap<>()).get(key);
+    }
+
+    public void clearTemp(Long chatId, String key) {
+        Map<String, String> userTemp = tempData.get(chatId);
+        if (userTemp != null) {
+            userTemp.remove(key);
+        }
+    }
+
+    // 💵 Лимит
     public void setTradeLimit(Long chatId, Double limit) {
         UserSettings settings = getOrCreate(chatId);
         settings.setTradeLimit(String.valueOf(limit));
         repository.save(settings);
     }
 
-    public Double getTradeLimit(Long chatId) {
-        return Double.valueOf(getOrCreate(chatId).getTradeLimit());
-    }
-    public String getExchangeSymbol(Long chatId) {
-        return getOrCreate(chatId).getExchangeSymbol();
-    }
+
+
+    // 📊 Символ
+
 
     public void setExchangeSymbol(Long chatId, String symbol) {
         UserSettings settings = getOrCreate(chatId);
@@ -109,11 +115,17 @@ public class UserSettingsService {
         repository.save(settings);
     }
 
+    // ⏱ Таймфрейм
     public void setTimeframe(Long chatId, String tf) {
         UserSettings settings = getOrCreate(chatId);
         settings.setTimeframe(tf);
         repository.save(settings);
     }
 
-
+    // 📈 Биржа
+    public void setExchange(Long chatId, Exchange exchange) {
+        UserSettings settings = getOrCreate(chatId);
+        settings.setExchange(exchange);
+        repository.save(settings);
+    }
 }

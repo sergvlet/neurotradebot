@@ -17,7 +17,7 @@ public class SymbolSetCallback implements CallbackProcessor {
 
     @Override
     public BotCallback callback() {
-        return BotCallback.SYMBOL_SET;
+        return BotCallback.SET_SYMBOL;
     }
 
     @Override

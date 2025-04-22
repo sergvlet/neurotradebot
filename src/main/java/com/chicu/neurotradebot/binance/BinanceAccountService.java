@@ -1,0 +1,79 @@
+package com.chicu.neurotradebot.binance;
+
+import com.chicu.neurotradebot.trade.model.Exchange;
+import com.chicu.neurotradebot.trade.model.TradeMode;
+import com.chicu.neurotradebot.trade.model.UserApiKeys;
+import com.chicu.neurotradebot.trade.service.UserApiKeysService;
+import com.chicu.neurotradebot.trade.service.UserSettingsService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class BinanceAccountService {
+
+    private final BinanceHttpClient httpClient;
+    private final UserApiKeysService apiKeysService;
+    private final UserSettingsService settingsService;
+
+    private static final String BASE_URL_REAL = "https://api.binance.com";
+    private static final String BASE_URL_TEST = "https://testnet.binance.vision";
+
+    public String getFormattedBalance(Long chatId) {
+        String rawJson = getBalance(chatId);
+        if (rawJson.startsWith("❌")) return rawJson;
+
+        StringBuilder sb = new StringBuilder("💰 *Баланс на Binance:*\n\n");
+
+        try {
+            JSONObject json = new JSONObject(rawJson);
+            JSONArray balances = json.getJSONArray("balances");
+
+            for (int i = 0; i < balances.length(); i++) {
+                JSONObject asset = balances.getJSONObject(i);
+                double free = asset.getDouble("free");
+                double locked = asset.getDouble("locked");
+                String assetName = asset.getString("asset");
+
+                if (free > 0 || locked > 0) {
+                    sb.append(String.format("*%s*: свободно: `%.4f`, заблокировано: `%.4f`\n", assetName, free, locked));
+                }
+            }
+        } catch (Exception e) {
+            log.error("❌ Ошибка при парсинге баланса", e);
+            return "❌ Ошибка при разборе баланса";
+        }
+
+        String result = sb.toString();
+        if (result.length() > 4000) {
+            result = result.substring(0, 3900) + "\n\n⚠️ Баланс обрезан: слишком много строк...";
+        }
+
+        return result;
+    }
+
+    public String getBalance(Long chatId) {
+        var settings = settingsService.getOrCreate(chatId);
+        Exchange exchange = settings.getExchange();
+        TradeMode mode = settings.getTradeMode();
+
+        UserApiKeys keys = apiKeysService.getOrCreate(chatId, exchange);
+        String apiKey = mode == TradeMode.REAL ? keys.getRealApiKey() : keys.getTestApiKey();
+        String secretKey = mode == TradeMode.REAL ? keys.getRealApiSecret() : keys.getTestApiSecret();
+        String baseUrl = mode == TradeMode.REAL ? BASE_URL_REAL : BASE_URL_TEST;
+
+        if (apiKey == null || secretKey == null) {
+            return "❌ Ключи API не установлены для режима: " + mode.getTitle();
+        }
+
+        Map<String, String> params = new HashMap<>();
+        return httpClient.sendSignedRequest(baseUrl, "/api/v3/account", "GET", apiKey, secretKey, params);
+    }
+}

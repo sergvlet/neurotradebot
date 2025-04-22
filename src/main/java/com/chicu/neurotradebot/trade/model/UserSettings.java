@@ -14,11 +14,13 @@ public class UserSettings {
     @Id
     private Long chatId;
 
-    private String exchange; // Пример: "BINANCE", "BYBIT"
+    @Enumerated(EnumType.STRING)
+    @Column(name = "exchange_name")
+    private Exchange exchange = Exchange.BINANCE; // ✅ теперь enum с дефолтным значением
 
-    private String exchangeSymbol = "BTCUSDT"; // ⚠️ новое поле по умолчанию
+    private String exchangeSymbol = "BTCUSDT"; // ⚠️ по умолчанию
 
-    private String timeframe = "1h"; // ⚠️ новое поле по умолчанию
+    private String timeframe = "1h"; // ⚠️ по умолчанию
 
     private String tradeLimit; // сумма сделки в USDT (как строка)
 

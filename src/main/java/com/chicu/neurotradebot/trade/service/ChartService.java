@@ -34,7 +34,7 @@ public class ChartService {
 
     public File generateStrategyChart(Long chatId) {
         UserSettings settings = userSettingsService.getOrCreate(chatId);
-        String symbol = settings.getExchange(); // Пример: BTCUSDT
+        String symbol = String.valueOf(settings.getExchange()); // Пример: BTCUSDT
         String interval = "1h"; // Можно расширить в будущем
         Set<AvailableStrategy> strategies = settings.getStrategies();
 

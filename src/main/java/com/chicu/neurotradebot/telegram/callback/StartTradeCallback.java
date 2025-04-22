@@ -8,20 +8,19 @@ import org.telegram.telegrambots.meta.bots.AbsSender;
 
 @Component
 @RequiredArgsConstructor
-public class TimeframeSelectCallback implements CallbackProcessor {
+public class StartTradeCallback implements CallbackProcessor {
 
-    private final MessageUtils messageUtils;
     private final KeyboardService keyboardService;
+    private final MessageUtils messageUtils;
 
     @Override
     public BotCallback callback() {
-        return BotCallback.TIMEFRAME_MENU;
+        return BotCallback.START_TRADE;
     }
 
     @Override
     public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
-        String text = "⏱ Выберите таймфрейм:";
-        var keyboard = keyboardService.getTimeframeSelectionMenu();
-        messageUtils.editMessage(chatId, messageId, text, keyboard, sender);
+        var keyboard = keyboardService.getTradingMenu(chatId);
+        messageUtils.editMessage(chatId, messageId, "📊 Торговое меню:", keyboard, sender);
     }
 }
