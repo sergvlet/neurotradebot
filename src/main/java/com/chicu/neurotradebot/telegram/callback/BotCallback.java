@@ -10,8 +10,24 @@ public enum BotCallback {
     // Главное меню
     MAIN_MENU("main_menu"),
 
+    // Ручная торговля
+    TRADE_MODE_MANUAL("trade_mode_manual"),
+    MANUAL_MENU("manual_menu"),
+    MANUAL_TRADE_EXECUTE("manual_trade_execute"),
+    MANUAL_TRADE_STATS("manual_trade_stats"),
+    MANUAL_TRADE_HISTORY("manual_trade_history"),
+    MANUAL_TRADE_SETTINGS("manual_trade_settings"),
+    MANUAL_STRATEGY_MENU("manual_strategy_menu"),
+    MANUAL_TRADE_LIMIT("manual_trade_limit"),
+    MANUAL_SYMBOL_MENU("manual_symbol_menu"),
+    MANUAL_TIMEFRAME_MENU("manual_timeframe_menu"),
+    MANUAL_EXCHANGE_MENU("manual_exchange_menu"),
+
+
     // Торговля
     START_TRADE("start_trade"),
+    TRADE_MODE_AI("trade_mode_ai"),
+
     SHOW_STRATEGY_GRAPH("show_strategy_graph"),
 
     // Статистика и история
@@ -48,7 +64,7 @@ public enum BotCallback {
 
     // Бинанс
     SHOW_BALANCE("show_balance"),
-
+    SET_TRADE_TYPE("set_trade_type"),
     // Навигация
     BACK("back");
 

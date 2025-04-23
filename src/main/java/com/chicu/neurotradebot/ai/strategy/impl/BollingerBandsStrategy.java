@@ -2,6 +2,7 @@ package com.chicu.neurotradebot.ai.strategy.impl;
 
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
 import com.chicu.neurotradebot.ai.strategy.config.BollingerBandsConfig;
+import com.chicu.neurotradebot.ai.strategy.config.StrategyConfig;
 import com.chicu.neurotradebot.trade.model.MarketCandle;
 import com.chicu.neurotradebot.trade.enums.Signal;
 import com.chicu.neurotradebot.trade.service.MarketCandleService;
@@ -25,7 +26,7 @@ import java.util.List;
 public class BollingerBandsStrategy implements AiStrategy {
 
     private final MarketCandleService candleService;
-    private final BollingerBandsConfig config = new BollingerBandsConfig();
+    private BollingerBandsConfig config = new BollingerBandsConfig(); // по умолчанию
 
     @Override
     public String getName() {
@@ -60,5 +61,14 @@ public class BollingerBandsStrategy implements AiStrategy {
         if (close.isLessThan(lower)) return Signal.BUY;
         else if (close.isGreaterThan(upper)) return Signal.SELL;
         else return Signal.HOLD;
+    }
+
+    @Override
+    public void setConfig(Object config){
+        if (config instanceof BollingerBandsConfig bollingerConfig) {
+            this.config = bollingerConfig;
+        } else {
+            log.warn("❌ Неверная конфигурация передана в BollingerBandsStrategy: {}", config);
+        }
     }
 }

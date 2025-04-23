@@ -2,6 +2,7 @@ package com.chicu.neurotradebot.ai.strategy.impl;
 
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
 import com.chicu.neurotradebot.ai.strategy.config.StochasticRsiConfig;
+import com.chicu.neurotradebot.ai.strategy.config.StrategyConfig;
 import com.chicu.neurotradebot.trade.model.MarketCandle;
 import com.chicu.neurotradebot.trade.enums.Signal;
 import com.chicu.neurotradebot.trade.service.MarketCandleService;
@@ -20,7 +21,7 @@ import java.util.List;
 public class StochasticRsiStrategy implements AiStrategy {
 
     private final MarketCandleService candleService;
-    private final StochasticRsiConfig config = new StochasticRsiConfig();
+    private StochasticRsiConfig config = new StochasticRsiConfig();
 
     @Override
     public String getName() {
@@ -46,5 +47,14 @@ public class StochasticRsiStrategy implements AiStrategy {
         if (stochasticRsiValue < 0.2) return Signal.BUY;
         else if (stochasticRsiValue > 0.8) return Signal.SELL;
         else return Signal.HOLD;
+    }
+
+    @Override
+    public void setConfig(Object config) {
+        if (config instanceof StochasticRsiConfig stochasticConfig) {
+            this.config = stochasticConfig;
+        } else {
+            log.warn("❌ Неверная конфигурация для Stochastic RSI стратегии: {}", config);
+        }
     }
 }

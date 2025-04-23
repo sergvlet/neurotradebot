@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MacdConfig {
+public class MacdConfig implements  StrategyConfig {
     private int shortPeriod = 12;
     private int longPeriod = 26;
     private int signalPeriod = 9;

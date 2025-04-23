@@ -2,6 +2,7 @@ package com.chicu.neurotradebot.ai.strategy.impl;
 
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
 import com.chicu.neurotradebot.ai.strategy.config.CciConfig;
+import com.chicu.neurotradebot.ai.strategy.config.StrategyConfig;
 import com.chicu.neurotradebot.trade.model.MarketCandle;
 import com.chicu.neurotradebot.trade.enums.Signal;
 import com.chicu.neurotradebot.trade.service.MarketCandleService;
@@ -19,7 +20,7 @@ import java.util.List;
 public class CciStrategy implements AiStrategy {
 
     private final MarketCandleService candleService;
-    private final CciConfig config = new CciConfig();
+    private CciConfig config = new CciConfig();
 
     @Override
     public String getName() {
@@ -44,5 +45,14 @@ public class CciStrategy implements AiStrategy {
         if (cciValue < config.getOversoldThreshold()) return Signal.BUY;
         else if (cciValue > config.getOverboughtThreshold()) return Signal.SELL;
         else return Signal.HOLD;
+    }
+
+    @Override
+    public void setConfig(Object config) {
+        if (config instanceof CciConfig cciConfig) {
+            this.config = cciConfig;
+        } else {
+            log.warn("❌ Неверная конфигурация для CciStrategy: {}", config);
+        }
     }
 }

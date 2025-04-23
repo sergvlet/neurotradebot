@@ -26,7 +26,7 @@ public class TimeframeSetCallback implements CallbackProcessor {
         userSettingsService.setTimeframe(chatId, tf);
 
         String text = "✅ Таймфрейм установлен: " + tf;
-        var keyboard = keyboardService.getSettingsMenu(chatId);
+        var keyboard = keyboardService.getManualTradeSettingsMenu(chatId);
         messageUtils.editMessage(chatId, messageId, text, keyboard, sender);
     }
 }

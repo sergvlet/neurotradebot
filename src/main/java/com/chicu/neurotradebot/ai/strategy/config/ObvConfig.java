@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ObvConfig {
+public class ObvConfig implements  StrategyConfig {
 
     /**
      * Минимальное количество свечей для анализа.

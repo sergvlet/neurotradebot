@@ -3,6 +3,7 @@ package com.chicu.neurotradebot.trade.service;
 import com.chicu.neurotradebot.ai.strategy.AvailableStrategy;
 import com.chicu.neurotradebot.trade.enums.Exchange;
 import com.chicu.neurotradebot.trade.enums.TradeMode;
+import com.chicu.neurotradebot.trade.enums.TradeType;
 import com.chicu.neurotradebot.trade.model.UserSettings;
 import com.chicu.neurotradebot.trade.repository.UserSettingsRepository;
 import lombok.RequiredArgsConstructor;
@@ -128,4 +129,14 @@ public class UserSettingsService {
         settings.setExchange(exchange);
         repository.save(settings);
     }
+    public void setTradeType(Long chatId, TradeType type) {
+        UserSettings settings = getOrCreate(chatId);
+        settings.setTradeType(type);
+        repository.save(settings);
+    }
+
+    public TradeType getTradeType(Long chatId) {
+        return getOrCreate(chatId).getTradeType();
+    }
+
 }

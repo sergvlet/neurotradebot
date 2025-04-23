@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class XgboostConfig {
+public class XgboostConfig implements  StrategyConfig {
     private int historySize = 30;
 }

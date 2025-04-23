@@ -23,7 +23,7 @@ public class ShowBalanceCallback implements CallbackProcessor {
     @Override
     public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
         String text = binanceAccountService.getFormattedBalance(chatId);
-        var keyboard = keyboardService.getSettingsMenu(chatId);
+        var keyboard = keyboardService.getManualTradeSettingsMenu(chatId);
 
         messageUtils.editMessage(chatId, messageId, text, keyboard, sender);
     }

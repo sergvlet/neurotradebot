@@ -5,10 +5,9 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum TradeMode {
-    DEMO("Демо режим"),
-    REAL("Реальный режим");
+public enum TradeType {
+    AI("🤖 AI-торговля"),
+    MANUAL("✋ Ручная торговля");
 
     private final String title;
-
 }

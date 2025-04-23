@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CciConfig {
+public class CciConfig implements StrategyConfig {
+
     private int period = 20;
     private double overboughtThreshold = 100.0;
     private double oversoldThreshold = -100.0;

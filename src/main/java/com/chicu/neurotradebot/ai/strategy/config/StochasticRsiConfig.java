@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StochasticRsiConfig {
+public class StochasticRsiConfig implements  StrategyConfig {
     private int rsiPeriod = 14;
     private int stochasticPeriod = 14;
     private int kPeriod = 3;

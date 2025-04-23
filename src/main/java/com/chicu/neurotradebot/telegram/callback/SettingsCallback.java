@@ -27,7 +27,7 @@ public class SettingsCallback implements CallbackProcessor {
         historyService.push(chatId, callback());
 
         String text = "⚙️ Настройки:\nВыберите параметр для изменения:";
-        InlineKeyboardMarkup keyboard = keyboardService.getSettingsMenu(chatId);
+        InlineKeyboardMarkup keyboard = keyboardService.getManualTradeSettingsMenu(chatId);
 
         messageUtils.editMessage(chatId, messageId, text, keyboard, sender);
     }

@@ -2,6 +2,7 @@ package com.chicu.neurotradebot.ai.strategy.impl;
 
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
 import com.chicu.neurotradebot.ai.strategy.config.ObvConfig;
+import com.chicu.neurotradebot.ai.strategy.config.StrategyConfig;
 import com.chicu.neurotradebot.trade.model.MarketCandle;
 import com.chicu.neurotradebot.trade.enums.Signal;
 import com.chicu.neurotradebot.trade.service.MarketCandleService;
@@ -20,7 +21,7 @@ import java.util.List;
 public class ObvStrategy implements AiStrategy {
 
     private final MarketCandleService candleService;
-    private final ObvConfig config = new ObvConfig();
+    private ObvConfig config = new ObvConfig();
 
     @Override
     public String getName() {
@@ -54,6 +55,15 @@ public class ObvStrategy implements AiStrategy {
             return Signal.SELL;
         } else {
             return Signal.HOLD;
+        }
+    }
+
+    @Override
+    public void setConfig(Object config) {
+        if (config instanceof ObvConfig obvConfig) {
+            this.config = obvConfig;
+        } else {
+            log.warn("❌ Неверная конфигурация для OBV стратегии: {}", config);
         }
     }
 }

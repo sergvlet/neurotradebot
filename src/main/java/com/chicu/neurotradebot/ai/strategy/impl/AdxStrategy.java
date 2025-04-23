@@ -2,8 +2,9 @@ package com.chicu.neurotradebot.ai.strategy.impl;
 
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
 import com.chicu.neurotradebot.ai.strategy.config.AdxConfig;
-import com.chicu.neurotradebot.trade.model.MarketCandle;
+import com.chicu.neurotradebot.ai.strategy.config.StrategyConfig;
 import com.chicu.neurotradebot.trade.enums.Signal;
+import com.chicu.neurotradebot.trade.model.MarketCandle;
 import com.chicu.neurotradebot.trade.service.MarketCandleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,33 +20,36 @@ import java.util.List;
 public class AdxStrategy implements AiStrategy {
 
     private final MarketCandleService candleService;
-    private final AdxConfig config = new AdxConfig(); // по умолчанию: period = 14, threshold = 20
+    private AdxConfig config = new AdxConfig(); // По умолчанию
 
     @Override
     public String getName() {
         return "ADX";
     }
 
-
     @Override
     public Signal analyze(List<MarketCandle> candles) {
         if (candles.size() < config.getPeriod() + 1) {
-            log.warn("📉 Недостаточно данных для расчета ADX (нужно минимум {} баров)", config.getPeriod() + 1);
+            log.warn("📉 Недостаточно данных для ADX (нужно минимум {} баров)", config.getPeriod() + 1);
             return Signal.HOLD;
         }
 
         BarSeries series = candleService.buildBarSeries(candles);
         ADXIndicator adx = new ADXIndicator(series, config.getPeriod());
 
-        int lastIndex = series.getEndIndex();
-        double adxValue = adx.getValue(lastIndex).doubleValue();
+        double value = adx.getValue(series.getEndIndex()).doubleValue();
 
-        log.info("📊 ADX: value={}, threshold={}", adxValue, config.getTrendStrengthThreshold());
+        log.info("📊 ADX: value={}, threshold={}", value, config.getTrendStrengthThreshold());
 
-        if (adxValue > config.getTrendStrengthThreshold()) {
-            return Signal.BUY;
+        return value > config.getTrendStrengthThreshold() ? Signal.BUY : Signal.HOLD;
+    }
+
+    @Override
+    public void setConfig(Object config) {
+        if (config instanceof AdxConfig) {
+            this.config = (AdxConfig) config;
         } else {
-            return Signal.HOLD;
+            log.warn("⚠️ Неверный тип конфигурации для ADX: {}", config);
         }
     }
 }

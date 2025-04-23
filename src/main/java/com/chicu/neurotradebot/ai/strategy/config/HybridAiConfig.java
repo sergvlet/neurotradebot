@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class HybridAiConfig {
+public class HybridAiConfig implements  StrategyConfig {
 
     /**
      * Какие стратегии участвуют в гибридной.

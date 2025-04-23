@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VwapConfig {
+public class VwapConfig implements  StrategyConfig {
     private int period = 14;
 }

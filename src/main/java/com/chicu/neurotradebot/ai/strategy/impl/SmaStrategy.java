@@ -1,8 +1,8 @@
 package com.chicu.neurotradebot.ai.strategy.impl;
 
-
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
 import com.chicu.neurotradebot.ai.strategy.config.SmaConfig;
+import com.chicu.neurotradebot.ai.strategy.config.StrategyConfig;
 import com.chicu.neurotradebot.trade.model.MarketCandle;
 import com.chicu.neurotradebot.trade.enums.Signal;
 import com.chicu.neurotradebot.trade.service.MarketCandleService;
@@ -21,9 +21,7 @@ import java.util.List;
 public class SmaStrategy implements AiStrategy {
 
     private final MarketCandleService candleService;
-
-    // Параметры SMA, можно будет конфигурировать
-    private final SmaConfig config = new SmaConfig(5, 20);
+    private SmaConfig config = new SmaConfig(5, 20);
 
     @Override
     public String getName() {
@@ -53,5 +51,14 @@ public class SmaStrategy implements AiStrategy {
         if (shortValue > longValue) return Signal.BUY;
         else if (shortValue < longValue) return Signal.SELL;
         else return Signal.HOLD;
+    }
+
+    @Override
+    public void setConfig(Object config) {
+        if (config instanceof SmaConfig smaConfig) {
+            this.config = smaConfig;
+        } else {
+            log.warn("❌ Неверная конфигурация для SMA стратегии: {}", config);
+        }
     }
 }

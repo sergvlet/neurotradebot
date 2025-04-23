@@ -2,16 +2,17 @@ package com.chicu.neurotradebot.ai.strategy.impl;
 
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
 import com.chicu.neurotradebot.ai.strategy.config.IchimokuConfig;
-import com.chicu.neurotradebot.trade.model.MarketCandle;
+import com.chicu.neurotradebot.ai.strategy.config.StrategyConfig;
 import com.chicu.neurotradebot.trade.enums.Signal;
+import com.chicu.neurotradebot.trade.model.MarketCandle;
 import com.chicu.neurotradebot.trade.service.MarketCandleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.ta4j.core.BarSeries;
+import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
 import org.ta4j.core.indicators.ichimoku.IchimokuKijunSenIndicator;
 import org.ta4j.core.indicators.ichimoku.IchimokuTenkanSenIndicator;
-import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ import java.util.List;
 public class IchimokuStrategy implements AiStrategy {
 
     private final MarketCandleService candleService;
-    private final IchimokuConfig config = new IchimokuConfig();
+    private IchimokuConfig config = new IchimokuConfig();
 
     @Override
     public String getName() {
@@ -54,6 +55,13 @@ public class IchimokuStrategy implements AiStrategy {
             return Signal.SELL;
         } else {
             return Signal.HOLD;
+        }
+    }
+
+    @Override
+    public void setConfig(Object config) {
+        if (config instanceof IchimokuConfig ichimokuConfig) {
+            this.config = ichimokuConfig;
         }
     }
 }

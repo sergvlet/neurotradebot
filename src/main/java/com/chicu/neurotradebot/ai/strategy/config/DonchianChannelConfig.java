@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DonchianChannelConfig {
+public class DonchianChannelConfig implements StrategyConfig {
+
+    /**
+     * Период расчёта канала (по умолчанию 20).
+     */
     private int period = 20;
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SmaConfig {
+public class SmaConfig implements  StrategyConfig {
     private int shortPeriod = 5;
     private int longPeriod = 20;
 }

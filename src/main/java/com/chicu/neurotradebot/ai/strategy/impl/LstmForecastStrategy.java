@@ -2,6 +2,7 @@ package com.chicu.neurotradebot.ai.strategy.impl;
 
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
 import com.chicu.neurotradebot.ai.strategy.config.LstmConfig;
+import com.chicu.neurotradebot.ai.strategy.config.StrategyConfig;
 import com.chicu.neurotradebot.ai.strategy.ml.PricePredictor;
 import com.chicu.neurotradebot.trade.model.MarketCandle;
 import com.chicu.neurotradebot.trade.enums.Signal;
@@ -20,7 +21,8 @@ public class LstmForecastStrategy implements AiStrategy {
 
     private final MarketCandleService candleService;
     private final PricePredictor predictor;
-    private final LstmConfig config = new LstmConfig();
+
+    private LstmConfig config = new LstmConfig();
 
     @Override
     public String getName() {
@@ -47,5 +49,14 @@ public class LstmForecastStrategy implements AiStrategy {
         if (forecast > lastPrice * 1.002) return Signal.BUY;
         if (forecast < lastPrice * 0.998) return Signal.SELL;
         return Signal.HOLD;
+    }
+
+    @Override
+    public void setConfig(Object config) {
+        if (config instanceof LstmConfig lstmConfig) {
+            this.config = lstmConfig;
+        } else {
+            log.warn("❌ Неверная конфигурация передана в LSTM стратегию: {}", config);
+        }
     }
 }

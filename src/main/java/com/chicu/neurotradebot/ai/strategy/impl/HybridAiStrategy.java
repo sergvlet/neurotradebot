@@ -2,24 +2,22 @@ package com.chicu.neurotradebot.ai.strategy.impl;
 
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
 import com.chicu.neurotradebot.ai.strategy.config.HybridAiConfig;
-import com.chicu.neurotradebot.trade.model.MarketCandle;
+import com.chicu.neurotradebot.ai.strategy.config.StrategyConfig;
 import com.chicu.neurotradebot.trade.enums.Signal;
+import com.chicu.neurotradebot.trade.model.MarketCandle;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-/**
- * Стратегия объединяет сигналы от других стратегий.
- */
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class HybridAiStrategy implements AiStrategy {
 
     private final List<AiStrategy> strategies;
-    private final HybridAiConfig config = new HybridAiConfig();
+    private HybridAiConfig config = new HybridAiConfig();
 
     @Override
     public String getName() {
@@ -59,5 +57,14 @@ public class HybridAiStrategy implements AiStrategy {
         if ((double) sellVotes / total > config.getThreshold()) return Signal.SELL;
 
         return Signal.HOLD;
+    }
+
+    @Override
+    public void setConfig(Object config) {
+        if (config instanceof HybridAiConfig hybridConfig) {
+            this.config = hybridConfig;
+        } else {
+            log.warn("❌ Неверная конфигурация для Hybrid AI: {}", config);
+        }
     }
 }

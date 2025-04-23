@@ -1,6 +1,7 @@
 package com.chicu.neurotradebot.ai.strategy.impl;
 
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
+import com.chicu.neurotradebot.ai.strategy.config.StrategyConfig;
 import com.chicu.neurotradebot.ai.strategy.config.XgboostConfig;
 import com.chicu.neurotradebot.ai.strategy.ml.SignalClassifier;
 import com.chicu.neurotradebot.trade.model.MarketCandle;
@@ -20,7 +21,7 @@ public class XgboostSignalStrategy implements AiStrategy {
 
     private final MarketCandleService candleService;
     private final SignalClassifier classifier;
-    private final XgboostConfig config = new XgboostConfig();
+    private XgboostConfig config = new XgboostConfig();
 
     @Override
     public String getName() {
@@ -42,5 +43,14 @@ public class XgboostSignalStrategy implements AiStrategy {
         Signal signal = classifier.classify(history);
         log.info("🧠 XGBoost сигнал: {}", signal);
         return signal;
+    }
+
+    @Override
+    public void setConfig(Object config) {
+        if (config instanceof XgboostConfig xgboostConfig) {
+            this.config = xgboostConfig;
+        } else {
+            log.warn("❌ Неверная конфигурация для XGBoost стратегии: {}", config);
+        }
     }
 }

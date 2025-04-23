@@ -3,6 +3,7 @@ package com.chicu.neurotradebot.telegram.util;
 import com.chicu.neurotradebot.ai.strategy.AvailableStrategy;
 import com.chicu.neurotradebot.telegram.callback.BotCallback;
 import com.chicu.neurotradebot.trade.enums.TradeMode;
+import com.chicu.neurotradebot.trade.enums.TradeType;
 import com.chicu.neurotradebot.trade.service.UserSettingsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,13 @@ public class KeyboardService {
         ));
     }
 
+    public InlineKeyboardMarkup getTradingMenuByMode(Long chatId) {
+        TradeType type = userSettingsService.getTradeType(chatId);
+        return type == TradeType.MANUAL ? getManualTradingMenu(chatId) : getTradingMenu(chatId);
+    }
+
+
+
     public InlineKeyboardMarkup getTradingMenu(Long chatId) {
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
         buttons.add(List.of(createButton("🔄 Запустить торговлю", BotCallback.START_TRADE.getValue())));
@@ -34,27 +42,44 @@ public class KeyboardService {
                 createButton("📈 Статистика", BotCallback.STATISTICS.getValue()),
                 createButton("📉 История", BotCallback.HISTORY.getValue())
         ));
-        buttons.add(List.of(createButton("⚙️ Настройки", BotCallback.SETTINGS.getValue())));
+
+        TradeType current = userSettingsService.getTradeType(chatId);
+        buttons.add(List.of(
+                createButton((current == TradeType.AI ? "✅ " : "☑️ ") + "🤖 AI-режим", BotCallback.SET_TRADE_TYPE.getValue() + ":AI"),
+                createButton((current == TradeType.MANUAL ? "✅ " : "☑️ ") + "🧑‍💼 Ручной режим", BotCallback.SET_TRADE_TYPE.getValue() + ":MANUAL")
+        ));
+
         buttons.add(List.of(createButton("🔙 Назад", BotCallback.MAIN_MENU.getValue())));
         return buildKeyboard(buttons);
     }
 
-    public InlineKeyboardMarkup getSettingsMenu(Long chatId) {
-        var settings = userSettingsService.getOrCreate(chatId);
-        String symbol = settings.getExchangeSymbol();
-        String tf = settings.getTimeframe();
+    public InlineKeyboardMarkup getManualTradingMenu(Long chatId) {
+        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+        buttons.add(List.of(createButton("🔄 Выполнить сделку", BotCallback.MANUAL_TRADE_EXECUTE.getValue())));
+        buttons.add(List.of(
+                createButton("📈 Статистика", BotCallback.MANUAL_TRADE_STATS.getValue()),
+                createButton("📉 История", BotCallback.MANUAL_TRADE_HISTORY.getValue())
+        ));
+        buttons.add(List.of(createButton("⚙️ Настройки", BotCallback.MANUAL_TRADE_SETTINGS.getValue())));
+        buttons.add(List.of(createButton("🔙 Назад", BotCallback.MAIN_MENU.getValue())));
+        return buildKeyboard(buttons);
+    }
 
+    public InlineKeyboardMarkup getManualTradeSettingsMenu(Long chatId) {
+        var settings = userSettingsService.getOrCreate(chatId);
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
         buttons.add(List.of(createButton("🧠 Стратегии", BotCallback.STRATEGY_MENU.getValue())));
         buttons.add(List.of(createButton("🧪 Режим торговли", BotCallback.SELECT_MODE.getValue())));
         buttons.add(List.of(createButton("💵 Лимит сделки", BotCallback.TRADE_LIMIT.getValue())));
-        buttons.add(List.of(createButton("📊 Пара: " + symbol, BotCallback.SYMBOL_MENU.getValue())));
-        buttons.add(List.of(createButton("⏱ Таймфрейм: " + tf, BotCallback.TIMEFRAME_MENU.getValue())));
+        buttons.add(List.of(createButton("📊 Пара: " + settings.getExchangeSymbol(), BotCallback.SYMBOL_MENU.getValue())));
+        buttons.add(List.of(createButton("⏱ Таймфрейм: " + settings.getTimeframe(), BotCallback.TIMEFRAME_MENU.getValue())));
         buttons.add(List.of(createButton("📈 Биржа", BotCallback.EXCHANGE_MENU.getValue())));
         buttons.add(List.of(createButton("💰 Баланс", BotCallback.SHOW_BALANCE.getValue())));
         buttons.add(List.of(createButton("🔙 Назад", BotCallback.START_TRADE.getValue())));
         return buildKeyboard(buttons);
     }
+
+
 
     public InlineKeyboardMarkup getStrategySelectionMenu(Set<AvailableStrategy> selected) {
         List<List<InlineKeyboardButton>> rows = new ArrayList<>();
@@ -106,8 +131,6 @@ public class KeyboardService {
         }
         return appendBackButton(buttons);
     }
-
-    // Служебные
 
     public InlineKeyboardMarkup appendBackButton(List<List<InlineKeyboardButton>> buttons) {
         buttons.add(List.of(createButton("🔙 Назад", BotCallback.BACK.getValue())));

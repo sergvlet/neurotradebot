@@ -1,6 +1,7 @@
 package com.chicu.neurotradebot.ai.strategy.impl;
 
 import com.chicu.neurotradebot.ai.strategy.AiStrategy;
+import com.chicu.neurotradebot.ai.strategy.config.StrategyConfig;
 import com.chicu.neurotradebot.ai.strategy.config.VwapConfig;
 import com.chicu.neurotradebot.trade.model.MarketCandle;
 import com.chicu.neurotradebot.trade.enums.Signal;
@@ -20,7 +21,7 @@ import java.util.List;
 public class VwapStrategy implements AiStrategy {
 
     private final MarketCandleService candleService;
-    private final VwapConfig config = new VwapConfig();
+    private VwapConfig config = new VwapConfig();
 
     @Override
     public String getName() {
@@ -50,6 +51,15 @@ public class VwapStrategy implements AiStrategy {
             return Signal.SELL;
         } else {
             return Signal.HOLD;
+        }
+    }
+
+    @Override
+    public void setConfig(Object config) {
+        if (config instanceof VwapConfig vwapConfig) {
+            this.config = vwapConfig;
+        } else {
+            log.warn("❌ Неверная конфигурация для VWAP стратегии: {}", config);
         }
     }
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdxConfig {
+public class AdxConfig implements StrategyConfig {
 
     /**
      * Период для расчёта ADX (по умолчанию 14).
