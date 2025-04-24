@@ -20,7 +20,18 @@ public class BotInfoCallback implements CallbackProcessor {
 
     @Override
     public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
-        String text = """
+        String text = getBotInfoText();
+
+        var keyboard = keyboardService.getMainMenu(chatId);
+        messageUtils.editMessage(chatId, messageId, text, keyboard, sender);
+    }
+
+    /**
+     * Метод для получения информации о боте.
+     * Это позволяет легко редактировать текст без изменений в коде.
+     */
+    private String getBotInfoText() {
+        return """
                 🤖 <b>О боте</b>
 
                 Этот бот создан для <b>AI-автотpговли</b> на криптобиржах.
@@ -39,8 +50,5 @@ public class BotInfoCallback implements CallbackProcessor {
 
                 💬 По вопросам — пишите в поддержку.
                 """;
-
-        var keyboard = keyboardService.getMainMenu(chatId);
-        messageUtils.editMessage(chatId, messageId, text, keyboard, sender);
     }
 }

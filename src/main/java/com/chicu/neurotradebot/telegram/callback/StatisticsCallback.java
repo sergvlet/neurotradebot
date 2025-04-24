@@ -22,7 +22,16 @@ public class StatisticsCallback implements CallbackProcessor {
 
     @Override
     public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
-        String text = statisticsService.getStatisticsText(chatId);
-        messageUtils.editMessage(chatId, messageId, text, keyboardService.getTradingMenu(chatId), sender);
+        // Получаем актуальную статистику для пользователя
+        String statisticsText = statisticsService.getStatisticsText(chatId);
+
+        // Отправляем обновленное сообщение со статистикой и клавишей для перехода обратно
+        messageUtils.editMessage(
+                chatId,
+                messageId,
+                statisticsText, // обновленный текст со статистикой
+                keyboardService.getTradingMenu(chatId), // соответствующая клавиатура
+                sender
+        );
     }
 }

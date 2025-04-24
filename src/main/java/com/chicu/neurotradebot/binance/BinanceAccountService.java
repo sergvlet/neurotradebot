@@ -3,6 +3,7 @@ package com.chicu.neurotradebot.binance;
 import com.chicu.neurotradebot.trade.enums.Exchange;
 import com.chicu.neurotradebot.trade.enums.TradeMode;
 import com.chicu.neurotradebot.trade.model.UserApiKeys;
+import com.chicu.neurotradebot.trade.model.UserSettings;
 import com.chicu.neurotradebot.trade.service.UserApiKeysService;
 import com.chicu.neurotradebot.trade.service.UserSettingsService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,11 @@ public class BinanceAccountService {
     private static final String BASE_URL_REAL = "https://api.binance.com";
     private static final String BASE_URL_TEST = "https://testnet.binance.vision";
 
+    /**
+     * Возвращает отформатированный баланс пользователя на Binance.
+     * @param chatId идентификатор чата
+     * @return строка с балансом
+     */
     public String getFormattedBalance(Long chatId) {
         String rawJson = getBalance(chatId);
         if (rawJson.startsWith("❌")) return rawJson;
@@ -59,21 +65,29 @@ public class BinanceAccountService {
         return result;
     }
 
+    /**
+     * Получение баланса с учетом настроек пользователя
+     * @param chatId идентификатор чата
+     * @return ответ от API
+     */
     public String getBalance(Long chatId) {
-        var settings = settingsService.getOrCreate(chatId);
+        UserSettings settings = settingsService.getOrCreate(chatId);
         Exchange exchange = settings.getExchange();
         TradeMode mode = settings.getTradeMode();
 
+        // Получаем ключи пользователя для выбранной биржи и режима
         UserApiKeys keys = apiKeysService.getOrCreate(chatId, exchange);
         String apiKey = mode == TradeMode.REAL ? keys.getRealApiKey() : keys.getTestApiKey();
         String secretKey = mode == TradeMode.REAL ? keys.getRealApiSecret() : keys.getTestApiSecret();
         String baseUrl = mode == TradeMode.REAL ? BASE_URL_REAL : BASE_URL_TEST;
 
         if (apiKey == null || secretKey == null) {
+            log.error("❌ API ключи не установлены для режима: " + mode.getTitle());
             return "❌ Ключи API не установлены для режима: " + mode.getTitle();
         }
 
         Map<String, String> params = new HashMap<>();
+        // Отправляем запрос на получение баланса
         return httpClient.sendSignedRequest(baseUrl, "/api/v3/account", "GET", apiKey, secretKey, params);
     }
 }

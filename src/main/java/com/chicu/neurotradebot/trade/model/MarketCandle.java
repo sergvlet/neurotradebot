@@ -1,44 +1,44 @@
 package com.chicu.neurotradebot.trade.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 
 @Entity
-@Table(name = "market_candle")
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class MarketCandle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String symbol; // Торговая пара (например, BTCUSDT)
+    private String symbol; // торговая пара, например, BTCUSDT
+    private String interval; // интервал свечи, например, 1m, 5m, 1h
+    private Instant timestamp; // время открытия свечи
+    private double open; // цена открытия
+    private double high; // высокая цена
+    private double low; // низкая цена
+    private double close; // цена закрытия
+    private double volume; // объем
+    private Instant closeTime; // время закрытия свечи
 
-    @Column(nullable = false)
-    private String interval; // Интервал (например, 1m, 5m, 1h)
-
-    @Column(nullable = false)
-    private ZonedDateTime timestamp; // Время открытия свечи
-
-    @Column(nullable = false)
-    private double open;
-
-    @Column(nullable = false)
-    private double high;
-
-    @Column(nullable = false)
-    private double low;
-
-    @Column(nullable = false)
-    private double close;
-
-    @Column(nullable = false)
-    private double volume;
+    // Убедитесь, что openTime правильно инициализируется в конструкторе
+    public MarketCandle(String symbol, String interval, Instant openTime, double open, double high, double low, double close, double volume, Instant closeTime) {
+        this.symbol = symbol;
+        this.interval = interval;
+        this.timestamp = openTime;
+        this.open = open;
+        this.high = high;
+        this.low = low;
+        this.close = close;
+        this.volume = volume;
+        this.closeTime = closeTime;
+    }
 }

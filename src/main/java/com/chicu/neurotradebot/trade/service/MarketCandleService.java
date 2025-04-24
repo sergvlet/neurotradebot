@@ -7,14 +7,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.ta4j.core.BarSeries;
-import org.ta4j.core.BaseBarSeries;
 import org.ta4j.core.BaseBar;
+import org.ta4j.core.BaseBarSeries;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -56,12 +57,13 @@ public class MarketCandleService {
                 double volume = node.get(5).asDouble();
 
                 candles.add(MarketCandle.builder()
-                        .timestamp(Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault()))
+                        .timestamp(Instant.ofEpochMilli(timestamp)) // Установили openTime в Instant
                         .open(open)
                         .high(high)
                         .low(low)
                         .close(close)
                         .volume(volume)
+                        .closeTime(Instant.ofEpochMilli(timestamp).plus(Duration.ofMinutes(1))) // Пример с закрытием свечи через 1 минуту
                         .build());
             }
 
@@ -82,7 +84,7 @@ public class MarketCandleService {
             Duration barDuration = Duration.ofMinutes(1); // можно позже сделать гибко
             series.addBar(new BaseBar(
                     barDuration,
-                    candle.getTimestamp(),
+                    ZonedDateTime.ofInstant(candle.getTimestamp(), ZoneId.systemDefault()), // Преобразование в ZonedDateTime
                     String.valueOf(candle.getOpen()),
                     String.valueOf(candle.getHigh()),
                     String.valueOf(candle.getLow()),
@@ -97,7 +99,7 @@ public class MarketCandleService {
     /**
      * Удобный метод-заглушка для получения свечей (для совместимости со стратегиями)
      */
-    public List<MarketCandle> getLatestCandles(String symbol, String interval) {
+    public List<MarketCandle> getLatestCandles(String symbol, String interval, int i) {
         return getCandles(symbol, interval);
     }
 }

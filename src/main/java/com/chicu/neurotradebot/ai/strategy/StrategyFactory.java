@@ -50,16 +50,32 @@ public class StrategyFactory {
         strategies.put(AvailableStrategy.HYBRID, hybridAiStrategy);
     }
 
+    /**
+     * Получение стратегии по умолчанию или указанной
+     * @param strategy Стратегия из перечисления AvailableStrategy
+     * @return Соответствующая стратегия
+     */
     public AiStrategy get(AvailableStrategy strategy) {
-        return strategies.get(strategy);
+        AiStrategy aiStrategy = strategies.get(strategy);
+        if (aiStrategy == null) {
+            throw new IllegalArgumentException("Стратегия не найдена: " + strategy);
+        }
+        return aiStrategy;
     }
 
+    /**
+     * Получение всех стратегий на основе выбранных пользователем
+     * @param selected Стратегии, выбранные пользователем
+     * @return Словарь с соответствующими стратегиями
+     */
     public Map<AvailableStrategy, AiStrategy> getStrategies(Set<AvailableStrategy> selected) {
         Map<AvailableStrategy, AiStrategy> result = new EnumMap<>(AvailableStrategy.class);
         for (AvailableStrategy s : selected) {
             AiStrategy impl = strategies.get(s);
             if (impl != null) {
                 result.put(s, impl);
+            } else {
+                throw new IllegalArgumentException("Стратегия не найдена для: " + s);
             }
         }
         return result;

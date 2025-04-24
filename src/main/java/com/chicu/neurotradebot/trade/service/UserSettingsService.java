@@ -30,6 +30,7 @@ public class UserSettingsService {
                     UserSettings settings = new UserSettings();
                     settings.setChatId(chatId);
                     settings.setStrategies(new HashSet<>());
+                    settings.setTradeType(TradeType.AI);  // По умолчанию AI торговля
                     return repository.save(settings);
                 });
     }
@@ -49,10 +50,10 @@ public class UserSettingsService {
         repository.save(settings);
     }
 
+    // Получить все выбранные стратегии для AI
     public Set<AvailableStrategy> getSelectedStrategies(Long chatId) {
         return getOrCreate(chatId).getStrategies();
     }
-
 
     // 💼 Режим торговли
     public void setTradeMode(Long chatId, TradeMode mode) {
@@ -105,11 +106,7 @@ public class UserSettingsService {
         repository.save(settings);
     }
 
-
-
     // 📊 Символ
-
-
     public void setExchangeSymbol(Long chatId, String symbol) {
         UserSettings settings = getOrCreate(chatId);
         settings.setExchangeSymbol(symbol);
@@ -129,6 +126,7 @@ public class UserSettingsService {
         settings.setExchange(exchange);
         repository.save(settings);
     }
+
     public void setTradeType(Long chatId, TradeType type) {
         UserSettings settings = getOrCreate(chatId);
         settings.setTradeType(type);
@@ -137,6 +135,21 @@ public class UserSettingsService {
 
     public TradeType getTradeType(Long chatId) {
         return getOrCreate(chatId).getTradeType();
+    }
+
+    // 💡 Ручная стратегия
+    public void setSelectedManualStrategy(Long chatId, AvailableStrategy strategy) {
+        UserSettings settings = getOrCreate(chatId);
+        settings.setSelectedManualStrategy(strategy);
+        repository.save(settings);
+    }
+
+    public AvailableStrategy getSelectedManualStrategy(Long chatId) {
+        return getOrCreate(chatId).getSelectedManualStrategy();
+    }
+    // Метод для сохранения настроек пользователя
+    public void save(UserSettings userSettings) {
+        repository.save(userSettings);
     }
 
 }

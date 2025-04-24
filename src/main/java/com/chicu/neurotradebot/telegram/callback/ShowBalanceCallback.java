@@ -22,9 +22,28 @@ public class ShowBalanceCallback implements CallbackProcessor {
 
     @Override
     public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
-        String text = binanceAccountService.getFormattedBalance(chatId);
-        var keyboard = keyboardService.getManualTradeSettingsMenu(chatId);
+        try {
+            // Получаем отформатированный баланс пользователя
+            String balanceText = binanceAccountService.getFormattedBalance(chatId);
 
-        messageUtils.editMessage(chatId, messageId, text, keyboard, sender);
+            if (balanceText == null || balanceText.isEmpty()) {
+                // Если баланс не был получен или пустой, показываем сообщение об ошибке
+                balanceText = "❌ Не удалось получить баланс. Попробуйте снова позже.";
+            }
+
+            // Получаем клавиатуру для ручной торговли
+            var keyboard = keyboardService.getManualTradeSettingsMenu(chatId);
+
+            // Отправляем сообщение с балансом и клавишами
+            messageUtils.editMessage(chatId, messageId, balanceText, keyboard, sender);
+
+        } catch (Exception e) {
+            // Логируем ошибку и отправляем сообщение об ошибке
+            messageUtils.editMessage(chatId, messageId,
+                    "❌ Произошла ошибка при получении баланса. Попробуйте снова позже.",
+                    keyboardService.getManualTradeSettingsMenu(chatId), sender);
+            // Можно логировать исключение для отладки
+            e.printStackTrace();
+        }
     }
 }

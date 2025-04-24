@@ -28,19 +28,36 @@ public class UserSettings {
     private String tradeLimit;
 
     @Enumerated(EnumType.STRING)
-    private AvailableStrategy selectedManualStrategy; // ✅ для ручной торговли
+    private AvailableStrategy selectedManualStrategy; // Стратегия для ручной торговли
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_strategies", joinColumns = @JoinColumn(name = "chat_id"))
     @Column(name = "strategy")
-    private Set<AvailableStrategy> strategies = new HashSet<>();
+    private Set<AvailableStrategy> strategies = new HashSet<>();  // Множество стратегий
 
     @Enumerated(EnumType.STRING)
     @Column(name = "trade_mode")
-    private TradeMode tradeMode = TradeMode.DEMO;
+    private TradeMode tradeMode = TradeMode.DEMO; // По умолчанию DEMO
 
     @Enumerated(EnumType.STRING)
     @Column(name = "trade_type")
-    private TradeType tradeType = TradeType.AI;
+    private TradeType tradeType = TradeType.AI;  // По умолчанию AI торговля
+
+    @OneToMany(mappedBy = "userSettings", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<StrategyConfigEntity> strategyConfigs; // Связь с конфигурациями стратегий
+
+    public String getStrategyText() {
+        if (tradeType == TradeType.AI) {
+            return strategies.isEmpty() ? "Не выбрано ❌" :
+                    strategies.stream()
+                            .map(s -> "✅ " + s.getTitle())
+                            .sorted()
+                            .reduce((a, b) -> a + "\n" + b)
+                            .orElse("Не выбрано ❌");
+        } else if (tradeType == TradeType.MANUAL && selectedManualStrategy != null) {
+            return "✅ " + selectedManualStrategy.getTitle();
+        }
+        return "Не выбрано ❌";
+    }
 }

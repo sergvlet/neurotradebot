@@ -5,8 +5,8 @@ import com.chicu.neurotradebot.ai.strategy.AvailableStrategy;
 import com.chicu.neurotradebot.trade.enums.Signal;
 import com.chicu.neurotradebot.trade.model.MarketCandle;
 import com.chicu.neurotradebot.trade.service.MarketCandleService;
-import com.chicu.neurotradebot.trade.service.StrategyConfigService;
 import com.chicu.neurotradebot.trade.service.UserSettingsService;
+import com.chicu.neurotradebot.trade.service.UserStrategyConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class StrategyEngine {
 
     private final MarketCandleService candleService;
     private final UserSettingsService userSettingsService;
-    private final StrategyConfigService configService;
+    private final UserStrategyConfigService configService;
 
     // фабрика стратегий
     private final com.chicu.neurotradebot.ai.strategy.StrategyFactory strategyFactory;
@@ -39,7 +39,7 @@ public class StrategyEngine {
             if (strategy == null) continue;
 
             // Установка конфигурации (универсально)
-            Object config = configService.getConfig(chatId, strategyKey);
+            Object config = configService.getUserStrategyConfig(chatId, strategyKey);
             strategy.setConfig(config);
 
             // Анализ

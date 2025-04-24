@@ -24,16 +24,19 @@ public class BackCallback implements CallbackProcessor {
     public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
         var settings = userSettingsService.getOrCreate(chatId);
 
-        // логика возврата: если ранее был вызван Settings → назад в TradingMenu
+        // Логика возврата в меню, проверяя, что пользователь настроил
         if (callbackData.equals(BotCallback.BACK.getValue())) {
-            // если пользователь уже настроен — возвращаем в торговое меню
-            if (settings.getExchange() != null && settings.getStrategies() != null && !settings.getStrategies().isEmpty()) {
+            // Возвращаем в торговое меню, если все настройки готовы
+            if (settings.getExchange() != null
+                    && settings.getStrategies() != null && !settings.getStrategies().isEmpty()
+                    && settings.getTradeMode() != null) {
+                // Все нужные настройки присутствуют — показываем меню для торговли
                 messageUtils.editMessage(chatId, messageId,
                         "📊 Главное торговое меню:",
                         keyboardService.getTradingMenu(chatId),
                         sender);
             } else {
-                // иначе — в главное меню
+                // Если что-то не настроено — показываем главное меню
                 messageUtils.editMessage(chatId, messageId,
                         "🏠 Главное меню:",
                         keyboardService.getMainMenu(chatId),

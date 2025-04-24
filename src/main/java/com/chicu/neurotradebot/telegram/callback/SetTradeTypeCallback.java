@@ -24,17 +24,34 @@ public class SetTradeTypeCallback implements CallbackProcessor {
     @Override
     public void process(Long chatId, Integer messageId, String callbackData, AbsSender sender) {
         try {
-            String[] parts = callbackData.split(":");
-            TradeType type = TradeType.valueOf(parts[1]); // пример: set_trade_type:AI
+            // Проверка на корректность данных callbackData
+            if (callbackData == null || !callbackData.contains(":")) {
+                messageUtils.editMessage(chatId, messageId, "❌ Неверные данные для переключения режима.", null, sender);
+                return;
+            }
 
+            // Разделяем данные на части и получаем тип торговли
+            String[] parts = callbackData.split(":");
+            if (parts.length < 2) {
+                messageUtils.editMessage(chatId, messageId, "❌ Неверные данные для переключения режима.", null, sender);
+                return;
+            }
+
+            TradeType type = TradeType.valueOf(parts[1]); // Пример: set_trade_type:AI
+
+            // Сохраняем выбранный режим в настройках
             userSettingsService.setTradeType(chatId, type);
 
+            // Генерируем текст в зависимости от выбранного режима
             String text = type == TradeType.AI
                     ? "🤖 Режим торговли: <b>AI</b>\n\nВыберите действие:"
                     : "✋ Режим торговли: <b>Ручной</b>\n\nВыберите действие:";
 
+            // Отправляем обновленное сообщение с новым меню
             messageUtils.editMessage(chatId, messageId, text, keyboardService.getTradingMenuByMode(chatId), sender);
 
+        } catch (IllegalArgumentException e) {
+            messageUtils.editMessage(chatId, messageId, "❌ Ошибка: Неверно указан режим торговли.", null, sender);
         } catch (Exception e) {
             messageUtils.editMessage(chatId, messageId, "❌ Ошибка переключения режима.", null, sender);
         }

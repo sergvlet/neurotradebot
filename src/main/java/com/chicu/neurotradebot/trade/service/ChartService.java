@@ -57,7 +57,7 @@ public class ChartService {
         ClosePriceIndicator closePrice = new ClosePriceIndicator(series);
 
         List<Date> xData = candles.stream()
-                .map(c -> Date.from(c.getTimestamp().toInstant()))
+                .map(c -> Date.from(c.getTimestamp()))  // Используем openTime для преобразования в Date
                 .collect(Collectors.toList());
 
         List<Double> closeData = candles.stream()
@@ -107,5 +107,4 @@ public class ChartService {
         }
         return values;
     }
-
 }

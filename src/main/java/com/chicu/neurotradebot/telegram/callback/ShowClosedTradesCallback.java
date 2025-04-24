@@ -35,6 +35,7 @@ public class ShowClosedTradesCallback implements CallbackProcessor {
             return;
         }
 
+        // Сортируем сделки по времени закрытия (по убыванию)
         List<ClosedTrade> lastFive = trades.stream()
                 .sorted(Comparator.comparing(ClosedTrade::getCloseTime).reversed())
                 .limit(5)
@@ -43,15 +44,19 @@ public class ShowClosedTradesCallback implements CallbackProcessor {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd.MM HH:mm");
         StringBuilder sb = new StringBuilder("📉 *5 последних сделок:*\n\n");
 
+        // Формируем строки с информацией о сделках
         for (ClosedTrade trade : lastFive) {
             sb.append("• *").append(trade.getSymbol()).append("* ")
-              .append(trade.getStrategy()).append(" — ")
-              .append(String.format("%.2f", trade.getProfit())).append(" USDT\n")
-              .append("_").append(trade.getOpenTime().format(fmt)).append(" ➝ ")
-              .append(trade.getCloseTime().format(fmt)).append("_\n\n");
+                    .append(trade.getStrategy()).append(" — ")
+                    .append(String.format("%.2f", trade.getProfit())).append(" USDT\n")
+                    .append("_").append(trade.getOpenTime().format(fmt)).append(" ➝ ")
+                    .append(trade.getCloseTime().format(fmt)).append("_\n\n");
         }
 
+        // Ограничиваем длину сообщения для Telegram
         String result = sb.length() > 4000 ? sb.substring(0, 3990) + "..." : sb.toString();
+
+        // Отправляем результат
         messageUtils.editMessage(chatId, messageId, result, keyboardService.getTradingMenu(chatId), sender);
     }
 }
