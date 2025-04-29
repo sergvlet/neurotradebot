@@ -27,6 +27,16 @@ public class SettingsMenuBuilder {
                 .callbackData("api_setup_start")
                 .build();
 
+        InlineKeyboardButton manualModeButton = InlineKeyboardButton.builder()
+                .text("🧑‍💻 Ручная торговля")
+                .callbackData("select_manual_mode")
+                .build();
+
+        InlineKeyboardButton aiModeButton = InlineKeyboardButton.builder()
+                .text("🤖 AI-торговля")
+                .callbackData("select_ai_mode")
+                .build();
+
         InlineKeyboardButton backButton = InlineKeyboardButton.builder()
                 .text("🔙 Назад в главное меню")
                 .callbackData("back_to_main")
@@ -36,6 +46,7 @@ public class SettingsMenuBuilder {
                 List.of(switchModeButton),
                 List.of(selectExchangeButton),
                 List.of(apiKeySetupButton),
+                List.of(manualModeButton, aiModeButton),
                 List.of(backButton)
         );
 

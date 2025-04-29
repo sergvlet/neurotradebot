@@ -5,6 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Общие торговые настройки пользователя.
+ * Связаны один-к-одному с сущностью User через user_id.
+ * Хранят выбранную биржу, режим торговли и сеть (тест/реал).
+ */
 @Entity
 @Table(name = "user_trading_settings")
 @Getter
@@ -12,17 +17,46 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserTradingSettings {
 
+    /**
+     * ID пользователя (Telegram ID), используется как Primary Key.
+     */
     @Id
-    private Long userId; // Telegram ID (Primary Key)
+    private Long userId;
 
+    /**
+     * Связь с основной сущностью User.
+     * Загрузка и сохранение синхронизированы через @MapsId.
+     */
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
-    private User user; // Прямая связь с User
+    private User user;
 
-    private String exchange; // Выбранная биржа
+    /**
+     * Выбранная биржа для торговли.
+     * Примеры: Binance, Bybit и т.д.
+     */
+    @Column(name = "exchange")
+    private String exchange;
 
-    private Boolean useTestnet; // true = тестовая сеть, false = реальная
+    /**
+     * Использовать ли тестовую сеть.
+     * true — тестовая сеть, false — реальная сеть.
+     */
+    @Column(name = "use_testnet")
+    private Boolean useTestnet;
 
-    private String tradingMode; // MANUAL или AI
+    /**
+     * Выбранный режим торговли.
+     * Значения: "MANUAL" (ручная торговля) или "AI" (автоматическая торговля).
+     */
+    @Column(name = "trading_mode")
+    private String tradingMode;
+
+    /**
+     * Связь с AI-торговыми настройками пользователя.
+     * Каскадное сохранение и удаление настроек.
+     */
+    @OneToOne(mappedBy = "userTradingSettings", cascade = CascadeType.ALL, orphanRemoval = true)
+    private AiTradeSettings aiTradeSettings;
 }
