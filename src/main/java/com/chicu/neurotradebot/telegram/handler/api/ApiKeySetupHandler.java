@@ -9,8 +9,8 @@ import com.chicu.neurotradebot.user.repository.ExchangeCredentialRepository;
 import com.chicu.neurotradebot.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -62,7 +62,7 @@ public class ApiKeySetupHandler {
         }
 
         if (update.hasMessage() && update.getMessage().hasText()) {
-            return handleMessage(update.getMessage()); // ВАЖНО: исправлено
+            return handleMessage(update.getMessage());
         }
 
         return null;
@@ -110,9 +110,9 @@ public class ApiKeySetupHandler {
 
             ExchangeCredential credential = credentialRepository.findByUserIdAndExchange(chatId, exchange)
                     .orElseGet(() -> {
-                        ExchangeCredential c = new ExchangeCredential();
-                        c.setCreatedAt(LocalDateTime.now());
-                        return c;
+                        ExchangeCredential newCredential = new ExchangeCredential();
+                        newCredential.setCreatedAt(LocalDateTime.now());
+                        return newCredential;
                     });
 
             credential.setUser(user);
@@ -171,7 +171,6 @@ public class ApiKeySetupHandler {
                     : credential.getRealApiKey() != null && credential.getRealSecretKey() != null;
 
             if (keysExist) {
-                // Ключи для нужной сети есть ➔ спрашиваем замену
                 return EditMessageText.builder()
                         .chatId(String.valueOf(chatId))
                         .messageId(messageId)
@@ -199,7 +198,6 @@ public class ApiKeySetupHandler {
             }
         }
 
-        // Если credential нет или нет ключей для этой сети ➔ сразу запрос API ключа
         UserSessionManager.setInputStage(chatId, InputStage.ENTER_API_KEY);
 
         return EditMessageText.builder()

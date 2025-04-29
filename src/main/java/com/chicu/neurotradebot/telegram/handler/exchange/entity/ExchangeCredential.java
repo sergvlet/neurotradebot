@@ -9,19 +9,19 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "exchange_credentials")
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "exchange_credentials")
 public class ExchangeCredential {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) // Связываем с пользователем
     @JoinColumn(name = "user_id", nullable = false)
-    private User user; // <-- теперь здесь ссылка на пользователя
+    private User user; // Ссылка на пользователя
 
     private String exchange;
 

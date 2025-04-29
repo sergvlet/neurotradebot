@@ -1,8 +1,6 @@
 package com.chicu.neurotradebot.user.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,20 +15,23 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    private Long id; // Telegram ID
+    private Long id; // Telegram ID (Primary Key)
 
     private String username;
     private String firstName;
     private String lastName;
-    private Boolean registered;
 
     private LocalDateTime createdAt;
 
-    private LocalDateTime subscriptionStartAt; // дата начала подписки
-    private LocalDateTime subscriptionEndAt;   // дата окончания подписки
+    private LocalDateTime subscriptionStartAt;
+    private LocalDateTime subscriptionEndAt;
 
     private Boolean subscriptionActive;
     private Boolean trialUsed;
+
+    // 📌 Добавляем связь с таблицей user_trading_settings
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private UserTradingSettings tradingSettings;
 
     public boolean isSubscriptionActive() {
         return Boolean.TRUE.equals(subscriptionActive);
@@ -39,8 +40,4 @@ public class User {
     public boolean isTrialUsed() {
         return Boolean.TRUE.equals(trialUsed);
     }
-    public boolean isRegistered() {
-        return subscriptionStartAt != null;
-    }
-
 }
