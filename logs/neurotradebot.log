@@ -1647,7 +1647,7 @@ org.springframework.dao.DataIntegrityViolationException: could not execute state
 	at com.chicu.neurotradebot.user.service.AiTradeSettingsSyncService.lambda$saveSessionToDb$1(AiTradeSettingsSyncService.java:66) ~[classes/:na]
 	at java.base/java.util.Optional.orElseGet(Optional.java:364) ~[na:na]
 	at com.chicu.neurotradebot.user.service.AiTradeSettingsSyncService.saveSessionToDb(AiTradeSettingsSyncService.java:60) ~[classes/:na]
-	at com.chicu.neurotradebot.telegram.handler.trade.ai.AITradeMenuHandler.handle(AITradeMenuHandler.java:91) ~[classes/:na]
+	at com.chicu.neurotradebot.view.AITradeMenuHandler.handle(AITradeMenuHandler.java:91) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.handler.TelegramUpdateHandler.handleCallbackQuery(TelegramUpdateHandler.java:110) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.handler.TelegramUpdateHandler.handle(TelegramUpdateHandler.java:49) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.bot.NeuroTradeBot.onUpdateReceived(NeuroTradeBot.java:41) ~[classes/:na]
@@ -1758,7 +1758,7 @@ org.springframework.dao.DataIntegrityViolationException: could not execute state
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.2.5.jar:6.2.5]
 	at jdk.proxy4/jdk.proxy4.$Proxy127.save(Unknown Source) ~[na:na]
 	at com.chicu.neurotradebot.user.service.AiTradeSettingsSyncService.saveSessionToDb(AiTradeSettingsSyncService.java:72) ~[classes/:na]
-	at com.chicu.neurotradebot.telegram.handler.trade.ai.AITradeMenuHandler.handle(AITradeMenuHandler.java:86) ~[classes/:na]
+	at com.chicu.neurotradebot.view.AITradeMenuHandler.handle(AITradeMenuHandler.java:86) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.handler.TelegramUpdateHandler.handleCallbackQuery(TelegramUpdateHandler.java:110) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.handler.TelegramUpdateHandler.handle(TelegramUpdateHandler.java:49) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.bot.NeuroTradeBot.onUpdateReceived(NeuroTradeBot.java:41) ~[classes/:na]
@@ -1870,7 +1870,7 @@ org.springframework.dao.DataIntegrityViolationException: could not execute state
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.2.5.jar:6.2.5]
 	at jdk.proxy4/jdk.proxy4.$Proxy127.save(Unknown Source) ~[na:na]
 	at com.chicu.neurotradebot.user.service.AiTradeSettingsSyncService.saveSessionToDb(AiTradeSettingsSyncService.java:78) ~[classes/:na]
-	at com.chicu.neurotradebot.telegram.handler.trade.ai.AITradeMenuHandler.handle(AITradeMenuHandler.java:91) ~[classes/:na]
+	at com.chicu.neurotradebot.view.AITradeMenuHandler.handle(AITradeMenuHandler.java:91) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.handler.TelegramUpdateHandler.handleCallbackQuery(TelegramUpdateHandler.java:110) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.handler.TelegramUpdateHandler.handle(TelegramUpdateHandler.java:49) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.bot.NeuroTradeBot.onUpdateReceived(NeuroTradeBot.java:41) ~[classes/:na]
@@ -1943,7 +1943,7 @@ org.springframework.dao.DataIntegrityViolationException: could not execute state
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.2.5.jar:6.2.5]
 	at jdk.proxy4/jdk.proxy4.$Proxy127.save(Unknown Source) ~[na:na]
 	at com.chicu.neurotradebot.user.service.AiTradeSettingsSyncService.saveSessionToDb(AiTradeSettingsSyncService.java:78) ~[classes/:na]
-	at com.chicu.neurotradebot.telegram.handler.trade.ai.AITradeMenuHandler.handle(AITradeMenuHandler.java:86) ~[classes/:na]
+	at com.chicu.neurotradebot.view.AITradeMenuHandler.handle(AITradeMenuHandler.java:86) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.handler.TelegramUpdateHandler.handleCallbackQuery(TelegramUpdateHandler.java:110) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.handler.TelegramUpdateHandler.handle(TelegramUpdateHandler.java:49) ~[classes/:na]
 	at com.chicu.neurotradebot.telegram.bot.NeuroTradeBot.onUpdateReceived(NeuroTradeBot.java:41) ~[classes/:na]
@@ -2139,3 +2139,505 @@ java.net.SocketTimeoutException: Read timed out
 2025-04-30T14:45:32.341+02:00  INFO 1892 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-04-30T14:45:32.344+02:00  INFO 1892 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-04-30T14:45:32.347+02:00  INFO 1892 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T15:23:25.836+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 6056 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-04-30T15:23:25.839+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T15:23:25.904+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-30T15:23:25.905+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-30T15:23:26.434+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T15:23:26.555+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 114 ms. Found 4 JPA repository interfaces.
+2025-04-30T15:23:26.886+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T15:23:26.896+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T15:23:26.896+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T15:23:26.935+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T15:23:26.935+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1030 ms
+2025-04-30T15:23:27.042+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T15:23:27.078+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T15:23:27.101+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T15:23:27.291+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T15:23:27.312+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T15:23:27.434+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@24beda2b
+2025-04-30T15:23:27.435+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T15:23:27.459+02:00  WARN 6056 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T15:23:27.482+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T15:23:28.177+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T15:23:28.381+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T15:23:48.518+02:00  WARN 6056 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T15:23:48.761+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-30T15:23:48.821+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T15:23:48.827+02:00  INFO 6056 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 23.299 seconds (process running for 28.462)
+2025-04-30T15:47:43.976+02:00 ERROR 6056 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : api.telegram.org:443 failed to respond
+
+org.apache.http.NoHttpResponseException: api.telegram.org:443 failed to respond
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:141) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:56) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:259) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:163) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.conn.CPoolProxy.receiveResponseHeader(CPoolProxy.java:157) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:273) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:272) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:12:29.361+02:00  WARN 6056 --- [neuro-trade-bot] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m17s43ms235µs200ns).
+2025-04-30T16:12:42.973+02:00  INFO 6056 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : Read timed out
+
+java.net.SocketTimeoutException: Read timed out
+	at java.base/sun.nio.ch.NioSocketImpl.timedRead(NioSocketImpl.java:278) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:304) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:346) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:796) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.implRead(Socket.java:1116) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:1103) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:489) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:483) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.bytesInCompletePacket(SSLSocketInputRecord.java:70) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketImpl.readApplicationRecord(SSLSocketImpl.java:1462) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:1068) ~[na:na]
+	at org.apache.http.impl.io.SessionInputBufferImpl.streamRead(SessionInputBufferImpl.java:137) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.io.SessionInputBufferImpl.fillBuffer(SessionInputBufferImpl.java:153) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.io.SessionInputBufferImpl.readLine(SessionInputBufferImpl.java:280) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:138) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:56) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:259) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:163) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.conn.CPoolProxy.receiveResponseHeader(CPoolProxy.java:157) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:273) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:272) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:13:23.975+02:00  INFO 6056 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T16:13:23.982+02:00  INFO 6056 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T16:13:24.006+02:00  INFO 6056 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T16:13:24.009+02:00  INFO 6056 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T16:13:24.012+02:00  INFO 6056 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T16:13:27.533+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 10644 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-04-30T16:13:27.535+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T16:13:27.586+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-30T16:13:27.587+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-30T16:13:28.070+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T16:13:28.183+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 106 ms. Found 4 JPA repository interfaces.
+2025-04-30T16:13:28.534+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T16:13:28.545+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T16:13:28.546+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T16:13:28.582+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T16:13:28.583+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 996 ms
+2025-04-30T16:13:28.690+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T16:13:28.723+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T16:13:28.758+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T16:13:28.944+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T16:13:28.965+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T16:13:29.086+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@21c65605
+2025-04-30T16:13:29.088+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T16:13:29.111+02:00  WARN 10644 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T16:13:29.129+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T16:13:29.841+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T16:13:30.038+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T16:13:31.063+02:00  WARN 10644 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T16:13:31.279+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-30T16:13:31.350+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T16:13:31.356+02:00  INFO 10644 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.147 seconds (process running for 4.674)
+2025-04-30T16:25:42.981+02:00  INFO 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : Read timed out
+
+java.net.SocketTimeoutException: Read timed out
+	at java.base/sun.nio.ch.NioSocketImpl.timedRead(NioSocketImpl.java:278) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:304) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:346) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:796) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.implRead(Socket.java:1116) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:1103) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:489) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:483) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.bytesInCompletePacket(SSLSocketInputRecord.java:70) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketImpl.readApplicationRecord(SSLSocketImpl.java:1462) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:1068) ~[na:na]
+	at org.apache.http.impl.io.SessionInputBufferImpl.streamRead(SessionInputBufferImpl.java:137) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.io.SessionInputBufferImpl.fillBuffer(SessionInputBufferImpl.java:153) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.io.SessionInputBufferImpl.readLine(SessionInputBufferImpl.java:280) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:138) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:56) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:259) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:163) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.conn.CPoolProxy.receiveResponseHeader(CPoolProxy.java:157) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:273) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:272) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:25:43.501+02:00 ERROR 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : Этот хост неизвестен (api.telegram.org)
+
+java.net.UnknownHostException: Этот хост неизвестен (api.telegram.org)
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method) ~[na:na]
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:52) ~[na:na]
+	at java.base/java.net.InetAddress$PlatformResolver.lookupByName(InetAddress.java:1221) ~[na:na]
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1817) ~[na:na]
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:1149) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676) ~[na:na]
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:25:44.149+02:00 ERROR 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : api.telegram.org
+
+java.net.UnknownHostException: api.telegram.org
+	at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:998) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676) ~[na:na]
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:25:45.214+02:00 ERROR 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : api.telegram.org
+
+java.net.UnknownHostException: api.telegram.org
+	at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:998) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676) ~[na:na]
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:25:46.078+02:00 ERROR 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : api.telegram.org
+
+java.net.UnknownHostException: api.telegram.org
+	at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:998) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676) ~[na:na]
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:25:47.104+02:00 ERROR 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : api.telegram.org
+
+java.net.UnknownHostException: api.telegram.org
+	at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:998) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676) ~[na:na]
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:25:50.227+02:00 ERROR 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : api.telegram.org
+
+java.net.UnknownHostException: api.telegram.org
+	at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:998) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676) ~[na:na]
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:25:54.985+02:00 ERROR 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : Этот хост неизвестен (api.telegram.org)
+
+java.net.UnknownHostException: Этот хост неизвестен (api.telegram.org)
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method) ~[na:na]
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:52) ~[na:na]
+	at java.base/java.net.InetAddress$PlatformResolver.lookupByName(InetAddress.java:1221) ~[na:na]
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1817) ~[na:na]
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:1149) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676) ~[na:na]
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:25:57.893+02:00 ERROR 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : api.telegram.org
+
+java.net.UnknownHostException: api.telegram.org
+	at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:998) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676) ~[na:na]
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:26:07.554+02:00 ERROR 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : Этот хост неизвестен (api.telegram.org)
+
+java.net.UnknownHostException: Этот хост неизвестен (api.telegram.org)
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method) ~[na:na]
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:52) ~[na:na]
+	at java.base/java.net.InetAddress$PlatformResolver.lookupByName(InetAddress.java:1221) ~[na:na]
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1817) ~[na:na]
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:1149) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676) ~[na:na]
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:26:14.993+02:00 ERROR 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : api.telegram.org
+
+java.net.UnknownHostException: api.telegram.org
+	at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:998) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676) ~[na:na]
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:26:34.512+02:00 ERROR 10644 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Connection] o.t.t.u.DefaultBotSession                : Этот хост неизвестен (api.telegram.org)
+
+java.net.UnknownHostException: Этот хост неизвестен (api.telegram.org)
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method) ~[na:na]
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:52) ~[na:na]
+	at java.base/java.net.InetAddress$PlatformResolver.lookupByName(InetAddress.java:1221) ~[na:na]
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1817) ~[na:na]
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:1149) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676) ~[na:na]
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:249) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:188) ~[telegrambots-6.5.0.jar:na]
+
+2025-04-30T16:47:30.099+02:00  WARN 10644 --- [neuro-trade-bot] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=21m697ms140µs200ns).
+2025-04-30T16:53:49.957+02:00  INFO 10644 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T16:53:49.962+02:00  INFO 10644 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T16:53:49.983+02:00  INFO 10644 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T16:53:49.985+02:00  INFO 10644 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T16:53:49.988+02:00  INFO 10644 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T17:07:34.427+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 24624 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-04-30T17:07:34.428+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T17:07:34.485+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-30T17:07:34.485+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-30T17:07:34.941+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T17:07:35.049+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 101 ms. Found 4 JPA repository interfaces.
+2025-04-30T17:07:35.376+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T17:07:35.387+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T17:07:35.388+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T17:07:35.423+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T17:07:35.424+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 938 ms
+2025-04-30T17:07:35.523+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T17:07:35.553+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T17:07:35.572+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T17:07:35.758+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T17:07:35.777+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T17:07:35.899+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@c48f0bb
+2025-04-30T17:07:35.901+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T17:07:35.930+02:00  WARN 24624 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T17:07:35.943+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T17:07:36.595+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T17:07:36.793+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T17:07:37.336+02:00  WARN 24624 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T17:07:37.563+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-30T17:07:37.620+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T17:07:37.625+02:00  INFO 24624 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 3.504 seconds (process running for 4.027)
+2025-04-30T17:08:01.436+02:00  INFO 24624 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T17:08:01.443+02:00  INFO 24624 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T17:08:01.478+02:00  INFO 24624 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T17:08:01.481+02:00  INFO 24624 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T17:08:01.487+02:00  INFO 24624 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T17:08:03.271+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 21124 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-04-30T17:08:03.273+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T17:08:03.317+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-30T17:08:03.318+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-30T17:08:03.785+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T17:08:03.892+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 100 ms. Found 4 JPA repository interfaces.
+2025-04-30T17:08:04.230+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T17:08:04.240+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T17:08:04.241+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T17:08:04.274+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T17:08:04.274+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 956 ms
+2025-04-30T17:08:04.376+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T17:08:04.421+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T17:08:04.443+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T17:08:04.630+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T17:08:04.654+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T17:08:04.779+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2e6df7f0
+2025-04-30T17:08:04.781+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T17:08:04.804+02:00  WARN 21124 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T17:08:04.817+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T17:08:05.518+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T17:08:05.713+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T17:08:06.265+02:00  WARN 21124 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T17:08:06.487+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-30T17:08:06.545+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T17:08:06.553+02:00  INFO 21124 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 3.596 seconds (process running for 4.213)
+2025-04-30T17:08:25.930+02:00  INFO 21124 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T17:08:25.935+02:00  INFO 21124 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T17:08:25.953+02:00  INFO 21124 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T17:08:25.955+02:00  INFO 21124 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T17:08:25.958+02:00  INFO 21124 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T17:09:36.385+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 22500 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-04-30T17:09:36.387+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T17:09:36.443+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-30T17:09:36.444+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-30T17:09:36.899+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T17:09:37.012+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 105 ms. Found 4 JPA repository interfaces.
+2025-04-30T17:09:37.361+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T17:09:37.372+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T17:09:37.372+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T17:09:37.407+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T17:09:37.408+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 964 ms
+2025-04-30T17:09:37.501+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T17:09:37.535+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T17:09:37.553+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T17:09:37.735+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T17:09:37.753+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T17:09:37.883+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@44b538b2
+2025-04-30T17:09:37.885+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T17:09:37.908+02:00  WARN 22500 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T17:09:37.921+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T17:09:38.592+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T17:09:38.795+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T17:09:40.165+02:00  WARN 22500 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T17:09:40.365+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-30T17:09:40.426+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T17:09:40.434+02:00  INFO 22500 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.357 seconds (process running for 4.875)
+2025-04-30T17:14:41.877+02:00  INFO 22500 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T17:14:41.882+02:00  INFO 22500 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T17:14:41.903+02:00  INFO 22500 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T17:14:41.906+02:00  INFO 22500 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T17:14:41.909+02:00  INFO 22500 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

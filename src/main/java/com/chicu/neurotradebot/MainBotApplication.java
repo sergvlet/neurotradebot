@@ -1,6 +1,6 @@
 package com.chicu.neurotradebot;
 
-import com.chicu.neurotradebot.telegram.bot.NeuroTradeBot;
+import com.chicu.neurotradebot.bot.NeuroTradeBot;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
