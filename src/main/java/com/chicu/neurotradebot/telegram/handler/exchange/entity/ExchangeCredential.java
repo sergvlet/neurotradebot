@@ -19,12 +19,11 @@ public class ExchangeCredential {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Связываем с пользователем
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user; // Ссылка на пользователя
+    private User user;
 
     private String exchange;
-
     private Boolean useTestnet;
 
     private String realApiKey;

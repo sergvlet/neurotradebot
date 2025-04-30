@@ -1,27 +1,26 @@
 package com.chicu.neurotradebot.user.service;
 
 import com.chicu.neurotradebot.user.entity.AiTradeSettings;
+import com.chicu.neurotradebot.user.entity.User;
 import com.chicu.neurotradebot.user.entity.UserTradingSettings;
+import com.chicu.neurotradebot.user.repository.UserRepository;
 import com.chicu.neurotradebot.user.repository.UserTradingSettingsRepository;
 import com.chicu.neurotradebot.telegram.session.UserSessionManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-/**
- * Сервис для синхронизации настроек AI между базой данных и сессией Telegram.
- */
 @Service
 @RequiredArgsConstructor
 public class AiTradeSettingsSyncService {
 
     private final AiTradeSettingsService aiTradeSettingsService;
     private final UserTradingSettingsRepository userTradingSettingsRepository;
+    private final UserRepository userRepository;
 
-    /**
-     * Загружает настройки AI из базы и сохраняет их в UserSessionManager.
-     */
+    @Transactional
     public void loadSettingsToSession(Long userId) {
         aiTradeSettingsService.findByUserId(userId).ifPresent(settings -> {
             UserSessionManager.setAiStrategy(userId, settings.getStrategy());
@@ -32,7 +31,6 @@ public class AiTradeSettingsSyncService {
             UserSessionManager.setAiPairMode(userId, settings.getPairMode());
             UserSessionManager.setAiManualPair(userId, settings.getManualPair());
 
-            // Поддержка множественных списков пар
             UserSessionManager.clearAiAllowedPairsList(userId);
             String allowed = settings.getAllowedPairs();
             if (allowed != null && !allowed.isBlank()) {
@@ -45,20 +43,27 @@ public class AiTradeSettingsSyncService {
         });
     }
 
-    /**
-     * Сохраняет текущие значения из UserSessionManager в базу.
-     */
+    @Transactional
     public void saveSessionToDb(Long userId) {
-        Optional<UserTradingSettings> userSettingsOpt = userTradingSettingsRepository.findById(userId);
-        if (userSettingsOpt.isEmpty()) return;
+        // Ищем пользователя
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) return;
+        User user = userOpt.get();
 
-        UserTradingSettings userSettings = userSettingsOpt.get();
-        AiTradeSettings ai = userSettings.getAiTradeSettings();
+        // Получаем или создаём торговые настройки
+        UserTradingSettings tradingSettings = user.getTradingSettings();
+        if (tradingSettings == null) {
+            tradingSettings = new UserTradingSettings();
+            tradingSettings.setUser(user);
+            user.setTradingSettings(tradingSettings);
+        }
 
+        // Получаем или создаём AI-настройки
+        AiTradeSettings ai = tradingSettings.getAiTradeSettings();
         if (ai == null) {
             ai = new AiTradeSettings();
-            ai.setUserTradingSettings(userSettings);
-            userSettings.setAiTradeSettings(ai);
+            ai.setUserTradingSettings(tradingSettings);
+            tradingSettings.setAiTradeSettings(ai);
         }
 
         ai.setStrategy(UserSessionManager.getAiStrategy(userId));
@@ -68,11 +73,9 @@ public class AiTradeSettingsSyncService {
         ai.setNotifications(UserSessionManager.isAiNotifications(userId));
         ai.setPairMode(UserSessionManager.getAiPairMode(userId));
         ai.setManualPair(UserSessionManager.getAiManualPair(userId));
+        ai.setAllowedPairs(String.join("\n", UserSessionManager.getAiAllowedPairsList(userId)));
 
-        // Объединяем список строк в одну строку для хранения
-        var list = UserSessionManager.getAiAllowedPairsList(userId);
-        ai.setAllowedPairs(String.join("\n", list));
-
-        aiTradeSettingsService.saveOrUpdate(ai);
+        // Сохраняем через каскад — достаточно сохранить User
+        userRepository.save(user);
     }
 }

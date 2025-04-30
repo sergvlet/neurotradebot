@@ -36,10 +36,14 @@ public class AITradeMenuHandler {
 
         String pairInfo = switch (pairMode) {
             case "MANUAL" -> "Ручной (пара: *%s*)".formatted(manualPair);
-            case "LIST" -> "Выбор из сохранённых списков";
+            case "LIST" -> {
+                String list = manualPair != null && !manualPair.isBlank() ? manualPair : "не выбран";
+                yield "Список: *%s*".formatted(list);
+            }
             case "AUTO" -> "Автоматический выбор AI";
             default -> "Не задан";
         };
+
 
         String currentSettings = """
                 🤖 *AI-торговля: настройки*

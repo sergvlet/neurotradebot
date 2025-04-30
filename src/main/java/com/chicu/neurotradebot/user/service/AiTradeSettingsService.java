@@ -28,11 +28,11 @@ public class AiTradeSettingsService {
 
     /**
      * Сохранить или обновить AI-торговые настройки.
-     * 
-     * @param aiTradeSettings Объект настроек
-     * @return Сохранённый объект
+     *
+     * @param settings Объект настроек
      */
-    public AiTradeSettings saveOrUpdate(AiTradeSettings aiTradeSettings) {
-        return aiTradeSettingsRepository.save(aiTradeSettings);
+    public void saveOrUpdate(AiTradeSettings settings) {
+        aiTradeSettingsRepository.save(settings); // ← Обязательно!
     }
+
 }
