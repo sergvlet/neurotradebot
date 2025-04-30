@@ -1,6 +1,5 @@
-package com.chicu.neurotradebot.service;
+package com.chicu.neurotradebot.model;
 
-import com.chicu.neurotradebot.model.UserTradingSettings;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

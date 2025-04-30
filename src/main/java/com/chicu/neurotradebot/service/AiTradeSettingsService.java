@@ -1,5 +1,6 @@
 package com.chicu.neurotradebot.service;
 
+import com.chicu.neurotradebot.model.AiTradeSettings;
 import com.chicu.neurotradebot.repository.AiTradeSettingsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class AiTradeSettingsService {
      * @param settings Объект настроек
      */
     public void saveOrUpdate(AiTradeSettings settings) {
-        aiTradeSettingsRepository.save(settings); // ← Обязательно!
+        aiTradeSettingsRepository.save(settings);
     }
 
 }

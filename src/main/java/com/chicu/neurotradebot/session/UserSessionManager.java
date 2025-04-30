@@ -41,6 +41,10 @@ public class UserSessionManager {
         userTestnetStatus.put(userId, !isTestnet(userId));
     }
 
+    public static void setTestnet(Long userId, boolean isTestnet) {
+        userTestnetStatus.put(userId, isTestnet);
+    }
+
     public static void setSelectedExchange(Long userId, String exchange) {
         userSelectedExchange.put(userId, exchange);
     }
@@ -167,8 +171,8 @@ public class UserSessionManager {
     public static Integer getLastBotMessageId(Long chatId) {
         return lastBotMessageIds.getOrDefault(chatId, null);
     }
+
     public static void clearAiAllowedPairsList(Long chatId) {
         aiAllowedPairLists.remove(chatId);
     }
-
 }

@@ -1,5 +1,6 @@
 package com.chicu.neurotradebot.service;
 
+import com.chicu.neurotradebot.model.AiTradeSettings;
 import com.chicu.neurotradebot.model.User;
 import com.chicu.neurotradebot.model.UserTradingSettings;
 import com.chicu.neurotradebot.repository.UserRepository;

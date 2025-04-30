@@ -1,6 +1,5 @@
 package com.chicu.neurotradebot.model;
 
-import com.chicu.neurotradebot.service.AiTradeSettings;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,9 +20,15 @@ public class UserTradingSettings {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String exchange;
+    @Column(name = "use_testnet")
     private Boolean useTestnet;
-    private String tradingMode;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "trading_mode")
+    private TradeMode tradeMode;
+
+    @Column(name = "selected_exchange")
+    private String selectedExchange;
 
     @OneToOne(mappedBy = "userTradingSettings", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private AiTradeSettings aiTradeSettings;

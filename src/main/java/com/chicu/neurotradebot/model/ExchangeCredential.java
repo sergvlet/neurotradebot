@@ -18,16 +18,26 @@ public class ExchangeCredential {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Привязка к пользователю
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    // Название биржи (Binance, Bybit и т.д.)
     private String exchange;
+
+    /**
+     * Флаг, указывающий, что эта конкретная пара ключей
+     * предназначена для TESTNET.
+     * Не означает, что пользователь сейчас в тестовой сети.
+     */
     private Boolean useTestnet;
 
+    // API-ключи для реальной торговли
     private String realApiKey;
     private String realSecretKey;
 
+    // API-ключи для тестовой торговли
     private String testApiKey;
     private String testSecretKey;
 
