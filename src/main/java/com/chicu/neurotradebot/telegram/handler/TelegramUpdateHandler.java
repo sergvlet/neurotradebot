@@ -16,11 +16,15 @@ import com.chicu.neurotradebot.user.service.AiTradeSettingsSyncService;
 import com.chicu.neurotradebot.user.service.SubscriptionChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -54,14 +58,17 @@ public class TelegramUpdateHandler {
         ensureUserExists(message);
 
         InputStage inputStage = UserSessionManager.getInputStage(chatId);
+
+        if (inputStage == InputStage.AI_LIST_ADD) {
+            Update fakeUpdate = new Update();
+            fakeUpdate.setMessage(message);
+            List<Object> actions = aiTradeMenuHandler.handleAiListAdd(fakeUpdate);
+            return actions;
+        }
+
         if (inputStage != InputStage.NONE) {
             Update fakeUpdate = new Update();
             fakeUpdate.setMessage(message);
-
-            if (inputStage == InputStage.AI_LIST_ADD) {
-                return handleAiListAdd(fakeUpdate);
-            }
-
             return apiKeySetupHandler.handle(fakeUpdate);
         }
 
@@ -118,35 +125,11 @@ public class TelegramUpdateHandler {
         return null;
     }
 
-    private Object handleAiListAdd(Update update) {
-        Message message = update.getMessage();
-        long chatId = message.getChatId();
-        String text = message.getText().replaceAll("\\s+", "");
 
-        Integer messageId = UserSessionManager.getLastBotMessageId(chatId);
-        if (messageId == null) {
-            return null;
-        }
-
-        if (!text.contains("/")) {
-            return EditMessageText.builder()
-                    .chatId(String.valueOf(chatId))
-                    .messageId(messageId)
-                    .text("⚠️ Неверный формат. Пример правильного ввода:\n\n`BTC/USDT,ETH/USDT`")
-                    .parseMode("Markdown")
-                    .build();
-        }
-
-        UserSessionManager.setAiAllowedPairs(chatId, text.toUpperCase());
-        aiTradeSettingsSyncService.saveSessionToDb(chatId);
-        UserSessionManager.setInputStage(chatId, InputStage.NONE);
-
-        return EditMessageText.builder()
+    private DeleteMessage buildDeleteMessage(Long chatId, Integer messageId) {
+        return DeleteMessage.builder()
                 .chatId(String.valueOf(chatId))
                 .messageId(messageId)
-                .text("✅ Список пар обновлён:\n\n" + text.toUpperCase())
-                .replyMarkup(aiTradeMenuBuilder.buildListPairMenu())
-                .parseMode("Markdown")
                 .build();
     }
 

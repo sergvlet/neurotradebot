@@ -31,8 +31,17 @@ public class AiTradeSettingsSyncService {
             UserSessionManager.setAiNotifications(userId, Boolean.TRUE.equals(settings.getNotifications()));
             UserSessionManager.setAiPairMode(userId, settings.getPairMode());
             UserSessionManager.setAiManualPair(userId, settings.getManualPair());
-            UserSessionManager.setAiAllowedPairs(userId, settings.getAllowedPairs());
 
+            // Поддержка множественных списков пар
+            UserSessionManager.clearAiAllowedPairsList(userId);
+            String allowed = settings.getAllowedPairs();
+            if (allowed != null && !allowed.isBlank()) {
+                for (String line : allowed.split("\n")) {
+                    if (!line.isBlank()) {
+                        UserSessionManager.appendAiAllowedPair(userId, line.trim());
+                    }
+                }
+            }
         });
     }
 
@@ -59,7 +68,10 @@ public class AiTradeSettingsSyncService {
         ai.setNotifications(UserSessionManager.isAiNotifications(userId));
         ai.setPairMode(UserSessionManager.getAiPairMode(userId));
         ai.setManualPair(UserSessionManager.getAiManualPair(userId));
-        ai.setAllowedPairs(UserSessionManager.getAiAllowedPairs(userId));
+
+        // Объединяем список строк в одну строку для хранения
+        var list = UserSessionManager.getAiAllowedPairsList(userId);
+        ai.setAllowedPairs(String.join("\n", list));
 
         aiTradeSettingsService.saveOrUpdate(ai);
     }

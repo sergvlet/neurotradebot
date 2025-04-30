@@ -1,8 +1,6 @@
 package com.chicu.neurotradebot.telegram.session;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserSessionManager {
@@ -24,14 +22,15 @@ public class UserSessionManager {
     private static final Map<Long, Boolean> aiNotifications = new ConcurrentHashMap<>();
     private static final Map<Long, String> aiPairMode = new ConcurrentHashMap<>();
     private static final Map<Long, String> aiManualPair = new ConcurrentHashMap<>();
-    private static final Map<Long, String> aiAllowedPairs = new ConcurrentHashMap<>();
+
+    // Новый формат — список списков валютных пар
+    private static final Map<Long, List<String>> aiAllowedPairLists = new ConcurrentHashMap<>();
 
     // Техническая служебная информация
     private static final Map<Long, Integer> lastBotMessageIds = new ConcurrentHashMap<>();
 
-    // === Методы ===
+    // === Testnet / Exchange ===
 
-    // --- Testnet/Real ---
     public static boolean isTestnet(Long userId) {
         return userTestnetStatus.getOrDefault(userId, false);
     }
@@ -48,7 +47,8 @@ public class UserSessionManager {
         return userSelectedExchange.getOrDefault(userId, "Не выбрана");
     }
 
-    // --- API Ключи ---
+    // === Input Stage ===
+
     public static InputStage getInputStage(Long userId) {
         return inputStages.getOrDefault(userId, InputStage.NONE);
     }
@@ -56,6 +56,8 @@ public class UserSessionManager {
     public static void setInputStage(Long userId, InputStage stage) {
         inputStages.put(userId, stage);
     }
+
+    // === Temp API Keys ===
 
     public static void saveTempApiKey(Long userId, String apiKey) {
         tempApiKeys.put(userId, apiKey);
@@ -69,7 +71,8 @@ public class UserSessionManager {
         tempApiKeys.remove(userId);
     }
 
-    // --- Режим торговли ---
+    // === Режим торговли ===
+
     public static TradeMode getTradeMode(Long userId) {
         return userTradeMode.getOrDefault(userId, TradeMode.MANUAL);
     }
@@ -78,7 +81,8 @@ public class UserSessionManager {
         userTradeMode.put(userId, tradeMode);
     }
 
-    // --- AI Торговля ---
+    // === AI Торговля: основные настройки ===
+
     public static String getAiStrategy(Long chatId) {
         return aiStrategy.getOrDefault(chatId, "Сбалансированная");
     }
@@ -135,22 +139,29 @@ public class UserSessionManager {
         aiManualPair.put(chatId, pair);
     }
 
-    public static String getAiAllowedPairs(Long chatId) {
-        return aiAllowedPairs.getOrDefault(chatId, "");
+    // === AI Торговля: списки валютных пар ===
+
+    public static List<String> getAiAllowedPairsList(Long chatId) {
+        return aiAllowedPairLists.getOrDefault(chatId, new ArrayList<>());
     }
 
-    public static void setAiAllowedPairs(Long chatId, String pairs) {
-        aiAllowedPairs.put(chatId, pairs);
+    public static void appendAiAllowedPair(Long chatId, String newPairList) {
+        aiAllowedPairLists.computeIfAbsent(chatId, k -> new ArrayList<>()).add(newPairList);
     }
 
-    public static void removeAiAllowedPair(Long chatId, String pair) {
-        String current = aiAllowedPairs.getOrDefault(chatId, "");
-        List<String> pairs = new ArrayList<>(List.of(current.split(",")));
-        pairs.removeIf(p -> p.equalsIgnoreCase(pair));
-        aiAllowedPairs.put(chatId, String.join(",", pairs));
+    public static void removeAiAllowedPairAt(Long chatId, int index) {
+        List<String> list = aiAllowedPairLists.get(chatId);
+        if (list != null && index >= 0 && index < list.size()) {
+            list.remove(index);
+        }
     }
 
-    // --- Техническая информация ---
+    public static void clearAllPairLists(Long chatId) {
+        aiAllowedPairLists.remove(chatId);
+    }
+
+    // === Служебные сообщения ===
+
     public static void setLastBotMessageId(Long chatId, Integer messageId) {
         lastBotMessageIds.put(chatId, messageId);
     }
@@ -158,4 +169,8 @@ public class UserSessionManager {
     public static Integer getLastBotMessageId(Long chatId) {
         return lastBotMessageIds.getOrDefault(chatId, null);
     }
+    public static void clearAiAllowedPairsList(Long chatId) {
+        aiAllowedPairLists.remove(chatId);
+    }
+
 }

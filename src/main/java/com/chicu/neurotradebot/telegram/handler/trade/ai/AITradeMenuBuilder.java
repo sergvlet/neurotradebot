@@ -108,23 +108,47 @@ public class AITradeMenuBuilder {
                 .build();
     }
 
-    public InlineKeyboardMarkup buildRemovePairsMenu(String allowedPairs) {
-        String[] pairs = allowedPairs.split(",");
-        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
-        for (String pair : pairs) {
-            rows.add(List.of(button("❌ " + pair, "ai_list_del_" + pair.replace("/", ""))));
-        }
-        rows.add(List.of(button("🔙 Назад", "ai_list_remove")));
-        return InlineKeyboardMarkup.builder().keyboard(rows).build();
-    }
-
     public InlineKeyboardMarkup buildAllowedPairsMenu(String allowedPairs) {
         String[] pairs = allowedPairs.split(",");
         List<List<InlineKeyboardButton>> rows = new ArrayList<>();
         for (String pair : pairs) {
             rows.add(List.of(button(pair, "ai_list_select_" + pair.replace("/", ""))));
         }
-        rows.add(List.of(button("🔙 Назад", "ai_list_pick")));
+        rows.add(List.of(button("🔙 Назад", "ai_back_list_menu")));
+        return InlineKeyboardMarkup.builder().keyboard(rows).build();
+    }
+
+    public InlineKeyboardMarkup buildRemovePairsMenu(String allowedPairs) {
+        String[] pairs = allowedPairs.split(",");
+        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
+        for (int i = 0; i < pairs.length; i += 2) {
+            List<InlineKeyboardButton> row = new ArrayList<>();
+            row.add(button("❌ " + pairs[i], "ai_list_del_" + pairs[i].replace("/", "")));
+            if (i + 1 < pairs.length) {
+                row.add(button("❌ " + pairs[i + 1], "ai_list_del_" + pairs[i + 1].replace("/", "")));
+            }
+            rows.add(row);
+        }
+        rows.add(List.of(button("🗑 Удалить все", "ai_list_del_all"), button("🔙 Назад", "ai_back_list_menu")));
+        return InlineKeyboardMarkup.builder().keyboard(rows).build();
+    }
+
+    public InlineKeyboardMarkup buildListSelectMenu(List<String> lists) {
+        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
+        for (int i = 0; i < lists.size(); i++) {
+            String text = lists.get(i);
+            rows.add(List.of(button(text, "ai_list_select_" + i)));
+        }
+        rows.add(List.of(button("🔙 Назад", "ai_back_list_menu")));
+        return InlineKeyboardMarkup.builder().keyboard(rows).build();
+    }
+
+    public InlineKeyboardMarkup buildListRemoveMenu(List<String> lists) {
+        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
+        for (int i = 0; i < lists.size(); i++) {
+            rows.add(List.of(button("❌ " + lists.get(i), "ai_list_del_item_" + i)));
+        }
+        rows.add(List.of(button("🔙 Назад", "ai_back_list_menu")));
         return InlineKeyboardMarkup.builder().keyboard(rows).build();
     }
 
