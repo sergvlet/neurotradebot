@@ -1,25 +1,45 @@
 package com.chicu.neurotradebot.controller;
 
+import com.chicu.neurotradebot.model.AiTradeSettings;
+import com.chicu.neurotradebot.service.AiTradeSettingsService;
+import com.chicu.neurotradebot.service.AiVisualizationService;
 import com.chicu.neurotradebot.session.InputStage;
 import com.chicu.neurotradebot.session.UserSessionManager;
 import com.chicu.neurotradebot.service.AiTradeSettingsSyncService;
+import com.chicu.neurotradebot.strategy.RsiEmaStrategyMenuHandler;
 import com.chicu.neurotradebot.view.AITradeMenuBuilder;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import java.io.File;
+
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class AITradeMenuHandler {
 
     private final AITradeMenuBuilder aiTradeMenuBuilder;
     private final AiTradeSettingsSyncService aiTradeSettingsSyncService;
+    private final RsiEmaStrategyMenuHandler rsiEmaStrategyMenuHandler;
+    private final AiVisualizationService aiVisualizationService;
+    private final AiTradeSettingsService aiTradeSettingsService;
+
+
+
 
     public Object showMainMenu(Update update) {
         long chatId = update.getCallbackQuery().getMessage().getChatId();
@@ -30,8 +50,10 @@ public class AITradeMenuHandler {
         String tradingType = UserSessionManager.getAiTradingType(chatId);
         String strategy = UserSessionManager.getAiStrategy(chatId);
         String risk = UserSessionManager.getAiRiskLevel(chatId);
-        String autostart = UserSessionManager.isAiAutostart(chatId) ? "Включён" : "Отключён";
         String notifications = UserSessionManager.isAiNotifications(chatId) ? "Включены" : "Отключены";
+        boolean aiRunning = UserSessionManager.isAiRunning(chatId);
+        String aiStatus = aiRunning ? "✅ *ВКЛЮЧЕНА*" : "⛔ *ВЫКЛЮЧЕНА*";
+
         String pairMode = UserSessionManager.getAiPairMode(chatId);
         String manualPair = UserSessionManager.getAiManualPair(chatId);
 
@@ -45,19 +67,18 @@ public class AITradeMenuHandler {
             default -> "Не задан";
         };
 
-
         String currentSettings = """
-                🤖 *AI-торговля: настройки*
+            🤖 *AI-торговля: настройки*
 
-                Тип торговли: *%s*
-                Стратегия: *%s*
-                Риск: *%s*
-                Автостарт: *%s*
-                Уведомления: *%s*
-                Валютная пара: %s
+            Статус AI: %s
+            Тип торговли: *%s*
+            Стратегия: *%s*
+            Риск: *%s*
+            Уведомления: *%s*
+            Валютная пара: %s
 
-                Выберите, что хотите изменить:
-                """.formatted(tradingType, strategy, risk, autostart, notifications, pairInfo);
+            Выберите, что хотите изменить:
+            """.formatted(aiStatus, tradingType, strategy, risk, notifications, pairInfo);
 
         return EditMessageText.builder()
                 .chatId(String.valueOf(chatId))
@@ -72,14 +93,34 @@ public class AITradeMenuHandler {
         String data = update.getCallbackQuery().getData();
         long chatId = update.getCallbackQuery().getMessage().getChatId();
 
-        return switch (data) {
+        Object result = switch (data) {
+            case "ai_visual" -> showVisualizationMessage(update);
+            case "ai_back_main_from_chart" -> {
+                int chartMsgId = UserSessionManager.getLastChartMessageId(chatId);
+                DeleteMessage deleteChart = DeleteMessage.builder()
+                        .chatId(String.valueOf(chatId))
+                        .messageId(chartMsgId)
+                        .build();
+
+                SendMessage mainMenu = SendMessage.builder()
+                        .chatId(String.valueOf(chatId))
+                        .text(buildCurrentSettingsMessage(chatId))
+                        .replyMarkup(aiTradeMenuBuilder.buildMainMenu())
+                        .parseMode("Markdown")
+                        .build();
+
+                yield List.of(deleteChart, mainMenu);
+            }
+
+
+
+            case "ai_back_main" -> showMainMenu(update);
+
             case "ai_trading_type" -> showTradingTypeMenu(update);
             case "ai_strategy" -> showStrategySelection(update);
             case "ai_risk" -> showRiskSelection(update);
-            case "ai_autostart" -> showAutostartMenu(update);
             case "ai_notifications" -> showNotificationsMenu(update);
             case "ai_pair" -> showPairSelectionMenu(update);
-            case "ai_back_main" -> showMainMenu(update);
             case "ai_back_list_menu" -> showListPairMenu(update);
 
             case "ai_pair_mode_manual" -> {
@@ -98,6 +139,8 @@ public class AITradeMenuHandler {
                 yield showMainMenu(update);
             }
 
+            case "ai_strategy_rsi_ema", "ai_strategy_main" -> rsiEmaStrategyMenuHandler.showStrategyOptions(update);
+
             case "ai_manual_pair_BTCUSDT" -> saveAndReturn(() -> UserSessionManager.setAiManualPair(chatId, "BTC/USDT"), chatId, update);
             case "ai_manual_pair_ETHUSDT" -> saveAndReturn(() -> UserSessionManager.setAiManualPair(chatId, "ETH/USDT"), chatId, update);
             case "ai_manual_pair_BNBUSDT" -> saveAndReturn(() -> UserSessionManager.setAiManualPair(chatId, "BNB/USDT"), chatId, update);
@@ -109,24 +152,120 @@ public class AITradeMenuHandler {
             case "ai_list_remove" -> showRemoveListInstruction(update);
             case "ai_list_pick" -> showListSelectMenu(update);
 
-            default -> {
-                if (data.startsWith("ai_list_select_")) {
-                    int index = Integer.parseInt(data.replace("ai_list_select_", ""));
-                    String selectedList = UserSessionManager.getAiAllowedPairsList(chatId).get(index);
-                    UserSessionManager.setAiManualPair(chatId, selectedList);
-                    aiTradeSettingsSyncService.saveSessionToDb(chatId);
-                    yield showMainMenu(update);
-                }
-                if (data.startsWith("ai_list_del_item_")) {
-                    int index = Integer.parseInt(data.replace("ai_list_del_item_", ""));
-                    UserSessionManager.removeAiAllowedPairAt(chatId, index);
-                    aiTradeSettingsSyncService.saveSessionToDb(chatId);
-                    yield showRemoveListInstruction(update);
-                }
-                yield null;
+            case "ai_strategy_settings", "ai_set_rsi_period", "ai_set_ema_short",
+                 "ai_set_ema_long", "ai_set_rsi_buy", "ai_set_rsi_sell", "ai_set_limit"
+                    -> rsiEmaStrategyMenuHandler.handleCallback(update);
+            case "ai_strategy_reset" -> rsiEmaStrategyMenuHandler.resetToDefault(update);
+
+            case "ai_control" -> {
+                boolean running = UserSessionManager.isAiRunning(chatId);
+                yield buildEditMessage(update, "🤖 Управление AI-режимом:", aiTradeMenuBuilder.buildStartStopMenu(running));
             }
+            case "ai_start" -> saveAndReturn(() -> UserSessionManager.setAiRunning(chatId, true), chatId, update);
+            case "ai_stop" -> saveAndReturn(() -> UserSessionManager.setAiRunning(chatId, false), chatId, update);
+
+            default -> null;
         };
+
+        if (result != null) return result;
+
+        // списки
+        if (data.startsWith("ai_list_select_")) {
+            int index = Integer.parseInt(data.replace("ai_list_select_", ""));
+            String selectedList = UserSessionManager.getAiAllowedPairsList(chatId).get(index);
+            UserSessionManager.setAiManualPair(chatId, selectedList);
+            aiTradeSettingsSyncService.saveSessionToDb(chatId);
+            return showMainMenu(update);
+        }
+
+        if (data.startsWith("ai_list_del_item_")) {
+            int index = Integer.parseInt(data.replace("ai_list_del_item_", ""));
+            UserSessionManager.removeAiAllowedPairAt(chatId, index);
+            aiTradeSettingsSyncService.saveSessionToDb(chatId);
+            return showRemoveListInstruction(update);
+        }
+
+        if (data.startsWith("ai_strategy_")) {
+            String value = data.replace("ai_strategy_", "");
+            return saveAndReturn(() -> UserSessionManager.setAiStrategy(chatId, value), chatId, update);
+        }
+
+        if (data.startsWith("ai_risk_")) {
+            String value = data.replace("ai_risk_", "");
+            return saveAndReturn(() -> UserSessionManager.setAiRiskLevel(chatId, value), chatId, update);
+        }
+
+        if (data.startsWith("ai_trading_type_")) {
+            String value = data.replace("ai_trading_type_", "");
+            return saveAndReturn(() -> UserSessionManager.setAiTradingType(chatId, value), chatId, update);
+        }
+
+        if (data.startsWith("ai_notifications_")) {
+            boolean enabled = data.endsWith("_on");
+            return saveAndReturn(() -> UserSessionManager.setAiNotifications(chatId, enabled), chatId, update);
+        }
+
+        return null;
     }
+
+    private Object showVisualizationMessage(Update update) {
+        long chatId = update.getCallbackQuery().getMessage().getChatId();
+        int messageId = update.getCallbackQuery().getMessage().getMessageId();
+
+        AiTradeSettings settings = aiTradeSettingsService
+                .createIfAbsentAndInitializeDefaults(chatId); // гарантированная загрузка
+
+        try {
+            byte[] chartImage = aiVisualizationService.generateChart(settings);
+
+            // Создаём временный PNG-файл
+            File tempFile = File.createTempFile("chart_", ".png");
+            try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+                fos.write(chartImage);
+            }
+
+            // Создаём сообщение с графиком
+            SendPhoto photo = SendPhoto.builder()
+                    .chatId(String.valueOf(chatId))
+                    .photo(new InputFile(tempFile))
+                    .caption("📊 Визуализация стратегии *%s* по паре *%s*".formatted(
+                            settings.getStrategy(),
+                            settings.getManualPair()
+                    ))
+                    .replyMarkup(InlineKeyboardMarkup.builder()
+                            .keyboard(List.of(
+                                    List.of(InlineKeyboardButton.builder()
+                                            .text("🔙 Назад")
+                                            .callbackData("ai_back_main_from_chart")
+                                            .build())
+                            ))
+                            .build())
+                    .parseMode("Markdown")
+                    .build();
+
+            // Удаляем старое меню
+            DeleteMessage delete = DeleteMessage.builder()
+                    .chatId(String.valueOf(chatId))
+                    .messageId(messageId)
+                    .build();
+
+            return List.of(delete, photo);
+
+        } catch (Exception e) {
+            log.error("Ошибка при визуализации: {}", e.getMessage(), e);
+
+            return SendMessage.builder()
+                    .chatId(String.valueOf(chatId))
+                    .text("❌ Не удалось построить график. Попробуйте позже.")
+                    .replyMarkup(aiTradeMenuBuilder.buildBackToMainMenu())
+                    .parseMode("Markdown")
+                    .build();
+
+        }
+
+    }
+
+
 
     private Object showTradingTypeMenu(Update update) {
         return buildEditMessage(update, "📈 Выберите тип торговли:", aiTradeMenuBuilder.buildTradingTypeMenu());
@@ -140,9 +279,6 @@ public class AITradeMenuHandler {
         return buildEditMessage(update, "⚖️ Выберите уровень риска:", aiTradeMenuBuilder.buildRiskSelectionMenu());
     }
 
-    private Object showAutostartMenu(Update update) {
-        return buildEditMessage(update, "🚀 Автостарт торговли:", aiTradeMenuBuilder.buildAutoStartMenu());
-    }
 
     private Object showNotificationsMenu(Update update) {
         return buildEditMessage(update, "🔔 Настройки уведомлений:", aiTradeMenuBuilder.buildNotificationsMenu());
@@ -249,4 +385,41 @@ public class AITradeMenuHandler {
         aiTradeSettingsSyncService.saveSessionToDb(chatId);
         return showMainMenu(update);
     }
+
+    private String buildCurrentSettingsMessage(long chatId) {
+        String tradingType = UserSessionManager.getAiTradingType(chatId);
+        String strategy = UserSessionManager.getAiStrategy(chatId);
+        String risk = UserSessionManager.getAiRiskLevel(chatId);
+        String notifications = UserSessionManager.isAiNotifications(chatId) ? "Включены" : "Отключены";
+        boolean aiRunning = UserSessionManager.isAiRunning(chatId);
+        String aiStatus = aiRunning ? "✅ ВКЛЮЧЕНА" : "⛔ ВЫКЛЮЧЕНА";
+
+        String pairMode = UserSessionManager.getAiPairMode(chatId);
+        String manualPair = UserSessionManager.getAiManualPair(chatId);
+
+        String pairInfo = switch (pairMode) {
+            case "MANUAL" -> "Ручной (пара: %s)".formatted(manualPair);
+            case "LIST" -> {
+                String list = manualPair != null && !manualPair.isBlank() ? manualPair : "не выбран";
+                yield "Список: %s".formatted(list);
+            }
+            case "AUTO" -> "Автоматический выбор AI";
+            default -> "Не задан";
+        };
+
+        return """
+        🤖 *AI-торговля: настройки*
+
+        Статус AI: %s
+        Тип торговли: *%s*
+        Стратегия: *%s*
+        Риск: *%s*
+        Уведомления: *%s*
+        Валютная пара: %s
+
+        Выберите, что хотите изменить:
+        """.formatted(aiStatus, tradingType, strategy, risk, notifications, pairInfo);
+    }
+
+
 }

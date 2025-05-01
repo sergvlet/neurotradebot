@@ -1,5 +1,6 @@
 package com.chicu.neurotradebot.controller;
 
+import com.chicu.neurotradebot.strategy.RsiEmaStrategyMenuHandler;
 import com.chicu.neurotradebot.view.SubscriptionMenuBuilder;
 import com.chicu.neurotradebot.view.TradeMenuHandler;
 import com.chicu.neurotradebot.view.AITradeMenuBuilder;
@@ -34,6 +35,8 @@ public class TelegramUpdateHandler {
     private final SubscriptionChecker subscriptionChecker;
     private final SubscriptionMenuBuilder subscriptionMenuBuilder;
     private final AiTradeSettingsSyncService aiTradeSettingsSyncService;
+    private final RsiEmaStrategyMenuHandler rsiEmaStrategyMenuHandler;
+
 
     public Object handle(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -62,8 +65,14 @@ public class TelegramUpdateHandler {
         if (inputStage != InputStage.NONE) {
             Update fakeUpdate = new Update();
             fakeUpdate.setMessage(message);
+
+            if (inputStage.name().startsWith("AI_STRATEGY_")) {
+                return rsiEmaStrategyMenuHandler.handleText(fakeUpdate);
+            }
+
             return apiKeySetupHandler.handle(fakeUpdate);
         }
+
 
         if ("/start".equals(text)) {
             return mainMenuHandler.startNewMessage(message);
@@ -117,18 +126,10 @@ public class TelegramUpdateHandler {
 
         return null;
     }
-
-
-    private DeleteMessage buildDeleteMessage(Long chatId, Integer messageId) {
-        return DeleteMessage.builder()
-                .chatId(String.valueOf(chatId))
-                .messageId(messageId)
-                .build();
-    }
-
     private void ensureUserExists(Message message) {
         Long chatId = message.getChatId();
-        if (!userRepository.existsById(chatId)) {
+
+        userRepository.findById(chatId).orElseGet(() -> {
             User newUser = new User();
             newUser.setId(chatId);
             newUser.setUsername(message.getFrom().getUserName());
@@ -138,7 +139,8 @@ public class TelegramUpdateHandler {
             newUser.setSubscriptionStartAt(null);
             newUser.setSubscriptionEndAt(null);
             newUser.setTrialUsed(false);
-            userRepository.save(newUser);
-        }
+            newUser.setSubscriptionActive(false);
+            return userRepository.save(newUser); // ← сохраняется только 1 раз
+        });
     }
 }

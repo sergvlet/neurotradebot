@@ -20,10 +20,13 @@ public class UserSessionManager {
     private static final Map<Long, String> aiTradingType = new ConcurrentHashMap<>();
     private static final Map<Long, String> aiStrategy = new ConcurrentHashMap<>();
     private static final Map<Long, String> aiRisk = new ConcurrentHashMap<>();
-    private static final Map<Long, Boolean> aiAutostart = new ConcurrentHashMap<>();
     private static final Map<Long, Boolean> aiNotifications = new ConcurrentHashMap<>();
     private static final Map<Long, String> aiPairMode = new ConcurrentHashMap<>();
     private static final Map<Long, String> aiManualPair = new ConcurrentHashMap<>();
+    private static final Map<Long, Boolean> aiRunning = new ConcurrentHashMap<>();
+    private static final Map<Long, Integer> lastChartMessageIds = new ConcurrentHashMap<>();
+
+
 
     // Новый формат — список списков валютных пар
     private static final Map<Long, List<String>> aiAllowedPairLists = new ConcurrentHashMap<>();
@@ -113,14 +116,6 @@ public class UserSessionManager {
         aiTradingType.put(chatId, type);
     }
 
-    public static boolean isAiAutostart(Long chatId) {
-        return aiAutostart.getOrDefault(chatId, false);
-    }
-
-    public static void setAiAutostart(Long chatId, boolean enabled) {
-        aiAutostart.put(chatId, enabled);
-    }
-
     public static boolean isAiNotifications(Long chatId) {
         return aiNotifications.getOrDefault(chatId, true);
     }
@@ -144,6 +139,7 @@ public class UserSessionManager {
     public static void setAiManualPair(Long chatId, String pair) {
         aiManualPair.put(chatId, pair);
     }
+
 
     // === AI Торговля: списки валютных пар ===
 
@@ -174,5 +170,21 @@ public class UserSessionManager {
 
     public static void clearAiAllowedPairsList(Long chatId) {
         aiAllowedPairLists.remove(chatId);
+    }
+
+    public static boolean isAiRunning(Long chatId) {
+        return aiRunning.getOrDefault(chatId, false);
+    }
+
+    public static void setAiRunning(Long chatId, boolean running) {
+        aiRunning.put(chatId, running);
+    }
+
+    public static void setLastChartMessageId(long chatId, int messageId) {
+        lastChartMessageIds.put(chatId, messageId);
+    }
+
+    public static int getLastChartMessageId(long chatId) {
+        return lastChartMessageIds.getOrDefault(chatId, -1);
     }
 }

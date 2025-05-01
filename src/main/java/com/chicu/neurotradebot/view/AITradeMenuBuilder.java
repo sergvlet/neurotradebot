@@ -13,16 +13,33 @@ public class AITradeMenuBuilder {
     public InlineKeyboardMarkup buildMainMenu() {
         return InlineKeyboardMarkup.builder()
                 .keyboard(List.of(
+                        List.of(button("🤖 Управление AI", "ai_control")),
+
                         List.of(button("📈 Изменить тип торговли", "ai_trading_type")),
                         List.of(button("🎯 Изменить стратегию", "ai_strategy")),
                         List.of(button("⚖️ Изменить риск", "ai_risk")),
                         List.of(button("💱 Выбрать валюту", "ai_pair")),
-                        List.of(button("🚀 Автостарт", "ai_autostart")),
                         List.of(button("🔔 Уведомления", "ai_notifications")),
+                        List.of(button("📊 Визуализация AI", "ai_visual")),
+
                         List.of(button("🔙 Назад", "back_to_settings"))
+
+
+                        ))
+                .build();
+    }
+
+    public InlineKeyboardMarkup buildStrategySelectionMenu() {
+        return InlineKeyboardMarkup.builder()
+                .keyboard(List.of(
+                        List.of(button("🎯 RSI + EMA", "ai_strategy_rsi_ema")),
+                        List.of(button("🧊 Grid стратегия", "ai_strategy_grid")), // позже
+                        List.of(button("📉 DCA стратегия", "ai_strategy_dca")),
+                        List.of(button("🔙 Назад", "ai_back_main"))
                 ))
                 .build();
     }
+
 
     public InlineKeyboardMarkup buildTradingTypeMenu() {
         return InlineKeyboardMarkup.builder()
@@ -33,16 +50,16 @@ public class AITradeMenuBuilder {
                 .build();
     }
 
-    public InlineKeyboardMarkup buildStrategySelectionMenu() {
+    public InlineKeyboardMarkup buildStartStopMenu(boolean running) {
         return InlineKeyboardMarkup.builder()
                 .keyboard(List.of(
-                        List.of(button("🟢 Консервативная", "ai_strategy_conservative")),
-                        List.of(button("🟡 Сбалансированная", "ai_strategy_balanced")),
-                        List.of(button("🔴 Агрессивная", "ai_strategy_aggressive")),
+                        List.of(button(running ? "🔴 Остановить AI" : "🟢 Запустить AI", running ? "ai_stop" : "ai_start")),
                         List.of(button("🔙 Назад", "ai_back_main"))
                 ))
                 .build();
     }
+
+
 
     public InlineKeyboardMarkup buildRiskSelectionMenu() {
         return InlineKeyboardMarkup.builder()
@@ -55,15 +72,7 @@ public class AITradeMenuBuilder {
                 .build();
     }
 
-    public InlineKeyboardMarkup buildAutoStartMenu() {
-        return InlineKeyboardMarkup.builder()
-                .keyboard(List.of(
-                        List.of(button("🚀 Включить автостарт", "ai_autostart_on")),
-                        List.of(button("⛔ Отключить автостарт", "ai_autostart_off")),
-                        List.of(button("🔙 Назад", "ai_back_main"))
-                ))
-                .build();
-    }
+
 
     public InlineKeyboardMarkup buildNotificationsMenu() {
         return InlineKeyboardMarkup.builder()
@@ -108,30 +117,7 @@ public class AITradeMenuBuilder {
                 .build();
     }
 
-    public InlineKeyboardMarkup buildAllowedPairsMenu(String allowedPairs) {
-        String[] pairs = allowedPairs.split(",");
-        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
-        for (String pair : pairs) {
-            rows.add(List.of(button(pair, "ai_list_select_" + pair.replace("/", ""))));
-        }
-        rows.add(List.of(button("🔙 Назад", "ai_back_list_menu")));
-        return InlineKeyboardMarkup.builder().keyboard(rows).build();
-    }
 
-    public InlineKeyboardMarkup buildRemovePairsMenu(String allowedPairs) {
-        String[] pairs = allowedPairs.split(",");
-        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
-        for (int i = 0; i < pairs.length; i += 2) {
-            List<InlineKeyboardButton> row = new ArrayList<>();
-            row.add(button("❌ " + pairs[i], "ai_list_del_" + pairs[i].replace("/", "")));
-            if (i + 1 < pairs.length) {
-                row.add(button("❌ " + pairs[i + 1], "ai_list_del_" + pairs[i + 1].replace("/", "")));
-            }
-            rows.add(row);
-        }
-        rows.add(List.of(button("🗑 Удалить все", "ai_list_del_all"), button("🔙 Назад", "ai_back_list_menu")));
-        return InlineKeyboardMarkup.builder().keyboard(rows).build();
-    }
 
     public InlineKeyboardMarkup buildListSelectMenu(List<String> lists) {
         List<List<InlineKeyboardButton>> rows = new ArrayList<>();
@@ -158,4 +144,12 @@ public class AITradeMenuBuilder {
                 .callbackData(callbackData)
                 .build();
     }
+    public InlineKeyboardMarkup buildBackToMainMenu() {
+        return InlineKeyboardMarkup.builder()
+                .keyboard(List.of(
+                        List.of(button("🔙 Назад", "ai_back_main"))
+                ))
+                .build();
+    }
+
 }

@@ -23,13 +23,15 @@ public class AiTradeSettingsSyncService {
     @Transactional
     public void loadSettingsToSession(Long userId) {
         aiTradeSettingsService.findByUserId(userId).ifPresent(settings -> {
+            aiTradeSettingsService.initializeDefaultsIfNull(settings); // 👈 гарантия заполнения
+
             UserSessionManager.setAiStrategy(userId, settings.getStrategy());
             UserSessionManager.setAiRiskLevel(userId, settings.getRisk());
             UserSessionManager.setAiTradingType(userId, settings.getTradingType());
-            UserSessionManager.setAiAutostart(userId, Boolean.TRUE.equals(settings.getAutostart()));
             UserSessionManager.setAiNotifications(userId, Boolean.TRUE.equals(settings.getNotifications()));
             UserSessionManager.setAiPairMode(userId, settings.getPairMode());
             UserSessionManager.setAiManualPair(userId, settings.getManualPair());
+            UserSessionManager.setAiRunning(userId, Boolean.TRUE.equals(settings.getRunning()));
 
             UserSessionManager.clearAiAllowedPairsList(userId);
             String allowed = settings.getAllowedPairs();
@@ -45,12 +47,10 @@ public class AiTradeSettingsSyncService {
 
     @Transactional
     public void saveSessionToDb(Long userId) {
-        // Ищем пользователя
         Optional<User> userOpt = userRepository.findById(userId);
         if (userOpt.isEmpty()) return;
         User user = userOpt.get();
 
-        // Получаем или создаём торговые настройки
         UserTradingSettings tradingSettings = user.getTradingSettings();
         if (tradingSettings == null) {
             tradingSettings = new UserTradingSettings();
@@ -58,7 +58,6 @@ public class AiTradeSettingsSyncService {
             user.setTradingSettings(tradingSettings);
         }
 
-        // Получаем или создаём AI-настройки
         AiTradeSettings ai = tradingSettings.getAiTradeSettings();
         if (ai == null) {
             ai = new AiTradeSettings();
@@ -69,13 +68,19 @@ public class AiTradeSettingsSyncService {
         ai.setStrategy(UserSessionManager.getAiStrategy(userId));
         ai.setRisk(UserSessionManager.getAiRiskLevel(userId));
         ai.setTradingType(UserSessionManager.getAiTradingType(userId));
-        ai.setAutostart(UserSessionManager.isAiAutostart(userId));
         ai.setNotifications(UserSessionManager.isAiNotifications(userId));
         ai.setPairMode(UserSessionManager.getAiPairMode(userId));
         ai.setManualPair(UserSessionManager.getAiManualPair(userId));
         ai.setAllowedPairs(String.join("\n", UserSessionManager.getAiAllowedPairsList(userId)));
+        ai.setRunning(UserSessionManager.isAiRunning(userId));
 
-        // Сохраняем через каскад — достаточно сохранить User
+        aiTradeSettingsService.initializeDefaultsIfNull(ai); // 👈 защита перед сохранением
+
         userRepository.save(user);
+    }
+
+    public void setAiRunning(Long userId, boolean running) {
+        UserSessionManager.setAiRunning(userId, running);
+        saveSessionToDb(userId);
     }
 }
