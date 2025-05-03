@@ -1,6 +1,5 @@
 package com.chicu.neurotradebot.view;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -8,23 +7,12 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.List;
 
 @Component
-@RequiredArgsConstructor
 public class StartMenuBuilder {
 
     public InlineKeyboardMarkup buildMainMenu() {
-        InlineKeyboardButton tradeButton = InlineKeyboardButton.builder()
-                .text("🚀 Торговля")
-                .callbackData("trade_menu")
-                .build();
-
-        InlineKeyboardButton settingsButton = InlineKeyboardButton.builder()
-                .text("⚙️ Настройки")
-                .callbackData("settings_menu")
-                .build();
-
-        InlineKeyboardButton analyticsButton = InlineKeyboardButton.builder()
-                .text("📈 Аналитика")
-                .callbackData("analytics_menu")
+        InlineKeyboardButton aboutBotButton = InlineKeyboardButton.builder()
+                .text("ℹ️ О боте")
+                .callbackData("about_bot")
                 .build();
 
         InlineKeyboardButton subscriptionButton = InlineKeyboardButton.builder()
@@ -32,17 +20,27 @@ public class StartMenuBuilder {
                 .callbackData("subscribe_menu")
                 .build();
 
-        InlineKeyboardButton helpButton = InlineKeyboardButton.builder()
-                .text("🛠️ Помощь")
-                .callbackData("help_menu")
+        InlineKeyboardButton languageButton = InlineKeyboardButton.builder()
+                .text("🌐 Выбор языка")
+                .callbackData("language_menu")
+                .build();
+
+        InlineKeyboardButton manualTradeButton = InlineKeyboardButton.builder()
+                .text("🛠️ Ручная торговля")
+                .callbackData("select_manual_mode")       // ← изменено
+                .build();
+
+        InlineKeyboardButton aiTradeButton = InlineKeyboardButton.builder()
+                .text("🤖 AI Торговля")
+                .callbackData("select_ai_mode")           // ← изменено
                 .build();
 
         List<List<InlineKeyboardButton>> rows = List.of(
-                List.of(tradeButton),
-                List.of(settingsButton),
-                List.of(analyticsButton),
+                List.of(aboutBotButton),
                 List.of(subscriptionButton),
-                List.of(helpButton)
+                List.of(languageButton),
+                List.of(manualTradeButton),
+                List.of(aiTradeButton)
         );
 
         return InlineKeyboardMarkup.builder()

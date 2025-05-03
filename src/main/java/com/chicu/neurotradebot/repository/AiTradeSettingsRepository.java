@@ -1,17 +1,15 @@
+// src/main/java/com/chicu/neurotradebot/repository/AiTradeSettingsRepository.java
 package com.chicu.neurotradebot.repository;
 
-import com.chicu.neurotradebot.model.AiTradeSettings;
+import com.chicu.neurotradebot.entity.AiTradeSettings;
+import com.chicu.neurotradebot.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
-/**
- * Репозиторий для работы с AI-торговыми настройками пользователей.
- */
-@Repository
 public interface AiTradeSettingsRepository extends JpaRepository<AiTradeSettings, Long> {
+    Optional<AiTradeSettings> findByUserId(Long userId);
 
-    List<AiTradeSettings> findByRunningTrue();
+    Optional<AiTradeSettings> findByUser(User user);
 
 }
