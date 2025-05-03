@@ -1,6 +1,6 @@
-// src/main/java/com/chicu/neurotradebot/telegram/handler/SubscriptionMenuDefinition.java
 package com.chicu.neurotradebot.telegram.handler;
 
+import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.view.SubscriptionMenuBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class SubscriptionMenuDefinition implements MenuDefinition {
 
     @Override
     public InlineKeyboardMarkup markup(Long chatId) {
-        // chatId можно использовать, если нужно выбирать разметку в зависимости от пользователя
+        Long currentChatId = BotContext.getChatId();
         return builder.buildSubscriptionMenu();
     }
 }

@@ -1,6 +1,6 @@
-// src/main/java/com/chicu/neurotradebot/telegram/handler/GenericMenuCallbackHandler.java
 package com.chicu.neurotradebot.telegram.handler;
 
+import com.chicu.neurotradebot.telegram.BotContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -31,24 +31,33 @@ public class GenericMenuCallbackHandler implements CallbackHandler {
         Long   chatId = q.getMessage().getChatId();
         int    msgId  = q.getMessage().getMessageId();
 
-        // Скрываем spinner
-        sender.execute(new AnswerCallbackQuery(q.getId()));
+        // Устанавливаем текущий chatId в BotContext
+        BotContext.setChatId(chatId);
 
-        // Ищем нужное меню и редактируем сообщение
-        for (MenuDefinition m : menus) {
-            if (m.keys().contains(data)) {
-                sender.execute(EditMessageText.builder()
-                    .chatId(chatId.toString())
-                    .messageId(msgId)
-                    .text(m.title())
-                    .replyMarkup(m.markup(chatId))    // ← передаём chatId
-                    .build()
-                );
-                log.info("Показано меню '{}' для chatId={}", m.title(), chatId);
-                return;
+        try {
+            // Скрываем spinner
+            sender.execute(new AnswerCallbackQuery(q.getId()));
+
+            // Ищем нужное меню и редактируем сообщение
+            for (MenuDefinition m : menus) {
+                if (m.keys().contains(data)) {
+                    sender.execute(EditMessageText.builder()
+                        .chatId(chatId.toString())
+                        .messageId(msgId)
+                        .text(m.title())
+                        .replyMarkup(m.markup(chatId))
+                        .build()
+                    );
+                    log.info("Показано меню '{}' для chatId={}", m.title(), chatId);
+                    return;
+                }
             }
-        }
 
-        log.warn("Нет определения меню для callbackData='{}'", data);
+            log.warn("Нет определения меню для callbackData='{}'", data);
+
+        } finally {
+            // Очищаем BotContext после завершения
+            BotContext.clear();
+        }
     }
 }

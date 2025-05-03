@@ -1,6 +1,7 @@
-// src/main/java/com/chicu/neurotradebot/telegram/handler/NetworkSettingsMenuDefinition.java
 package com.chicu.neurotradebot.telegram.handler;
 
+import com.chicu.neurotradebot.telegram.BotContext;
+import com.chicu.neurotradebot.entity.User;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
 import com.chicu.neurotradebot.service.UserService;
 import com.chicu.neurotradebot.view.NetworkSettingsMenuBuilder;
@@ -20,23 +21,26 @@ public class NetworkSettingsMenuDefinition implements MenuDefinition {
 
     @Override
     public Set<String> keys() {
-        return Set.of("settings", "back_to_settings", "select_ai_mode", "select_manual_mode");
+        return Set.of(
+                "settings",
+                "back_to_settings",
+                "select_ai_mode",        // ← теперь они вызывают это меню
+                "select_manual_mode"
+        );
     }
+
 
     @Override
     public String title() {
         return "Настройки сети:";
     }
 
-    /**
-     * @param chatId текущий chatId
-     */
     @Override
     public InlineKeyboardMarkup markup(Long chatId) {
-        // берем пользователя и его настройки
-        var user     = userService.getOrCreate(chatId);
+        Long currentChatId = BotContext.getChatId();
+        var user = userService.getOrCreate(currentChatId);
         var settings = settingsService.getOrCreate(user);
-        // передаем текущий testMode, чтобы билдера отметила нужную кнопку
         return builder.buildNetworkSettingsMenu(settings.isTestMode());
     }
+
 }

@@ -1,6 +1,6 @@
-// src/main/java/com/chicu/neurotradebot/telegram/handler/LanguageMenuDefinition.java
 package com.chicu.neurotradebot.telegram.handler;
 
+import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.view.LanguageMenuBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class LanguageMenuDefinition implements MenuDefinition {
 
     @Override
     public InlineKeyboardMarkup markup(Long chatId) {
-        // chatId здесь не используется, но обязателен по интерфейсу
+        Long currentChatId = BotContext.getChatId();
         return builder.buildLanguageMenu();
     }
 }

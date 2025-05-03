@@ -1,6 +1,6 @@
-// src/main/java/com/chicu/neurotradebot/telegram/handler/StartMenuDefinition.java
 package com.chicu.neurotradebot.telegram.handler;
 
+import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.view.StartMenuBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class StartMenuDefinition implements MenuDefinition {
 
     @Override
     public InlineKeyboardMarkup markup(Long chatId) {
-        // chatId тут не нужен, но обязателен по сигнатуре
+        Long currentChatId = BotContext.getChatId();
         return builder.buildMainMenu();
     }
 }

@@ -1,6 +1,6 @@
-// src/main/java/com/chicu/neurotradebot/telegram/handler/ManualTradeMenuDefinition.java
 package com.chicu.neurotradebot.telegram.handler;
 
+import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.view.ManualTradeMenuBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -24,11 +24,9 @@ public class ManualTradeMenuDefinition implements MenuDefinition {
         return "Ручная торговля:";
     }
 
-    /**
-     * @param chatId текущий chatId (можно не использовать, если меню не зависит от пользователя)
-     */
     @Override
     public InlineKeyboardMarkup markup(Long chatId) {
+        Long currentChatId = BotContext.getChatId();
         return builder.buildManualTradeMenu();
     }
 }

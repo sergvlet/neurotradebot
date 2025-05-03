@@ -1,6 +1,6 @@
-// src/main/java/com/chicu/neurotradebot/telegram/handler/AboutMenuDefinition.java
 package com.chicu.neurotradebot.telegram.handler;
 
+import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.view.AboutBotMenuBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -25,10 +25,11 @@ public class AboutMenuDefinition implements MenuDefinition {
     }
 
     /**
-     * @param chatId текущий chatId (не используется здесь)
+     * Используем chatId из BotContext (если будет нужен в будущем)
      */
     @Override
     public InlineKeyboardMarkup markup(Long chatId) {
+        Long currentChatId = BotContext.getChatId();
         return builder.buildAboutMenu();
     }
 }

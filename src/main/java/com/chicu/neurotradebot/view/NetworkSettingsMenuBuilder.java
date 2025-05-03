@@ -15,12 +15,10 @@ public class NetworkSettingsMenuBuilder {
      */
     public InlineKeyboardMarkup buildNetworkSettingsMenu(boolean testMode) {
         InlineKeyboardButton toggle = InlineKeyboardButton.builder()
-                .text(testMode
-                        ? "🔵 Тестнет (✓)"
-                        : "🟢 Реал (✓)"
-                )
+                .text(testMode ? "🔵 Тестнет (✓)" : "🟢 Реал (✓)")
                 .callbackData("toggle_mode")
                 .build();
+
 
         InlineKeyboardButton selectExchange = InlineKeyboardButton.builder()
                 .text("🌐 Выбрать биржу")
