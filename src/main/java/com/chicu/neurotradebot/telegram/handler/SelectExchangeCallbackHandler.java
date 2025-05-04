@@ -2,6 +2,7 @@ package com.chicu.neurotradebot.telegram.handler;
 
 import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.telegram.TelegramSender;
+import com.chicu.neurotradebot.telegram.handler.CallbackHandler;
 import com.chicu.neurotradebot.view.ExchangeMenuBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +39,7 @@ public class SelectExchangeCallbackHandler implements CallbackHandler {
                     .build()
             );
 
-            log.info("Показано меню выбора биржи для chatId={}", chatId);
+            log.info("Открыто меню выбора биржи для chatId={}", chatId);
         } finally {
             BotContext.clear();
         }

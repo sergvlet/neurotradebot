@@ -40,7 +40,8 @@ public class NetworkSettingsMenuDefinition implements MenuDefinition {
         Long currentChatId = BotContext.getChatId();
         var user = userService.getOrCreate(currentChatId);
         var settings = settingsService.getOrCreate(user);
-        return builder.buildNetworkSettingsMenu(settings.isTestMode());
+        return builder.buildNetworkSettingsMenu(settings.isTestMode(), settings.getExchange());
     }
+
 
 }

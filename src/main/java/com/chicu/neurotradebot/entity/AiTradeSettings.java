@@ -40,6 +40,11 @@ public class AiTradeSettings {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
+    @Column(name = "api_setup_step")
+    private String apiSetupStep; // "NONE", "KEY", "SECRET"
+
+
+
     @PrePersist protected void onCreate() {
         createdAt          = Instant.now();
         updatedAt          = Instant.now();
