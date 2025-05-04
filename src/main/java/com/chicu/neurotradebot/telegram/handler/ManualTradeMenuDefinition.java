@@ -1,6 +1,5 @@
 package com.chicu.neurotradebot.telegram.handler;
 
-import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.view.ManualTradeMenuBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -26,7 +25,6 @@ public class ManualTradeMenuDefinition implements MenuDefinition {
 
     @Override
     public InlineKeyboardMarkup markup(Long chatId) {
-        Long currentChatId = BotContext.getChatId();
-        return builder.buildManualTradeMenu();
+        return builder.build(chatId);
     }
 }

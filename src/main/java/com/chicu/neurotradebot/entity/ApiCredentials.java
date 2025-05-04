@@ -24,8 +24,9 @@ public class ApiCredentials {
     private boolean testMode;     // false = real, true = test
 
     @Column(name = "api_key", nullable = false)
-    private String apiKeyEncrypted;
+    private String apiKey;
 
     @Column(name = "api_secret", nullable = false)
-    private String apiSecretEncrypted;
+    private String apiSecret;
+
 }

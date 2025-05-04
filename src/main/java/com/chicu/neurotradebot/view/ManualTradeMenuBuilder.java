@@ -10,36 +10,17 @@ import java.util.List;
 @Component
 public class ManualTradeMenuBuilder {
 
-    public InlineKeyboardMarkup buildManualTradeMenu() {
-        InlineKeyboardButton placeOrder = InlineKeyboardButton.builder()
-                .text("💵 Создать ордер")
-                .callbackData("manual_place_order")
-                .build();
+    public String title() {
+        return "⚙️ Ручной режим торговли";
+    }
 
-        InlineKeyboardButton activeOrders = InlineKeyboardButton.builder()
-                .text("📋 Активные ордера")
-                .callbackData("manual_active_orders")
-                .build();
-
-        InlineKeyboardButton cancelOrder = InlineKeyboardButton.builder()
-                .text("❌ Отменить ордер")
-                .callbackData("manual_cancel_order")
-                .build();
-
-        InlineKeyboardButton back = InlineKeyboardButton.builder()
-                .text("🔙 Назад")
-                .callbackData("back_to_main")
-                .build();
-
+    public InlineKeyboardMarkup build(Long chatId) {
         List<List<InlineKeyboardButton>> rows = List.of(
-            List.of(placeOrder),
-            List.of(activeOrders),
-            List.of(cancelOrder),
-            List.of(back)
+                List.of(InlineKeyboardButton.builder().text("📥 Открыть сделку").callbackData("manual_open").build()),
+                List.of(InlineKeyboardButton.builder().text("📤 Закрыть сделку").callbackData("manual_close").build()),
+                List.of(InlineKeyboardButton.builder().text("📊 Статистика").callbackData("manual_stats").build()),
+                List.of(InlineKeyboardButton.builder().text("⬅️ Назад").callbackData("back_to_settings").build())
         );
-
-        return InlineKeyboardMarkup.builder()
-                .keyboard(rows)
-                .build();
+        return InlineKeyboardMarkup.builder().keyboard(rows).build();
     }
 }

@@ -9,4 +9,7 @@ public interface ApiCredentialsService {
     void saveApiKey(User user, String exchange, boolean testMode, String apiKey);
     void saveApiSecret(User user, String exchange, boolean testMode, String apiSecret);
     ApiCredentials get(User user, String exchange, boolean testMode);
+    boolean testConnection(User user, String exchange, boolean testMode);
+
+
 }

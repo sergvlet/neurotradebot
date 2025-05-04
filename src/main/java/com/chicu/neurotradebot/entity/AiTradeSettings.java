@@ -43,14 +43,19 @@ public class AiTradeSettings {
     @Column(name = "api_setup_step")
     private String apiSetupStep; // "NONE", "KEY", "SECRET"
 
+    @Column(name = "input_state", length = 64)
+    @Enumerated(EnumType.STRING)
+    private UserInputState inputState;
 
 
-    @PrePersist protected void onCreate() {
-        createdAt          = Instant.now();
-        updatedAt          = Instant.now();
-        aiEnabled          = false;
-        testMode           = false;
+    @PrePersist
+    protected void onCreate() {
+        createdAt           = Instant.now();
+        updatedAt           = Instant.now();
+        aiEnabled           = false;
+        testMode            = false;
         scanIntervalSeconds = 60;
+        inputState          = UserInputState.NONE; // ← добавь это
     }
     @PreUpdate  protected void onUpdate() {
         updatedAt = Instant.now();
