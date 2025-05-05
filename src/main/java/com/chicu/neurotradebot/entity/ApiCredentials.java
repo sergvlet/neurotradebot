@@ -1,27 +1,28 @@
-// src/main/java/com/chicu/neurotradebot/entity/ApiCredentials.java
 package com.chicu.neurotradebot.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "api_credentials",
-       uniqueConstraints = @UniqueConstraint(columnNames = {"user_id","exchange","test_mode"}))
+@Table(name = "api_credentials")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class ApiCredentials {
-
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long   id;
+    private Long id;
 
+    // владелец — пользователь
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id")
-    private User   user;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "exchange", nullable = false, length = 32)
-    private String exchange;
+    // относится к одной конфигурации (биржа+режим)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "settings_id", nullable = false)
+    private AiTradeSettings settings;
 
-    @Column(name = "test_mode", nullable = false)
-    private boolean testMode;     // false = real, true = test
+    /** Метка ключа, например "main" или "testnet" */
+    @Column(nullable = false, length = 50)
+    private String label;
 
     @Column(name = "api_key", nullable = false)
     private String apiKey;
@@ -29,4 +30,7 @@ public class ApiCredentials {
     @Column(name = "api_secret", nullable = false)
     private String apiSecret;
 
+    /** Отмечает, какой ключ сейчас используется */
+    @Column(nullable = false)
+    private boolean active;
 }

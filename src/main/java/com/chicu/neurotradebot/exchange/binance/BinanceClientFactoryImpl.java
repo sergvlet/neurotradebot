@@ -1,24 +1,19 @@
+// src/main/java/com/chicu/neurotradebot/exchange/binance/BinanceClientFactoryImpl.java
 package com.chicu.neurotradebot.exchange.binance;
 
 import com.binance.connector.client.impl.SpotClientImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Component
-@RequiredArgsConstructor
 public class BinanceClientFactoryImpl implements BinanceClientFactory {
+
+    private static final String MAINNET_URL = "https://api.binance.com";
+    private static final String TESTNET_URL = "https://testnet.binance.vision";
 
     @Override
     public BinanceApiClient create(String apiKey, String apiSecret, boolean testMode) {
-        Map<String, Object> config = new HashMap<>();
-        config.put("baseUrl", testMode
-                ? "https://testnet.binance.vision"
-                : "https://api.binance.com");
-
-        SpotClientImpl spotClient = new SpotClientImpl(apiKey, apiSecret, String.valueOf(config));
+        String baseUrl = testMode ? TESTNET_URL : MAINNET_URL;
+        SpotClientImpl spotClient = new SpotClientImpl(apiKey, apiSecret, baseUrl);
         return new BinanceApiClientImpl(spotClient);
     }
 }

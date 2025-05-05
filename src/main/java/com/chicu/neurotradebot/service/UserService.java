@@ -1,26 +1,24 @@
+// src/main/java/com/chicu/neurotradebot/service/UserService.java
 package com.chicu.neurotradebot.service;
 
-import com.chicu.neurotradebot.entity.User;
+// импортим Telegram-User
+import org.telegram.telegrambots.meta.api.objects.User;
 
-/**
- * Сервис для работы с сущностью User.
- */
 public interface UserService {
     /**
      * Создаёт или обновляет пользователя на /start,
-     * заполняя все данные из Telegram API.
+     * заполняя данные из Telegram API.
+     *
+     * @param telegramUserId id пользователя в Телеграме
+     * @param telegramUser   объект User из TelegramBots API
+     * @return локальную сущность User
      */
-    User getOrCreate(Long telegramUserId,
-                     org.telegram.telegrambots.meta.api.objects.User from);
+    com.chicu.neurotradebot.entity.User getOrCreate(Long telegramUserId,
+                                                    User telegramUser);
 
     /**
      * Просто возвращает или создаёт пользователя по telegramUserId,
      * без изменения других полей.
      */
-    User getOrCreate(Long telegramUserId);
-
-    /**
-     * Обновляет телефон в любое время.
-     */
-    User updatePhoneNumber(Long telegramUserId, String phoneNumber);
+    com.chicu.neurotradebot.entity.User getOrCreate(Long telegramUserId);
 }

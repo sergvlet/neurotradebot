@@ -1,50 +1,38 @@
+// src/main/java/com/chicu/neurotradebot/view/StartMenuBuilder.java
 package com.chicu.neurotradebot.view;
 
+import com.chicu.neurotradebot.telegram.handler.MenuDefinition;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.List;
+import java.util.Set;
 
 @Component
-public class StartMenuBuilder {
+public class StartMenuBuilder implements MenuDefinition {
 
-    public InlineKeyboardMarkup buildMainMenu() {
-        InlineKeyboardButton aboutBotButton = InlineKeyboardButton.builder()
-                .text("ℹ️ О боте")
-                .callbackData("about_bot")
-                .build();
+    @Override
+    public Set<String> keys() {
+        return Set.of(); // необязательно
+    }
 
-        InlineKeyboardButton subscriptionButton = InlineKeyboardButton.builder()
-                .text("💳 Подписка")
-                .callbackData("subscribe_menu")
-                .build();
+    public String title() {
+        return "🚀 Главное меню";
+    }
 
-        InlineKeyboardButton languageButton = InlineKeyboardButton.builder()
-                .text("🌐 Выбор языка")
-                .callbackData("language_menu")
-                .build();
-
-        InlineKeyboardButton manualTradeButton = InlineKeyboardButton.builder()
-                .text("🛠️ Ручная торговля")
-                .callbackData("select_manual_mode")       // ← изменено
-                .build();
-
-        InlineKeyboardButton aiTradeButton = InlineKeyboardButton.builder()
-                .text("🤖 AI Торговля")
-                .callbackData("select_ai_mode")           // ← изменено
-                .build();
-
-        List<List<InlineKeyboardButton>> rows = List.of(
-                List.of(aboutBotButton),
-                List.of(subscriptionButton),
-                List.of(languageButton),
-                List.of(manualTradeButton),
-                List.of(aiTradeButton)
-        );
-
+    public InlineKeyboardMarkup markup(Long chatId) {
         return InlineKeyboardMarkup.builder()
-                .keyboard(rows)
-                .build();
+            .keyboard(List.of(
+                List.of(InlineKeyboardButton.builder()
+                    .text("🤖 AI-торговля")
+                    .callbackData("ai_control")
+                    .build()),
+                List.of(InlineKeyboardButton.builder()
+                    .text("💹 Ручная торговля")
+                    .callbackData("manual_trade_menu")
+                    .build())
+            ))
+            .build();
     }
 }

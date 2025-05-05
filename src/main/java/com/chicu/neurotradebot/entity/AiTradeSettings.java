@@ -1,63 +1,53 @@
-// src/main/java/com/chicu/neurotradebot/entity/AiTradeSettings.java
 package com.chicu.neurotradebot.entity;
 
+import com.chicu.neurotradebot.enums.ApiSetupStep;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "ai_trade_settings")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class AiTradeSettings {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long   id;
-
-    /** Связь с пользователем */
+    // ссылка на владельца
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private User user;
 
-    @Column(name = "exchange", length = 32)
+    /** Биржа (например "binance", "ftx" и т.д.) */
+    @Column(length = 32)
     private String exchange;
 
-    @Column(name = "ai_enabled", nullable = false)
-    private boolean aiEnabled;
-
+    /** true — TESTNET, false — REAL */
     @Column(name = "test_mode", nullable = false)
     private boolean testMode;
 
-    @Column(name = "scan_interval_seconds", nullable = false)
-    private int     scanIntervalSeconds;
+    /** Текущий шаг настройки ключей */
+    @Enumerated(EnumType.STRING)
+    @Column(name = "api_setup_step", nullable = false)
+    private ApiSetupStep apiSetupStep = ApiSetupStep.NONE;
 
-    @Column(name = "selected_pair", length = 32)
-    private String  selectedPair;
-
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", updatable = false, nullable = false)
     private Instant createdAt;
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @Column(name = "api_setup_step")
-    private String apiSetupStep; // "NONE", "KEY", "SECRET"
-
-    @Column(name = "input_state", length = 64)
-    @Enumerated(EnumType.STRING)
-    private UserInputState inputState;
-
+    // один AiTradeSettings — много ApiCredentials
+    @OneToMany(mappedBy = "settings", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ApiCredentials> credentials;
 
     @PrePersist
     protected void onCreate() {
-        createdAt           = Instant.now();
-        updatedAt           = Instant.now();
-        aiEnabled           = false;
-        testMode            = false;
-        scanIntervalSeconds = 60;
-        inputState          = UserInputState.NONE; // ← добавь это
+        createdAt = updatedAt = Instant.now();
+        apiSetupStep = ApiSetupStep.NONE;
     }
-    @PreUpdate  protected void onUpdate() {
+    @PreUpdate
+    protected void onUpdate() {
         updatedAt = Instant.now();
     }
 }

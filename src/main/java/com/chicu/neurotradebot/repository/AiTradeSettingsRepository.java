@@ -8,8 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface AiTradeSettingsRepository extends JpaRepository<AiTradeSettings, Long> {
-    Optional<AiTradeSettings> findByUserId(Long userId);
-
     Optional<AiTradeSettings> findByUser(User user);
-
 }

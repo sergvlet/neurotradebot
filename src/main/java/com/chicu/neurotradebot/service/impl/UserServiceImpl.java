@@ -1,3 +1,4 @@
+// src/main/java/com/chicu/neurotradebot/service/impl/UserServiceImpl.java
 package com.chicu.neurotradebot.service.impl;
 
 import com.chicu.neurotradebot.entity.User;
@@ -7,38 +8,41 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Реализация UserService, создаёт/обновляет и возвращает пользователя.
+ */
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
+   private final  UserRepository userRepository;
 
+    /**
+     * При /start: создаём или обновляем только telegramUserId и username.
+     */
     @Override
     @Transactional
     public User getOrCreate(Long telegramUserId,
                             org.telegram.telegrambots.meta.api.objects.User from) {
         return userRepository.findByTelegramUserId(telegramUserId)
-            .map(u -> {
-                // обновляем поля из Telegram API
-                u.setUsername(from.getUserName());
-                u.setFirstName(from.getFirstName());
-                u.setLastName(from.getLastName());
-                u.setLanguageCode(from.getLanguageCode());
-                return userRepository.save(u);
-            })
-            .orElseGet(() -> {
-                // создаём нового с полями из Telegram API
-                User u = User.builder()
-                        .telegramUserId(telegramUserId)
-                    .username(from.getUserName())
-                    .firstName(from.getFirstName())
-                    .lastName(from.getLastName())
-                    .languageCode(from.getLanguageCode())
-                    .build();
-                return userRepository.save(u);
-            });
+                .map(u -> {
+                    // Обновляем только username
+                    u.setUsername(from.getUserName());
+                    return userRepository.save(u);
+                })
+                .orElseGet(() -> {
+                    // Создаём нового пользователя
+                    User u = User.builder()
+                            .telegramUserId(telegramUserId)
+                            .username(from.getUserName())
+                            .build();
+                    return userRepository.save(u);
+                });
     }
 
+    /**
+     * Просто возвращает или создаёт пользователя по telegramUserId.
+     */
     @Override
     @Transactional
     public User getOrCreate(Long telegramUserId) {
@@ -49,14 +53,5 @@ public class UserServiceImpl implements UserService {
                             .build();
                     return userRepository.save(u);
                 });
-    }
-
-    @Override
-    @Transactional
-    public User updatePhoneNumber(Long telegramUserId, String phoneNumber) {
-        User u = userRepository.findByTelegramUserId(telegramUserId)
-            .orElseThrow(() -> new IllegalArgumentException("User not found: " + telegramUserId));
-        u.setPhoneNumber(phoneNumber);
-        return userRepository.save(u);
     }
 }

@@ -1,26 +1,38 @@
 // src/main/java/com/chicu/neurotradebot/view/ManualTradeMenuBuilder.java
 package com.chicu.neurotradebot.view;
 
+import com.chicu.neurotradebot.telegram.handler.MenuDefinition;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.List;
+import java.util.Set;
 
 @Component
-public class ManualTradeMenuBuilder {
+public class ManualTradeMenuBuilder implements MenuDefinition {
 
-    public String title() {
-        return "⚙️ Ручной режим торговли";
+    @Override
+    public Set<String> keys() {
+        return Set.of("manual_trade_menu");
     }
 
-    public InlineKeyboardMarkup build(Long chatId) {
-        List<List<InlineKeyboardButton>> rows = List.of(
-                List.of(InlineKeyboardButton.builder().text("📥 Открыть сделку").callbackData("manual_open").build()),
-                List.of(InlineKeyboardButton.builder().text("📤 Закрыть сделку").callbackData("manual_close").build()),
-                List.of(InlineKeyboardButton.builder().text("📊 Статистика").callbackData("manual_stats").build()),
-                List.of(InlineKeyboardButton.builder().text("⬅️ Назад").callbackData("back_to_settings").build())
-        );
-        return InlineKeyboardMarkup.builder().keyboard(rows).build();
+    public String title() {
+        return "💹 Меню ручной торговли";
+    }
+
+    public InlineKeyboardMarkup markup(Long chatId) {
+        return InlineKeyboardMarkup.builder()
+            .keyboard(List.of(
+                List.of(InlineKeyboardButton.builder()
+                    .text("➕ Открыть позицию")
+                    .callbackData("open_manual")
+                    .build()),
+                List.of(InlineKeyboardButton.builder()
+                    .text("⬅️ Назад")
+                    .callbackData("start_menu")
+                    .build())
+            ))
+            .build();
     }
 }

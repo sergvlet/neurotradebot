@@ -17,13 +17,20 @@ public class NeuroTradeBot extends TelegramLongPollingBot {
     private final MessageDispatcher  messageDispatcher;
     private final UpdateDispatcher   callbackDispatcher;
 
-    @Override public String getBotUsername() { return props.getUsername(); }
-    @Override public String getBotToken()    { return props.getToken();    }
+    @Override
+    public String getBotUsername() {
+        return props.getUsername();
+    }
+
+    @Override
+    public String getBotToken() {
+        return props.getToken();
+    }
 
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasCallbackQuery()) {
-            callbackDispatcher.dispatch(update.getCallbackQuery());
+            callbackDispatcher.dispatch(update); // <-- исправлено
         } else {
             messageDispatcher.dispatch(update);
         }

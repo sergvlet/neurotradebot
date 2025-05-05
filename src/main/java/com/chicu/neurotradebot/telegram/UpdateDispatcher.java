@@ -5,7 +5,7 @@ import com.chicu.neurotradebot.telegram.handler.CallbackHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.List;
 
@@ -13,21 +13,26 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class UpdateDispatcher {
+
     private final List<CallbackHandler> handlers;
 
-    /** Делегирует CallbackQuery первому подходящему CallbackHandler. */
-    public void dispatch(CallbackQuery query) {
-        log.debug("Получен CallbackQuery: {}", query.getData());
-        for (CallbackHandler h : handlers) {
-            if (h.canHandle(query)) {
+    public void dispatch(Update update) {
+        if (!update.hasCallbackQuery()) return;
+
+        String data = update.getCallbackQuery().getData();
+        log.debug("Получен CallbackQuery: {}", data);
+
+        for (CallbackHandler handler : handlers) {
+            if (handler.canHandle(update)) {
                 try {
-                    h.handle(query);
+                    handler.handle(update);
                 } catch (Exception e) {
-                    log.error("Ошибка в обработчике для '{}'", query.getData(), e);
+                    log.error("Ошибка в обработчике для '{}'", data, e);
                 }
                 return;
             }
         }
-        log.warn("Нет обработчика для callbackData='{}'", query.getData());
+
+        log.warn("Нет обработчика для callbackData='{}'", data);
     }
 }
