@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface ApiCredentialsRepository extends JpaRepository<ApiCredentials, Long> {
     List<ApiCredentials> findAllBySettings(AiTradeSettings settings);
     Optional<ApiCredentials> findBySettingsAndLabel(AiTradeSettings settings, String label);
-
+    Optional<ApiCredentials> findByUserIdAndActiveTrue(Long userId);
 }

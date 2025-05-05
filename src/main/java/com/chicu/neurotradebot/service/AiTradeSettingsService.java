@@ -14,4 +14,7 @@ public interface AiTradeSettingsService {
      * Сохранить текущие настройки.
      */
     void save(AiTradeSettings settings);
+
+    /** Получить настройки для «текущего» пользователя (из BotContext). */
+    AiTradeSettings getForCurrentUser();
 }

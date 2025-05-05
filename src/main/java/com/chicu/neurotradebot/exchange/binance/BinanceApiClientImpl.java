@@ -1,3 +1,4 @@
+// src/main/java/com/chicu/neurotradebot/exchange/binance/BinanceApiClientImpl.java
 package com.chicu.neurotradebot.exchange.binance;
 
 import com.binance.connector.client.impl.SpotClientImpl;
@@ -20,6 +21,11 @@ public class BinanceApiClientImpl implements BinanceApiClient {
     @Override
     public String getAccountInfo() throws BinanceClientException {
         Map<String, Object> params = new HashMap<>();
-        return client.createTrade().account(params);  // вот корректный вызов
+        return client.createTrade().account(params);
+    }
+
+    @Override
+    public String newOrder(Map<String, Object> params) throws BinanceClientException {
+        return client.createTrade().newOrder(params);
     }
 }
