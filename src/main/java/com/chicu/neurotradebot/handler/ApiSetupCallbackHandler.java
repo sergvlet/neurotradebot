@@ -1,4 +1,3 @@
-// src/main/java/com/chicu/neurotradebot/handler/ApiSetupCallbackHandler.java
 package com.chicu.neurotradebot.handler;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
@@ -23,7 +22,7 @@ public class ApiSetupCallbackHandler implements CallbackHandler {
 
     private final UserService userService;
     private final AiTradeSettingsService cfgService;
-    private final ApiSetupMenuBuilder view;         // ваш билдeр меню
+    private final ApiSetupMenuBuilder view;         // билдeр меню API
     private final NetworkSettingsViewBuilder netView;
     private final TelegramSender sender;
 
@@ -32,8 +31,8 @@ public class ApiSetupCallbackHandler implements CallbackHandler {
         if (!u.hasCallbackQuery()) return false;
         String d = u.getCallbackQuery().getData();
         return d.equals("api_setup_start")
-            || d.equals("replace_api_key")
-            || d.equals("keep_api_key");
+                || d.equals("replace_api_key")
+                || d.equals("keep_api_key");
     }
 
     @Override
@@ -45,10 +44,10 @@ public class ApiSetupCallbackHandler implements CallbackHandler {
 
         BotContext.setChatId(chatId);
         try {
-            // 1) убирать спиннер
+            // 1) ответ на callbackQuery (снимет спиннер)
             sender.execute(AnswerCallbackQuery.builder()
-                .callbackQueryId(cq.getId())
-                .build());
+                    .callbackQueryId(cq.getId())
+                    .build());
 
             // 2) достать cfg
             User user = userService.getOrCreate(chatId);
@@ -57,27 +56,28 @@ public class ApiSetupCallbackHandler implements CallbackHandler {
             switch (data) {
                 case "api_setup_start":
                 case "replace_api_key":
+                    // переключаем на ввод нового ключа
                     cfg.setApiSetupStep(ApiSetupStep.ENTER_KEY);
                     cfgService.save(cfg);
-                    // перерисуем меню ввода Key
+                    // перерисуем это же сообщение: текст + клавиатура
                     sender.execute(EditMessageText.builder()
-                        .chatId(chatId.toString())
-                        .messageId(msgId)
-                        .text("🔑 Введите новый API Key:")
-                        .replyMarkup(null)
-                        .build());
+                            .chatId(chatId.toString())
+                            .messageId(msgId)
+                            .text(view.title())
+                            .replyMarkup(view.markup())
+                            .build());
                     break;
 
                 case "keep_api_key":
+                    // отмена, возвращаемся в меню настроек
                     cfg.setApiSetupStep(ApiSetupStep.NONE);
                     cfgService.save(cfg);
-                    // вернуться в меню сетевых настроек
                     sender.execute(EditMessageText.builder()
-                        .chatId(chatId.toString())
-                        .messageId(msgId)
-                        .text(netView.title())
-                        .replyMarkup(netView.markup(chatId, /*fromAi=*/false))
-                        .build());
+                            .chatId(chatId.toString())
+                            .messageId(msgId)
+                            .text(netView.title())
+                            .replyMarkup(netView.markup(chatId, /*fromAi=*/false))
+                            .build());
                     break;
             }
         } finally {

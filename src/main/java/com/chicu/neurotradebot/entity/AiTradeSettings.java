@@ -14,7 +14,7 @@ public class AiTradeSettings {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ссылка на владельца
+    // владелец
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private User user;
@@ -34,20 +34,31 @@ public class AiTradeSettings {
 
     @Column(name = "created_at", updatable = false, nullable = false)
     private Instant createdAt;
+
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    // один AiTradeSettings — много ApiCredentials
+    // связи с ключами
     @OneToMany(mappedBy = "settings", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ApiCredentials> credentials;
 
+    /** ID последнего бот-сообщения с подсказкой во время ввода ключей */
+    @Column(name = "api_setup_prompt_msg_id", nullable = true)
+    private Integer apiSetupPromptMsgId;
+
     @PrePersist
     protected void onCreate() {
-        createdAt = updatedAt = Instant.now();
-        apiSetupStep = ApiSetupStep.NONE;
+        createdAt           = Instant.now();
+        updatedAt           = createdAt;
+        apiSetupStep        = ApiSetupStep.NONE;
+        apiSetupPromptMsgId = null;
     }
+
     @PreUpdate
     protected void onUpdate() {
+        // при любом обновлении меняем только метку времени
         updatedAt = Instant.now();
+        // apiSetupStep и apiSetupPromptMsgId сохраняются до тех пор,
+        // пока вы их не сбросите вручную в логике приложения
     }
 }

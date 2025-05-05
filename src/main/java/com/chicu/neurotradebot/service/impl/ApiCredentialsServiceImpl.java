@@ -120,4 +120,9 @@ public class ApiCredentialsServiceImpl implements ApiCredentialsService {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
+
+    @Override
+    public List<ApiCredentials> listAllForSettings(AiTradeSettings settings) {
+        return List.of();
+    }
 }

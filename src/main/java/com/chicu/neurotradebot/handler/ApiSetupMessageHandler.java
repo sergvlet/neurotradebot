@@ -1,4 +1,3 @@
-// src/main/java/com/chicu/neurotradebot/handler/ApiSetupMessageHandler.java
 package com.chicu.neurotradebot.handler;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
@@ -14,13 +13,14 @@ import com.chicu.neurotradebot.view.NetworkSettingsViewBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
 @RequiredArgsConstructor
 public class ApiSetupMessageHandler implements MessageHandler {
-  
+
     private final UserService userService;
     private final AiTradeSettingsService cfgService;
     private final ApiCredentialsService credService;
@@ -29,52 +29,69 @@ public class ApiSetupMessageHandler implements MessageHandler {
 
     @Override
     public boolean canHandle(Update u) {
-        if (!u.hasMessage() || u.getMessage().getText() == null) {
-            return false;
-        }
+        if (!u.hasMessage() || u.getMessage().getText() == null) return false;
         Long chatId = u.getMessage().getChatId();
         User user = userService.getOrCreate(chatId);
         AiTradeSettings cfg = cfgService.getOrCreate(user);
-        // обрабатываем только шаги ENTER_KEY и ENTER_SECRET
         return cfg.getApiSetupStep() == ApiSetupStep.ENTER_KEY
-            || cfg.getApiSetupStep() == ApiSetupStep.ENTER_SECRET;
+                || cfg.getApiSetupStep() == ApiSetupStep.ENTER_SECRET;
     }
 
     @Override
     public void handle(Update u) throws Exception {
-        Message msg = u.getMessage();
-        Long chatId = msg.getChatId();
-        String text  = msg.getText().trim();
+        Message incoming = u.getMessage();
+        Long chatId = incoming.getChatId();
+        String text  = incoming.getText().trim();
 
         BotContext.setChatId(chatId);
         try {
             User user = userService.getOrCreate(chatId);
             AiTradeSettings cfg = cfgService.getOrCreate(user);
 
+            // 1) Удаляем старую подсказку, если она есть
+            Integer oldPromptId = cfg.getApiSetupPromptMsgId();
+            if (oldPromptId != null) {
+                sender.executeSilently(
+                        DeleteMessage.builder()
+                                .chatId(chatId.toString())
+                                .messageId(oldPromptId)
+                                .build()
+                );
+            }
+
             if (cfg.getApiSetupStep() == ApiSetupStep.ENTER_KEY) {
-                // 1) сохраним введённый API Key
+                // 2) ENTER_KEY: сохраняем ключ
                 credService.saveApiKey(user, cfg.getExchange(), cfg.isTestMode(), text);
-                // 2) переключим шаг на ввод секрет
+                // переключаем шаг
                 cfg.setApiSetupStep(ApiSetupStep.ENTER_SECRET);
                 cfgService.save(cfg);
-                // 3) попросим ввести секрет, без удаления предыдущего системного сообщения
-                sender.execute(SendMessage.builder()
-                    .chatId(chatId.toString())
-                    .text("🔐 Теперь введите API Secret:")
-                    .build());
 
-            } else { // ENTER_SECRET
-                // 1) сохраним секрет
-                credService.saveApiSecret(user, cfg.getExchange(), cfg.isTestMode(), text);
-                // 2) сбросим шаг
-                cfg.setApiSetupStep(ApiSetupStep.NONE);
+                // 3) Отправляем новую подсказку и сохраняем её ID
+                Message prompt = sender.execute(
+                        SendMessage.builder()
+                                .chatId(chatId.toString())
+                                .text("🔐 Отлично! Теперь введите API Secret:")
+                                .build()
+                );
+                cfg.setApiSetupPromptMsgId(prompt.getMessageId());
                 cfgService.save(cfg);
-                // 3) покажем обновлённые сетевые настройки без лишнего спама
-                sender.execute(SendMessage.builder()
-                    .chatId(chatId.toString())
-                    .text(netView.title())
-                    .replyMarkup(netView.markup(chatId, /* fromAi */ false))
-                    .build());
+
+            } else {
+                // 4) ENTER_SECRET: сохраняем секрет
+                credService.saveApiSecret(user, cfg.getExchange(), cfg.isTestMode(), text);
+                // сбрасываем шаг и удаляем ID подсказки
+                cfg.setApiSetupStep(ApiSetupStep.NONE);
+                cfg.setApiSetupPromptMsgId(null);
+                cfgService.save(cfg);
+
+                // 5) Показываем меню сетевых настроек
+                sender.execute(
+                        SendMessage.builder()
+                                .chatId(chatId.toString())
+                                .text(netView.title())
+                                .replyMarkup(netView.markup(chatId, /* fromAi */ false))
+                                .build()
+                );
             }
 
         } finally {

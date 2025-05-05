@@ -1,6 +1,7 @@
 // src/main/java/com/chicu/neurotradebot/service/ApiCredentialsService.java
 package com.chicu.neurotradebot.service;
 
+import com.chicu.neurotradebot.entity.AiTradeSettings;
 import com.chicu.neurotradebot.entity.ApiCredentials;
 import com.chicu.neurotradebot.entity.User;
 
@@ -14,4 +15,6 @@ public interface ApiCredentialsService {
     List<ApiCredentials> listCredentials(User user, String exchange, boolean testMode);
     void selectCredential(User user, String exchange, boolean testMode, String label);
     boolean testConnection(User user, String exchange, boolean testMode);
+    List<ApiCredentials> listAllForSettings(AiTradeSettings settings);
+
 }
