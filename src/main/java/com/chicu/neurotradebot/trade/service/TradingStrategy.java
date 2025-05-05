@@ -1,7 +1,7 @@
 package com.chicu.neurotradebot.trade.service;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
-import com.chicu.neurotradebot.enums.Bar;
+import com.chicu.neurotradebot.entity.Bar;
 import com.chicu.neurotradebot.trade.model.Signal;
 import java.util.List;
 

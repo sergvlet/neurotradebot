@@ -6,6 +6,7 @@ import com.chicu.neurotradebot.enums.StrategyType;
 import com.chicu.neurotradebot.enums.TradeMode;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -64,14 +65,23 @@ public class AiTradeSettings {
 
     // ========== Параметры AI-режима ==========
 
-    /** Включение/выключение автоматической торговли */
-    @Column(nullable = false)
+    /**
+     * Включение/выключение автоматической торговли
+     * DEFAULT false — чтобы существующие записи получили false
+     */
+    @Column(nullable = false, columnDefinition = "boolean default false")
     @Builder.Default
     private boolean enabled = false;
 
-    /** Режим торговли (SPOT, MARGIN, FUTURES_USDT, FUTURES_COIN) */
+    /**
+     * Режим торговли (SPOT, MARGIN, FUTURES_USDT, FUTURES_COIN)
+     * DEFAULT 'SPOT'
+     */
     @Enumerated(EnumType.STRING)
-    @Column(name = "trade_mode", length = 32, nullable = false)
+    @Column(name = "trade_mode",
+            length = 32,
+            nullable = false,
+            columnDefinition = "varchar(32) default 'SPOT'")
     @Builder.Default
     private TradeMode tradeMode = TradeMode.SPOT;
 
@@ -82,14 +92,22 @@ public class AiTradeSettings {
     @Builder.Default
     private List<String> pairs = new ArrayList<>();
 
-    /** Выбранная стратегия (RSI_MACD, EMA_CROSSOVER и т.д.) */
+    /**
+     * Выбранная стратегия (RSI_MACD, EMA_CROSSOVER и т.д.)
+     * DEFAULT 'RSI_MACD'
+     */
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @Builder.Default
     private StrategyType strategy = StrategyType.RSI_MACD;
 
-    /** Интервал сканирования (ISO-8601 Duration, например "PT1M") */
-    @Column(name = "scan_interval", nullable = false)
+    /**
+     * Интервал сканирования в миллисекундах
+     * DEFAULT 60000
+     */
+    @Column(name = "scan_interval",
+            nullable = false,
+            columnDefinition = "numeric(21,0) default 60000")
     @Builder.Default
     private Duration scanInterval = Duration.ofMinutes(1);
 
@@ -109,6 +127,7 @@ public class AiTradeSettings {
         updatedAt           = createdAt;
         apiSetupStep        = ApiSetupStep.NONE;
         apiSetupPromptMsgId = null;
+        // дефолты enabled, tradeMode, strategy, scanInterval подхватятся из columnDefinition
     }
 
     @PreUpdate

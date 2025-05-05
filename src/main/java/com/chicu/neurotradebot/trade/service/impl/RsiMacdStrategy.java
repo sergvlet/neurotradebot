@@ -2,9 +2,9 @@
 package com.chicu.neurotradebot.trade.service.impl;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
+import com.chicu.neurotradebot.entity.Bar;
 import com.chicu.neurotradebot.entity.RsiMacdConfig;
 
-import com.chicu.neurotradebot.enums.Bar;
 import com.chicu.neurotradebot.trade.model.Signal;
 import com.chicu.neurotradebot.trade.service.TradingStrategy;
 import com.chicu.neurotradebot.trade.util.MacdResult;

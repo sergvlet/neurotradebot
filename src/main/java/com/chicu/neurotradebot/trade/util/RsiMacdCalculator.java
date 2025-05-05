@@ -3,7 +3,7 @@ package com.chicu.neurotradebot.trade.util;
 
 
 
-import com.chicu.neurotradebot.enums.Bar;
+import com.chicu.neurotradebot.entity.Bar;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

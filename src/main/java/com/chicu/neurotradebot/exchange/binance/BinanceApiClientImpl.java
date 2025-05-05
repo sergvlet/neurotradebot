@@ -28,4 +28,13 @@ public class BinanceApiClientImpl implements BinanceApiClient {
     public String newOrder(Map<String, Object> params) throws BinanceClientException {
         return client.createTrade().newOrder(params);
     }
+
+    @Override
+    public String getKlines(String symbol, String interval, int limit) throws BinanceClientException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("symbol", symbol);
+        params.put("interval", interval);
+        params.put("limit", limit);
+        return client.createMarket().klines(params);
+    }
 }

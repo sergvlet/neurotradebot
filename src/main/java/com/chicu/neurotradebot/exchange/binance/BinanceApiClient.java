@@ -26,4 +26,13 @@ public interface BinanceApiClient {
         params.put("quantity", quantity.toPlainString());
         return newOrder(params);
     }
+    /**
+     * Исторические свечи (Klines).
+     *
+     * @param symbol   например "BTCUSDT"
+     * @param interval например "1m", "5m"
+     * @param limit    сколько последних баров вернуть
+     * @return JSON-строка, как возвращает Binance API
+     */
+    String getKlines(String symbol, String interval, int limit) throws BinanceClientException;
 }
