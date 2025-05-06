@@ -64,11 +64,19 @@
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.ta4j/ta4j-core -->
+        <!-- pom.xml -->
         <dependency>
             <groupId>org.ta4j</groupId>
             <artifactId>ta4j-core</artifactId>
-            <version>0.14</version>
+            <version>0.17</version>
         </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+
+
         <!-- Telegram Bots Spring Boot Starter -->
         <dependency>
             <groupId>org.telegram</groupId>

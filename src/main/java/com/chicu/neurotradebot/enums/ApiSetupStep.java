@@ -11,7 +11,10 @@ public enum ApiSetupStep {
     NONE,
     ENTER_KEY,
     ENTER_SECRET,
-    ENTER_PAIR_ADD,      // ввод новой торговой пары
+    ENTER_PAIR_ADD,
     ENTER_PAIR_REMOVE,
-    ENTER_PAIR_IMPORT// ввод удаляемой пары
+    ENTER_RISK_SL,
+    ENTER_RISK_TP,
+    ENTER_RISK_MAXP,
+    ENTER_PAIR_IMPORT
 }
