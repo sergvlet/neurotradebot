@@ -1,7 +1,7 @@
 // src/main/java/com/chicu/neurotradebot/telegram/MessageDispatcher.java
 package com.chicu.neurotradebot.telegram;
 
-import com.chicu.neurotradebot.telegram.handler.MenuDefinition;
+import com.chicu.neurotradebot.telegram.handler.CallbackHandler;
 import com.chicu.neurotradebot.telegram.handler.MessageHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,35 +15,36 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MessageDispatcher {
 
-    private final List<MessageHandler> handlers;
+    // Разделяем обработчики на два типа
+    private final List<CallbackHandler> callbackHandlers;
+    private final List<MessageHandler> messageHandlers;
 
     public void dispatch(Update update) {
+        // сначала — коллбэки
         if (update.hasCallbackQuery()) {
             String key = update.getCallbackQuery().getData();
-            Long chatId = update.getCallbackQuery().getMessage().getChatId();
-
-            for (MessageHandler handler : handlers) {
-                if (handler instanceof MenuDefinition def && def.keys().contains(key)) {
+            for (CallbackHandler handler : callbackHandlers) {
+                if (handler.canHandle(update)) {
                     try {
-                        def.handle(update);
-                        log.info("📥 Обработан callback '{}', вызвано меню {}", key, def.getClass().getSimpleName());
+                        handler.handle(update);
+                        log.info("📥 Обработан callback '{}', вызван {}", key, handler.getClass().getSimpleName());
                     } catch (Exception e) {
-                        log.error("❌ Ошибка при обработке callback {} в {}", key, def.getClass().getSimpleName(), e);
+                        log.error("❌ Ошибка при обработке callback {} в {}", key, handler.getClass().getSimpleName(), e);
                     }
                     return;
                 }
             }
-
-            log.warn("⚠️ Нет MenuDefinition для callback '{}'", key);
+            log.warn("⚠️ Нет CallbackHandler для callback '{}'", key);
             return;
         }
 
-        for (MessageHandler handler : handlers) {
+        // затем — текстовые и прочие сообщения
+        for (MessageHandler handler : messageHandlers) {
             if (handler.canHandle(update)) {
                 try {
                     handler.handle(update);
                 } catch (Exception e) {
-                    log.error("Ошибка в MessageHandler {}", handler.getClass().getSimpleName(), e);
+                    log.error("❌ Ошибка в MessageHandler {}", handler.getClass().getSimpleName(), e);
                 }
                 return;
             }

@@ -35,4 +35,11 @@ public interface BinanceApiClient {
      * @return JSON-строка, как возвращает Binance API
      */
     String getKlines(String symbol, String interval, int limit) throws BinanceClientException;
+
+    /** Информация по всем инструментам биржи (exchangeInfo) */
+    String getExchangeInfo() throws BinanceClientException;
+
+    /** 24h тикеры по всем символам (ticker24H) */
+    String get24hrTicker() throws BinanceClientException;
+
 }

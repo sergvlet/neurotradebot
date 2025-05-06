@@ -37,4 +37,17 @@ public class BinanceApiClientImpl implements BinanceApiClient {
         params.put("limit", limit);
         return client.createMarket().klines(params);
     }
+
+    @Override
+    public String getExchangeInfo() throws BinanceClientException {
+        // Берём информацию о бирже через market API
+        return client.createMarket().exchangeInfo(new HashMap<>());
+    }
+
+    @Override
+    public String get24hrTicker() throws BinanceClientException {
+        // Берём 24h статистику по всем рынкам через market API
+        return client.createMarket().ticker24H(new HashMap<>());
+    }
+
 }

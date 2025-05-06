@@ -14,8 +14,6 @@ import java.util.List;
 
 /**
  * Основная сущность настроек AI-режима пользователя.
- * Хранит состояние сети (биржа, ключи), а также 
- * параметры автоматической и ручной торговли.
  */
 @Entity
 @Table(name = "ai_trade_settings")
@@ -36,15 +34,20 @@ public class AiTradeSettings {
 
     /** Биржа: например "binance", "ftx" и т.д. */
     @Column(length = 32)
-    private String exchange;
+    @Builder.Default
+    private String exchange = "";
 
     /** true — TESTNET, false — REAL */
-    @Column(name = "test_mode", nullable = false)
-    private boolean testMode;
+    @Column(name = "test_mode", nullable = false, columnDefinition = "boolean default false")
+    @Builder.Default
+    private boolean testMode = false;
 
     /** Шаг настройки API-ключей */
     @Enumerated(EnumType.STRING)
-    @Column(name = "api_setup_step", nullable = false)
+    @Column(name = "api_setup_step",
+            nullable = false,
+            columnDefinition = "varchar(32) default 'NONE'")
+    @Builder.Default
     private ApiSetupStep apiSetupStep = ApiSetupStep.NONE;
 
     /** Когда запись создана */
@@ -57,7 +60,8 @@ public class AiTradeSettings {
 
     /** Сохранённые API-учётные данные для этой записи */
     @OneToMany(mappedBy = "settings", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ApiCredentials> credentials;
+    @Builder.Default
+    private List<ApiCredentials> credentials = new ArrayList<>();
 
     /** ID последнего подсказочного сообщения бота при вводе ключей */
     @Column(name = "api_setup_prompt_msg_id")
@@ -65,18 +69,12 @@ public class AiTradeSettings {
 
     // ========== Параметры AI-режима ==========
 
-    /**
-     * Включение/выключение автоматической торговли
-     * DEFAULT false — чтобы существующие записи получили false
-     */
+    /** Включение/выключение автоматической торговли */
     @Column(nullable = false, columnDefinition = "boolean default false")
     @Builder.Default
     private boolean enabled = false;
 
-    /**
-     * Режим торговли (SPOT, MARGIN, FUTURES_USDT, FUTURES_COIN)
-     * DEFAULT 'SPOT'
-     */
+    /** Режим торговли (SPOT, MARGIN, FUTURES_USDT, FUTURES_COIN) */
     @Enumerated(EnumType.STRING)
     @Column(name = "trade_mode",
             length = 32,
@@ -85,26 +83,22 @@ public class AiTradeSettings {
     @Builder.Default
     private TradeMode tradeMode = TradeMode.SPOT;
 
-    /** Список валютных пар (например ["BTCUSDT","ETHUSDT"]) */
+    /** Список валютных пар */
     @ElementCollection
-    @CollectionTable(name = "ai_trade_pairs", joinColumns = @JoinColumn(name = "settings_id"))
+    @CollectionTable(name = "ai_trade_pairs",
+            joinColumns = @JoinColumn(name = "settings_id"))
     @Column(name = "pair", length = 16)
     @Builder.Default
     private List<String> pairs = new ArrayList<>();
 
-    /**
-     * Выбранная стратегия (RSI_MACD, EMA_CROSSOVER и т.д.)
-     * DEFAULT 'RSI_MACD'
-     */
+    /** Выбранная стратегия (RSI_MACD, EMA_CROSSOVER и т.д.) */
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false,
+            columnDefinition = "varchar(32) default 'RSI_MACD'")
     @Builder.Default
     private StrategyType strategy = StrategyType.RSI_MACD;
 
-    /**
-     * Интервал сканирования в миллисекундах
-     * DEFAULT 60000
-     */
+    /** Интервал сканирования в миллисекундах */
     @Column(name = "scan_interval",
             nullable = false,
             columnDefinition = "numeric(21,0) default 60000")
@@ -113,21 +107,23 @@ public class AiTradeSettings {
 
     /** Встроенный конфиг параметров RSI+MACD */
     @Embedded
+    @Builder.Default
     private RsiMacdConfig rsiMacdConfig = new RsiMacdConfig();
 
     /** Встроенный конфиг управления рисками */
     @Embedded
+    @Builder.Default
     private RiskConfig riskConfig = new RiskConfig();
 
     // ============================================
 
     @PrePersist
     protected void onCreate() {
-        createdAt           = Instant.now();
-        updatedAt           = createdAt;
-        apiSetupStep        = ApiSetupStep.NONE;
+        Instant now = Instant.now();
+        createdAt = now;
+        updatedAt = now;
+        apiSetupStep = ApiSetupStep.NONE;
         apiSetupPromptMsgId = null;
-        // дефолты enabled, tradeMode, strategy, scanInterval подхватятся из columnDefinition
     }
 
     @PreUpdate
