@@ -1,7 +1,6 @@
 package com.chicu.neurotradebot.trade.service.impl;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
-
 import com.chicu.neurotradebot.entity.Bar;
 import com.chicu.neurotradebot.entity.RsiMacdConfig;
 import com.chicu.neurotradebot.enums.TradeMode;
@@ -12,90 +11,140 @@ import com.chicu.neurotradebot.trade.risk.RiskManager;
 import com.chicu.neurotradebot.trade.risk.RiskResult;
 import com.chicu.neurotradebot.trade.service.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TradingServiceImpl implements TradingService {
 
     private final AiTradeSettingsService settingsService;
-    private final MarketDataService marketDataService;
-    private final TradingStrategy rsiMacdStrategy;
-    private final RiskManager riskManager;
-    private final SpotTradeExecutor spotExecutor;
-    private final AccountService accountService;
+    private final MarketDataService       marketDataService;
+    private final TradingStrategy         rsiMacdStrategy;
+    private final RiskManager             riskManager;
+    private final SpotTradeExecutor       spotExecutor;
+    private final AccountService          accountService;
 
     @Override
     public void executeCycle() {
-        // этот метод больше не используется внутри планировщика
-        throw new UnsupportedOperationException("Use executeCycle(chatId)");
+        Long chatId = BotContext.getChatId();
+        if (chatId == null) {
+            log.warn("ChatId отсутствует в контексте — пропускаем цикл");
+            return;
+        }
+        executeCycle(chatId);
     }
 
     @Override
     @Transactional
     public void executeCycle(Long chatId) {
         AiTradeSettings cfg = settingsService.getByChatId(chatId);
-        if (!cfg.isEnabled() || cfg.getTradeMode() != TradeMode.SPOT) {
+        if (!cfg.isEnabled()) {
+            log.info("Торговля отключена для chatId={}", chatId);
+            return;
+        }
+        if (cfg.getTradeMode() != TradeMode.SPOT) {
+            log.info("Режим торговли не SPOT ({}), chatId={}", cfg.getTradeMode(), chatId);
             return;
         }
 
-        RsiMacdConfig rsiCfg = cfg.getRsiMacdConfig();
-        if (rsiCfg == null) {
-            rsiCfg = new RsiMacdConfig();
+        RsiMacdConfig c = cfg.getRsiMacdConfig();
+        if (c == null) {
+            log.warn("RsiMacdConfig не задан для chatId={} — ставлю дефолт", chatId);
+            c = RsiMacdConfig.builder()
+                    .macdFast(12)
+                    .macdSlow(26)
+                    .macdSignal(9)
+                    .rsiPeriod(14)
+                    .rsiLower(BigDecimal.valueOf(30))
+                    .rsiUpper(BigDecimal.valueOf(70))
+                    .build();
+            cfg.setRsiMacdConfig(c);
+            settingsService.save(cfg);
         }
-        int neededBars = rsiCfg.getMacdSlow() + rsiCfg.getMacdSignal() + 1;
+
+        int needed = c.getMacdSlow() + c.getMacdSignal() + 1;
+        Duration interval = cfg.getScanInterval();
         Long userId = cfg.getUser().getId();
 
-        for (String symbol : cfg.getPairs()) {
-            List<Bar> history = marketDataService.getHistoricalBars(
-                    symbol,
-                    cfg.getScanInterval(),                     neededBars,
-                    chatId
-            );
+        for (String sym : cfg.getPairs()) {
+            List<Bar> hist = marketDataService.getHistoricalBars(sym, interval, 300, chatId);
 
-            Signal signal = rsiMacdStrategy.generateSignal(symbol, history, cfg);
-            if (signal == Signal.HOLD) continue;
+            if (hist.size() < needed) {
+                log.warn("Недостаточно баров для {}: нужно={}, получили={} — пропускаем", sym, needed, hist.size());
+                continue;
+            }
 
-            BigDecimal entryPrice = history.get(history.size() - 1).getClose();
-            String quoteAsset = symbol.substring(symbol.length() - 4);
-            BigDecimal freeBalance = accountService.getFreeBalance(userId, quoteAsset);
+            Signal sig;
+            try {
+                sig = rsiMacdStrategy.generateSignal(sym, hist, cfg);
+            } catch (Exception ex) {
+                log.error("Ошибка при расчёте сигнала для {}: {}", sym, ex.toString());
+                continue;
+            }
 
-            RiskResult rr = riskManager.calculate(cfg.getRiskConfig(), freeBalance, entryPrice);
+            log.info("Сигнал для {} = {} (chatId={})", sym, sig, chatId);
+            if (sig == Signal.HOLD) {
+                continue;
+            }
 
-            if (signal == Signal.BUY) {
-                spotExecutor.buy(userId, symbol, rr.getQuantity());
+            BigDecimal price = hist.get(hist.size() - 1).getClose();
+            String quote    = sym.substring(sym.length() - 4);
+            BigDecimal bal   = accountService.getFreeBalance(userId, quote);
+            RiskResult rr    = riskManager.calculate(cfg.getRiskConfig(), bal, price);
+
+            log.info("Исполняем {} {} {} по цене {}", sig, rr.getQuantity(), sym, price);
+            if (sig == Signal.BUY) {
+                spotExecutor.buy(userId, sym, rr.getQuantity());
             } else {
-                spotExecutor.sell(userId, symbol, rr.getQuantity());
+                spotExecutor.sell(userId, sym, rr.getQuantity());
             }
         }
     }
 
     @Override
     public void executeManualOrder(String symbol, boolean buy) {
+        Long chatId = BotContext.getChatId();
+        if (chatId == null) {
+            log.warn("ChatId отсутствует в контексте — ручной ордер отменён");
+            return;
+        }
+
         AiTradeSettings cfg = settingsService.getForCurrentUser();
-        // ... аналогично, здесь chatId внутри getForCurrentUser()
+        RsiMacdConfig c = cfg.getRsiMacdConfig();
+        if (c == null) {
+            log.warn("RsiMacdConfig не задан — ручной ордер отменён");
+            return;
+        }
+
+        int needed = c.getMacdSlow() + c.getMacdSignal() + 1;
+        Duration interval = cfg.getScanInterval();
         Long userId = cfg.getUser().getId();
-        RsiMacdConfig rsiCfg = cfg.getRsiMacdConfig();
-        if (rsiCfg == null) rsiCfg = new RsiMacdConfig();
-        int neededBars = rsiCfg.getMacdSlow() + rsiCfg.getMacdSignal() + 1;
 
-        List<Bar> history = marketDataService.getHistoricalBars(
-                symbol,
-                cfg.getScanInterval(),                 neededBars,
-                BotContext.getChatId()
-        );
+        List<Bar> hist = marketDataService.getHistoricalBars(symbol, interval, needed, chatId);
+        if (hist.size() < needed) {
+            log.warn("Недостаточно баров для ручного ордера {}: нужно={}, получили={} — userId={}",
+                    symbol, needed, hist.size(), userId);
+            return;
+        }
 
-        BigDecimal entryPrice = history.get(history.size() - 1).getClose();
-        String quoteAsset = symbol.substring(symbol.length() - 4);
-        BigDecimal freeBalance = accountService.getFreeBalance(userId, quoteAsset);
+        BigDecimal price = hist.get(hist.size() - 1).getClose();
+        String quote     = symbol.substring(symbol.length() - 4);
+        BigDecimal bal    = accountService.getFreeBalance(userId, quote);
+        RiskResult rr     = riskManager.calculate(cfg.getRiskConfig(), bal, price);
 
-        RiskResult rr = riskManager.calculate(cfg.getRiskConfig(), freeBalance, entryPrice);
-
-        if (buy) spotExecutor.buy(userId, symbol, rr.getQuantity());
-        else     spotExecutor.sell(userId, symbol, rr.getQuantity());
+        log.info("Ручной ордер {}: {} {} по цене {}",
+                buy ? "BUY" : "SELL", rr.getQuantity(), symbol, price);
+        if (buy) {
+            spotExecutor.buy(userId, symbol, rr.getQuantity());
+        } else {
+            spotExecutor.sell(userId, symbol, rr.getQuantity());
+        }
     }
 }

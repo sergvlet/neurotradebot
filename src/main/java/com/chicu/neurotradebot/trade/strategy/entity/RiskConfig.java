@@ -1,5 +1,5 @@
 // src/main/java/com/chicu/neurotradebot/entity/RiskConfig.java
-package com.chicu.neurotradebot.entity;
+package com.chicu.neurotradebot.trade.strategy.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;

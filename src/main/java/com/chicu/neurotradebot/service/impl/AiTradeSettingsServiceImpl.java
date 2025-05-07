@@ -3,13 +3,14 @@ package com.chicu.neurotradebot.service.impl;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
 import com.chicu.neurotradebot.entity.User;
+import com.chicu.neurotradebot.entity.RsiMacdConfig;
 import com.chicu.neurotradebot.repository.AiTradeSettingsRepository;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
 import com.chicu.neurotradebot.service.UserService;
-import com.chicu.neurotradebot.telegram.BotContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -23,8 +24,20 @@ public class AiTradeSettingsServiceImpl implements AiTradeSettingsService {
     public AiTradeSettings getOrCreate(User user) {
         return repo.findByUser(user)
                 .orElseGet(() -> {
+                    // При первом создании задаём стратегию RSI+MACD с дефолтными параметрами
+                    RsiMacdConfig defaultRsiMacd = RsiMacdConfig.builder()
+                            // пример изменения дефолта, если нужно
+                            .rsiPeriod(14)
+                            .rsiLower(BigDecimal.valueOf(30))
+                            .rsiUpper(BigDecimal.valueOf(70))
+                            .macdFast(12)
+                            .macdSlow(26)
+                            .macdSignal(9)
+                            .build();
+
                     AiTradeSettings s = AiTradeSettings.builder()
                             .user(user)
+                            .rsiMacdConfig(defaultRsiMacd)
                             .build();
                     return repo.save(s);
                 });
@@ -37,7 +50,7 @@ public class AiTradeSettingsServiceImpl implements AiTradeSettingsService {
 
     @Override
     public AiTradeSettings getForCurrentUser() {
-        Long chatId = BotContext.getChatId();
+        Long chatId = com.chicu.neurotradebot.telegram.BotContext.getChatId();
         User user = userService.getOrCreate(chatId);
         return getOrCreate(user);
     }
@@ -49,9 +62,6 @@ public class AiTradeSettingsServiceImpl implements AiTradeSettingsService {
 
     @Override
     public AiTradeSettings getByChatId(Long chatId) {
-        if (chatId == null) {
-            throw new IllegalArgumentException("chatId must not be null");
-        }
         User user = userService.getOrCreate(chatId);
         return getOrCreate(user);
     }

@@ -1,5 +1,5 @@
 // src/main/java/com/chicu/neurotradebot/telegram/view/PairsAddMethodMenuBuilder.java
-package com.chicu.neurotradebot.telegram.view.aimenu;
+package com.chicu.neurotradebot.telegram.view.networksettingsmenu;
 
 import com.chicu.neurotradebot.telegram.handler.MenuDefinition;
 import org.springframework.stereotype.Component;

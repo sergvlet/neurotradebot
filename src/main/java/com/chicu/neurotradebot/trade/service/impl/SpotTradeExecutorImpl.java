@@ -1,16 +1,16 @@
-package com.chicu.neurotradebot.trade.service.binance;
-
+package com.chicu.neurotradebot.trade.service.impl;
 
 import com.chicu.neurotradebot.trade.service.SpotTradeExecutor;
+import com.chicu.neurotradebot.trade.service.binance.BinanceApiClient;
+import com.chicu.neurotradebot.trade.service.binance.BinanceClientProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-@Primary
+
 @Component
 @RequiredArgsConstructor
-public class BinanceSpotTradeExecutor implements SpotTradeExecutor {
+public class SpotTradeExecutorImpl implements SpotTradeExecutor {
 
     private final BinanceClientProvider clientProvider;
 

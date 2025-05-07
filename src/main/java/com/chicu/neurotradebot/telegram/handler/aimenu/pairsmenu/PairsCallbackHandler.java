@@ -7,7 +7,7 @@ import com.chicu.neurotradebot.service.UserService;
 import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.telegram.TelegramSender;
 import com.chicu.neurotradebot.telegram.handler.CallbackHandler;
-import com.chicu.neurotradebot.telegram.view.aimenu.PairsAddMethodMenuBuilder;
+import com.chicu.neurotradebot.telegram.view.networksettingsmenu.PairsAddMethodMenuBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;

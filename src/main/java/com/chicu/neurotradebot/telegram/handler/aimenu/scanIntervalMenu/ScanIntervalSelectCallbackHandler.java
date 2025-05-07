@@ -33,20 +33,21 @@ public class ScanIntervalSelectCallbackHandler implements CallbackHandler {
   @Override
   public void handle(Update u) throws Exception {
     var cq     = u.getCallbackQuery();
-    String data   = cq.getData();            // например "scan_1m"
+    String data   = cq.getData();            // например "scan_1s"
     long   chatId = cq.getMessage().getChatId();
     int    msgId  = cq.getMessage().getMessageId();
 
-    // 1) Подтверждаем callback без текста
     sender.execute(new AnswerCallbackQuery(cq.getId()));
 
-    // 2) Сохраняем новый интервал
-    
     var user = userService.getOrCreate(chatId);
     var cfg  = settingsService.getOrCreate(user);
 
     Duration interval;
     switch (data) {
+      case "scan_1s"  -> interval = Duration.ofSeconds(1);
+      case "scan_5s"  -> interval = Duration.ofSeconds(5);
+      case "scan_10s" -> interval = Duration.ofSeconds(10);
+      case "scan_20s" -> interval = Duration.ofSeconds(20);
       case "scan_1m"  -> interval = Duration.ofMinutes(1);
       case "scan_5m"  -> interval = Duration.ofMinutes(5);
       case "scan_15m" -> interval = Duration.ofMinutes(15);
@@ -56,18 +57,18 @@ public class ScanIntervalSelectCallbackHandler implements CallbackHandler {
         return;
       }
     }
+
     cfg.setScanInterval(interval);
     settingsService.save(cfg);
 
-    // 3) Редактируем текущее сообщение: подтверждение + главное меню
-    String confirmation = "⏱ Интервал сканирования установлен: " + format(interval);
-    String newText = confirmation + "\n\n" + aiBuilder.title();
+    String confirmation = "⏱ Интервал сканирования: " + format(interval);
+    String newText      = confirmation + "\n\n" + aiBuilder.title();
 
     sender.execute(EditMessageText.builder()
             .chatId(Long.toString(chatId))
             .messageId(msgId)
-            .text(newText)                          // обновляем текст
-            .replyMarkup(aiBuilder.markup(chatId))  // показываем главное меню
+            .text(newText)
+            .replyMarkup(aiBuilder.markup(chatId))
             .build()
     );
 
@@ -75,8 +76,13 @@ public class ScanIntervalSelectCallbackHandler implements CallbackHandler {
   }
 
   private String format(Duration d) {
+    if (d.toSeconds() < 60) {
+      return d.toSeconds() + " сек.";
+    }
     long mins = d.toMinutes();
-    if (mins < 60) return mins + " мин.";
+    if (mins < 60) {
+      return mins + " мин.";
+    }
     return d.toHours() + " ч.";
   }
 }

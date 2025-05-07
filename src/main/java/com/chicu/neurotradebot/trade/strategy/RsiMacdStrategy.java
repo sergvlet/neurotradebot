@@ -1,63 +1,65 @@
 package com.chicu.neurotradebot.trade.strategy;
 
 import com.chicu.neurotradebot.entity.Bar;
-import com.chicu.neurotradebot.entity.RsiMacdConfig;
 import com.chicu.neurotradebot.entity.AiTradeSettings;
+import com.chicu.neurotradebot.entity.RsiMacdConfig;
 import com.chicu.neurotradebot.trade.model.Signal;
 import com.chicu.neurotradebot.trade.service.TradingStrategy;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Component
+@Slf4j
 public class RsiMacdStrategy implements TradingStrategy {
 
     @Override
     public Signal generateSignal(String symbol,
                                  List<Bar> history,
                                  AiTradeSettings settings) {
-        if (settings == null) {
-            throw new IllegalStateException("Нет настроек трейдера");
-        }
-
         RsiMacdConfig cfg = settings.getRsiMacdConfig();
         if (cfg == null) {
-            // Без конфигурации — не торгуем
             return Signal.HOLD;
         }
 
         int fastPeriod   = cfg.getMacdFast();
         int slowPeriod   = cfg.getMacdSlow();
         int signalPeriod = cfg.getMacdSignal();
-        int rsiPeriod    = cfg.getRsiPeriod(); // если есть
 
-        // 1) Собираем в массив цены закрытия:
         BigDecimal[] closes = history.stream()
                 .map(Bar::getClose)
                 .toArray(BigDecimal[]::new);
 
-        // 2) Вычисляем EMA(fast) и EMA(slow):
+        // 1) Вычисляем EMA
         BigDecimal[] emaFast = calculateEMA(closes, fastPeriod);
         BigDecimal[] emaSlow = calculateEMA(closes, slowPeriod);
 
-        // 3) Получаем MACD-линии:
-        BigDecimal[] macdLine = new BigDecimal[emaFast.length];
-        for (int i = 0; i < emaFast.length; i++) {
-            macdLine[i] = emaFast[i].subtract(emaSlow[i]);
+        // 2) Определяем, с какого индекса у нас уже есть все линии:
+        int macdStart    = Math.max(fastPeriod - 1, slowPeriod - 1);
+        int signalStart  = macdStart + (signalPeriod - 1);
+        if (closes.length <= signalStart) {
+            log.warn("Недостаточно баров для MACD: нужно хотя бы {}, а получили {}", signalStart + 1, closes.length);
+            return Signal.HOLD;
         }
 
-        // 4) Сигнальная линия — EMA от MACD-линии:
+        // 3) Собираем MACD-линию и сигнальную линию:
+        BigDecimal[] macdLine    = new BigDecimal[closes.length];
+        for (int i = macdStart; i < closes.length; i++) {
+            macdLine[i] = emaFast[i].subtract(emaSlow[i]);
+        }
         BigDecimal[] signalLine = calculateEMA(macdLine, signalPeriod);
 
-        // 5) Берём последние два значения, чтобы определить кроссовер:
-        int idx = macdLine.length - 1;
-        BigDecimal prevMacd   = macdLine[idx - 1];
-        BigDecimal prevSignal = signalLine[idx - 1];
-        BigDecimal currMacd   = macdLine[idx];
-        BigDecimal currSignal = signalLine[idx];
+        // 4) Берём два последних индекса, начиная от signalStart:
+        int last = closes.length - 1;
+        BigDecimal prevMacd   = macdLine[last - 1];
+        BigDecimal prevSignal = signalLine[last - 1];
+        BigDecimal currMacd   = macdLine[last];
+        BigDecimal currSignal = signalLine[last];
 
-        // 6) Простое правило «пересечения»:
+        // 5) Кроссовер:
         if (prevMacd.compareTo(prevSignal) <= 0 && currMacd.compareTo(currSignal) > 0) {
             return Signal.BUY;
         }
@@ -65,24 +67,19 @@ public class RsiMacdStrategy implements TradingStrategy {
             return Signal.SELL;
         }
 
-        // 7) (Опционально) добавьте RSI-фильтр:
-        // BigDecimal rsi = calculateRSI(closes, rsiPeriod);
-        // if (rsi.compareTo(cfg.getRsiOverbought()) > 0)  → SELL
-        // if (rsi.compareTo(cfg.getRsiOversold())   < 0)  → BUY
-
         return Signal.HOLD;
     }
 
     private BigDecimal[] calculateEMA(BigDecimal[] data, int period) {
         BigDecimal[] ema = new BigDecimal[data.length];
-        BigDecimal k = BigDecimal.valueOf(2.0 / (period + 1));
-        // 1) Инициализация — простое среднее первых `period` баров:
+        BigDecimal k = BigDecimal.valueOf(2.0).divide(BigDecimal.valueOf(period + 1), 16, RoundingMode.HALF_UP);
+        // инициализация на period-1
         BigDecimal sum = BigDecimal.ZERO;
         for (int i = 0; i < period; i++) {
             sum = sum.add(data[i]);
         }
-        ema[period - 1] = sum.divide(BigDecimal.valueOf(period), BigDecimal.ROUND_HALF_UP);
-        // 2) Рекуррентная формула:
+        ema[period - 1] = sum.divide(BigDecimal.valueOf(period), 16, RoundingMode.HALF_UP);
+        // рекуррентная формула
         for (int i = period; i < data.length; i++) {
             ema[i] = data[i]
                     .subtract(ema[i - 1])
@@ -91,7 +88,4 @@ public class RsiMacdStrategy implements TradingStrategy {
         }
         return ema;
     }
-
-    // private BigDecimal[] calculateEMA(BigDecimal[] ...) — перегрузка для BigDecimal[]
-    // private BigDecimal calculateRSI(BigDecimal[] data, int period) { ... }
 }

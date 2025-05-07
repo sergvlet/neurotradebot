@@ -1,7 +1,7 @@
 package com.chicu.neurotradebot.telegram.handler.aimenu.riskmenu;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
-import com.chicu.neurotradebot.entity.RiskConfig;
+import com.chicu.neurotradebot.trade.strategy.entity.RiskConfig;
 import com.chicu.neurotradebot.enums.ApiSetupStep;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
 import com.chicu.neurotradebot.service.UserService;

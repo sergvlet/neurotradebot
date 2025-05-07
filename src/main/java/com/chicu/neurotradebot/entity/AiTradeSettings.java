@@ -4,6 +4,7 @@ package com.chicu.neurotradebot.entity;
 import com.chicu.neurotradebot.enums.ApiSetupStep;
 import com.chicu.neurotradebot.enums.StrategyType;
 import com.chicu.neurotradebot.enums.TradeMode;
+import com.chicu.neurotradebot.trade.strategy.entity.RiskConfig;
 import jakarta.persistence.*;
 import lombok.*;
 

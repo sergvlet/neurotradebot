@@ -1,7 +1,7 @@
 // src/main/java/com/chicu/neurotradebot/trade/risk/RiskManager.java
 package com.chicu.neurotradebot.trade.risk;
 
-import com.chicu.neurotradebot.entity.RiskConfig;
+import com.chicu.neurotradebot.trade.strategy.entity.RiskConfig;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
