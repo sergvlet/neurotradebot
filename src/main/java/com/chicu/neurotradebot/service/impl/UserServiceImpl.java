@@ -15,10 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-   private final  UserRepository userRepository;
+    private final UserRepository userRepository;
 
     /**
-     * При /start: создаём или обновляем только telegramUserId и username.
+     * При /start: создаём или обновляем telegramUserId и username.
      */
     @Override
     @Transactional
@@ -26,31 +26,31 @@ public class UserServiceImpl implements UserService {
                             org.telegram.telegrambots.meta.api.objects.User from) {
         return userRepository.findByTelegramUserId(telegramUserId)
                 .map(u -> {
-                    // Обновляем только username
-                    u.setUsername(from.getUserName());
+                    String name = from.getUserName() != null ? from.getUserName() : "";
+                    u.setUsername(name);
                     return userRepository.save(u);
                 })
                 .orElseGet(() -> {
-                    // Создаём нового пользователя
-                    User u = User.builder()
-                            .telegramUserId(telegramUserId)
-                            .username(from.getUserName())
-                            .build();
+                    User u = new User();
+                    u.setTelegramUserId(telegramUserId);
+                    String name = from.getUserName() != null ? from.getUserName() : "";
+                    u.setUsername(name);
                     return userRepository.save(u);
                 });
     }
 
     /**
      * Просто возвращает или создаёт пользователя по telegramUserId.
+     * При создании ставим пустую строку в username, чтобы не было NULL.
      */
     @Override
     @Transactional
     public User getOrCreate(Long telegramUserId) {
         return userRepository.findByTelegramUserId(telegramUserId)
                 .orElseGet(() -> {
-                    User u = User.builder()
-                            .telegramUserId(telegramUserId)
-                            .build();
+                    User u = new User();
+                    u.setTelegramUserId(telegramUserId);
+                    u.setUsername("");    // пустая строка вместо null
                     return userRepository.save(u);
                 });
     }

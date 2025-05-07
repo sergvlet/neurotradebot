@@ -33,7 +33,7 @@ public class AiControlCallbackHandler implements CallbackHandler {
         var cq = update.getCallbackQuery();
         Long chatId = cq.getMessage().getChatId();
         Integer msgId = cq.getMessage().getMessageId();
-        BotContext.setChatId(chatId);
+        
         try {
             // 1) Answer spinner
             sender.execute(new AnswerCallbackQuery(cq.getId()));

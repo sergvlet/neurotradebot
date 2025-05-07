@@ -39,7 +39,7 @@ public class ExchangeSelectionCallbackHandler implements CallbackHandler {
         Long chat = cq.getMessage().getChatId();
         Integer msgId = cq.getMessage().getMessageId();
 
-        BotContext.setChatId(chat);
+
         try {
             String market = cq.getData().substring(PREFIX.length()); // binance или ftx
             User user = userService.getOrCreate(chat);

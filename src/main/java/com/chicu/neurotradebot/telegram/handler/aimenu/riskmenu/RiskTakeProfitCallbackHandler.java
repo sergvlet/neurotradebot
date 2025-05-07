@@ -37,7 +37,7 @@ public class RiskTakeProfitCallbackHandler implements com.chicu.neurotradebot.te
         sender.execute(new AnswerCallbackQuery(cq.getId()));
 
         // 2) Сохраняем шаг и promptMsgId
-        BotContext.setChatId(chat);
+        
         var cfg = settingsService.getOrCreate(userService.getOrCreate(chat));
         cfg.setApiSetupStep(ApiSetupStep.ENTER_RISK_TP);
         cfg.setApiSetupPromptMsgId(msgId);

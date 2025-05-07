@@ -32,7 +32,7 @@ public class AiStrategyCallbackHandler implements CallbackHandler {
         Long chat = cq.getMessage().getChatId();
         int  msg  = cq.getMessage().getMessageId();
 
-        BotContext.setChatId(chat);
+
         try {
             // Инициализируем настройки, если нужно
             var user     = userService.getOrCreate(chat);

@@ -1,4 +1,3 @@
-// src/main/java/com/chicu/neurotradebot/view/ManualTradeMenuBuilder.java
 package com.chicu.neurotradebot.telegram.view.manualtredemenu;
 
 import com.chicu.neurotradebot.telegram.handler.MenuDefinition;
@@ -17,21 +16,29 @@ public class ManualTradeMenuBuilder implements MenuDefinition {
         return Set.of("manual_trade_menu");
     }
 
+    @Override
     public String title() {
         return "💹 Меню ручной торговли";
     }
 
+    @Override
     public InlineKeyboardMarkup markup(Long chatId) {
         return InlineKeyboardMarkup.builder()
             .keyboard(List.of(
-                List.of(InlineKeyboardButton.builder()
-                    .text("➕ Открыть позицию")
-                    .callbackData("open_manual")
-                    .build()),
-                List.of(InlineKeyboardButton.builder()
-                    .text("⬅️ Назад")
-                    .callbackData("start_menu")
-                    .build())
+                // Новая строка с кнопкой «🧠 Стратегии»
+                List.of(
+                    InlineKeyboardButton.builder()
+                        .text("🧠 Стратегии")
+                        .callbackData("manual_strategies")
+                        .build()
+                ),
+                // Существующая кнопка «Назад»
+                List.of(
+                    InlineKeyboardButton.builder()
+                        .text("⬅️ Назад")
+                        .callbackData("start_menu")
+                        .build()
+                )
             ))
             .build();
     }

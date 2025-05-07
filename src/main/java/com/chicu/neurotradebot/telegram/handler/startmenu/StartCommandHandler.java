@@ -30,7 +30,7 @@ public class StartCommandHandler implements MessageHandler {
     @Override
     public void handle(Update update) throws Exception {
         Long chatId = update.getMessage().getChatId();
-        BotContext.setChatId(chatId);
+        
         try {
             // Создаём/обновляем юзера
             userService.getOrCreate(chatId, update.getMessage().getFrom());

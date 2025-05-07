@@ -39,7 +39,7 @@ public class RiskMaxPercentCallbackHandler implements CallbackHandler {
         sender.execute(new AnswerCallbackQuery(cq.getId()));
 
         // 2) Устанавливаем шаг и сохраняем ID сообщения, которое будем потом редактировать/удалять
-        BotContext.setChatId(chat);
+        
         var cfg = settingsService.getOrCreate(userService.getOrCreate(chat));
         cfg.setApiSetupStep(ApiSetupStep.ENTER_RISK_MAXP);
         cfg.setApiSetupPromptMsgId(msgId);

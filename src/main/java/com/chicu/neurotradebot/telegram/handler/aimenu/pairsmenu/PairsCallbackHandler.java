@@ -35,7 +35,7 @@ public class PairsCallbackHandler implements CallbackHandler {
         int  msg  = cq.getMessage().getMessageId();
 
         sender.execute(new AnswerCallbackQuery(cq.getId()));
-        BotContext.setChatId(chat);
+        
 
         try {
             // Сбрасываем шаг, чтобы не показывать меню снова

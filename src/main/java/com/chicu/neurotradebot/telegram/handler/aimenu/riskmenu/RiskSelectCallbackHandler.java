@@ -38,7 +38,7 @@ public class RiskSelectCallbackHandler implements CallbackHandler {
     sender.execute(new AnswerCallbackQuery(cq.getId()));
 
     // 2) Обновляем состояние
-    BotContext.setChatId(chatId);
+
     var cfg = settingsService.getOrCreate(userService.getOrCreate(chatId));
     ApiSetupStep step;
     String promptText;

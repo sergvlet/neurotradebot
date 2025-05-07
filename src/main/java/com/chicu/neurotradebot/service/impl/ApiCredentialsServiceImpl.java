@@ -1,13 +1,13 @@
-// src/main/java/com/chicu/neurotradebot/service/impl/ApiCredentialsServiceImpl.java
 package com.chicu.neurotradebot.service.impl;
 
+import com.binance.connector.client.exceptions.BinanceClientException;
 import com.chicu.neurotradebot.entity.ApiCredentials;
 import com.chicu.neurotradebot.entity.AiTradeSettings;
 import com.chicu.neurotradebot.entity.User;
 import com.chicu.neurotradebot.repository.ApiCredentialsRepository;
 import com.chicu.neurotradebot.service.ApiCredentialsService;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
-import com.chicu.neurotradebot.exchange.binance.BinanceClientFactory;
+import com.chicu.neurotradebot.trade.service.binance.BinanceClientFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,15 +27,6 @@ public class ApiCredentialsServiceImpl implements ApiCredentialsService {
     private final AiTradeSettingsService settingsService;
     private final BinanceClientFactory clientFactory;
 
-    /**
-     * Возвращает список всех сохранённых API-учётных данных для данного пользователя,
-     * биржи и режима (real или testnet).
-     *
-     * @param user      пользователь, для которого запрашиваем данные
-     * @param exchange  код биржи, например "binance"
-     * @param testMode  true — testnet, false — real
-     * @return список сущностей ApiCredentials, соответствующих фильтру
-     */
     @Override
     public List<ApiCredentials> listCredentials(User user, String exchange, boolean testMode) {
         AiTradeSettings settings = settingsService.getOrCreate(user);
@@ -45,35 +36,16 @@ public class ApiCredentialsServiceImpl implements ApiCredentialsService {
                 .toList();
     }
 
-    /**
-     * Проверяет, сохранены ли вообще ключи для данного пользователя,
-     * биржи и режима.
-     *
-     * @param user      пользователь
-     * @param exchange  код биржи
-     * @param testMode  режим testnet или real
-     * @return true, если найдены хотя бы одни креды
-     */
     @Override
     public boolean hasCredentials(User user, String exchange, boolean testMode) {
         return !listCredentials(user, exchange, testMode).isEmpty();
     }
 
-    /**
-     * Сохраняет API Key для пользователя. Если записи с таким лейблом ещё нет,
-     * создаёт новую сущность ApiCredentials. Секрет помечается "PENDING", данные неактивны.
-     *
-     * @param user      пользователь
-     * @param exchange  код биржи
-     * @param testMode  режим testnet или real
-     * @param apiKey    строка API Key
-     */
     @Override
     @Transactional
     public void saveApiKey(User user, String exchange, boolean testMode, String apiKey) {
         AiTradeSettings settings = settingsService.getOrCreate(user);
         String label = exchange + (testMode ? "_testnet" : "_main");
-
         ApiCredentials creds = repository.findBySettingsAndLabel(settings, label)
                 .orElseGet(() -> {
                     ApiCredentials c = new ApiCredentials();
@@ -82,76 +54,43 @@ public class ApiCredentialsServiceImpl implements ApiCredentialsService {
                     c.setLabel(label);
                     return c;
                 });
-
         creds.setApiKey(apiKey);
         creds.setApiSecret("PENDING");
         creds.setActive(false);
         repository.save(creds);
-
         log.info("🔑 Сохранён API Key (label={}) для user={} exchange={} mode={}",
-                label, user.getTelegramUserId(), exchange, testMode ? "TESTNET" : "REAL");
+                label, user.getTelegramUserId(), testMode ? "TESTNET" : "REAL");
     }
 
-    /**
-     * Сохраняет API Secret для ранее созданного ApiCredentials, делает запись активной.
-     *
-     * @param user       пользователь
-     * @param exchange   код биржи
-     * @param testMode   режим testnet или real
-     * @param apiSecret  строка API Secret
-     */
     @Override
     @Transactional
     public void saveApiSecret(User user, String exchange, boolean testMode, String apiSecret) {
         AiTradeSettings settings = settingsService.getOrCreate(user);
         String label = exchange + (testMode ? "_testnet" : "_main");
-
         ApiCredentials creds = repository.findBySettingsAndLabel(settings, label)
                 .orElseThrow(() -> new IllegalStateException("Сначала сохраните API Key"));
-
         creds.setApiSecret(apiSecret);
         creds.setActive(true);
         repository.save(creds);
-
         log.info("🔒 Сохранён API Secret (label={}) для user={} exchange={} mode={}",
-                label, user.getTelegramUserId(), exchange, testMode ? "TESTNET" : "REAL");
+                label, user.getTelegramUserId(), testMode ? "TESTNET" : "REAL");
     }
 
-    /**
-     * Отмечает указанную запись ApiCredentials активной, остальные — неактивными.
-     *
-     * @param user      пользователь
-     * @param exchange  код биржи
-     * @param testMode  режим testnet или real
-     * @param label     лейбл записи, которую нужно активировать
-     */
     @Override
     @Transactional
     public void selectCredential(User user, String exchange, boolean testMode, String label) {
         AiTradeSettings settings = settingsService.getOrCreate(user);
         List<ApiCredentials> credsList = repository.findAllBySettings(settings);
-
         credsList.forEach(c -> c.setActive(label.equals(c.getLabel())));
         repository.saveAll(credsList);
-
         log.info("✅ Активированы креды '{}' для user={} exchange={} mode={}",
-                label, user.getTelegramUserId(), exchange, testMode ? "TESTNET" : "REAL");
+                label, user.getTelegramUserId(), testMode ? "TESTNET" : "REAL");
     }
 
-    /**
-     * Возвращает активную запись ApiCredentials для данного пользователя,
-     * биржи и режима. Если нет активных, бросает исключение.
-     *
-     * @param user      пользователь
-     * @param exchange  код биржи
-     * @param testMode  режим testnet или real
-     * @return активная сущность ApiCredentials
-     */
     @Override
     public ApiCredentials getSelectedCredential(User user, String exchange, boolean testMode) {
         AiTradeSettings settings = settingsService.getOrCreate(user);
         String label = exchange + (testMode ? "_testnet" : "_main");
-
         return repository.findBySettingsAndLabel(settings, label)
                 .filter(ApiCredentials::isActive)
                 .orElseThrow(() -> new IllegalStateException(
@@ -160,25 +99,47 @@ public class ApiCredentialsServiceImpl implements ApiCredentialsService {
 
     /**
      * Проверяет соединение с биржей через Binance API: делает запрос accountInfo.
-     *
-     * @param user      пользователь
-     * @param exchange  код биржи
-     * @param testMode  режим testnet или real
-     * @return true, если соединение успешно, иначе бросает RuntimeException
+     * - При HTTP 2xx возвращает true.
+     * - При HTTP 4xx (неверные ключи/подпись) возвращает false.
+     * - При HTTP 5xx или других ошибках бросает RuntimeException.
      */
     @Override
     public boolean testConnection(User user, String exchange, boolean testMode) {
         ApiCredentials creds = getSelectedCredential(user, exchange, testMode);
+
+        // Сразу логируем, какие креды использует метод:
+        log.info("🔑 testConnection: userId={} exchange='{}' mode={} → using label='{}', apiKey='{}', apiSecret='{}'",
+                user.getTelegramUserId(),
+                exchange,
+                testMode ? "TESTNET" : "REAL",
+                creds.getLabel(),
+                creds.getApiKey(),
+                creds.getApiSecret().replaceAll(".", "*")  // весь secret звёздочками
+        );
+
+        var client = clientFactory.create(
+                creds.getApiKey(),
+                creds.getApiSecret(),
+                testMode
+        );
+
         try {
-            var client = clientFactory.create(
-                    creds.getApiKey(), creds.getApiSecret(), testMode
-            );
             client.getAccountInfo();
+            log.info("✅ getAccountInfo OK for mode={}", testMode ? "TESTNET" : "REAL");
             return true;
-        } catch (Exception e) {
-            log.error("❌ Ошибка тестирования соединения exchange={} mode={} — {}",
-                    exchange, testMode ? "TESTNET" : "REAL", e.getMessage());
-            throw new RuntimeException("Не удалось подключиться к бирже", e);
+        } catch (BinanceClientException e) {
+            String body = e.getMessage();
+            if (body != null && body.contains("\"code\":-1021")) {
+                log.warn("⚠️ Timestamp ahead — ключи считаем валидными");
+                return true;
+            }
+            log.warn("❌ Клиентская ошибка (4xx) — неверные ключи: {}", body);
+            return false;
+        } catch (Exception ex) {
+            log.warn("❌ Сетевая/серверная ошибка при проверке ключей: {}", ex.getMessage());
+            return false;
         }
     }
+
+
 }

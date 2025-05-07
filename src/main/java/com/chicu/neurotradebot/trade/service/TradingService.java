@@ -9,4 +9,7 @@ public interface TradingService {
 
     /** Выполнить ручной ордер по символу. */
     void executeManualOrder(String symbol, boolean buy);
+
+    /** Новый метод – цикл для конкретного чата. */
+    void executeCycle(Long chatId);
 }

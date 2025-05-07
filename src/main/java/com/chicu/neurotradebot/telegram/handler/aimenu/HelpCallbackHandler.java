@@ -37,8 +37,7 @@ public class HelpCallbackHandler implements CallbackHandler {
         // Отвечаем на callback, чтобы Telegram не показывал «тайм-аут»
         sender.execute(new AnswerCallbackQuery(cq.getId()));
 
-        // Устанавливаем контекст (для логов, если нужно)
-        BotContext.setChatId(chat);
+
         try {
             // Составляем текст FAQ
             String faq = "❓ *Помощь / FAQ*\n\n" +

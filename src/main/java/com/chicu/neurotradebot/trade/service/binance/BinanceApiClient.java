@@ -1,4 +1,4 @@
-package com.chicu.neurotradebot.exchange.binance;
+package com.chicu.neurotradebot.trade.service.binance;
 
 import com.binance.connector.client.exceptions.BinanceClientException;
 

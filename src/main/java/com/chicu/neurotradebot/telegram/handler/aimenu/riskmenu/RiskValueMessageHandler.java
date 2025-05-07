@@ -48,7 +48,7 @@ public class RiskValueMessageHandler implements MessageHandler {
         int  userMsg = u.getMessage().getMessageId();
         String text  = u.getMessage().getText().trim().replace("%", "");
 
-        BotContext.setChatId(chat);
+
         try {
             AiTradeSettings cfg = settingsService.getOrCreate(userService.getOrCreate(chat));
             Integer promptId = cfg.getApiSetupPromptMsgId();

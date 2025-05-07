@@ -17,7 +17,18 @@ public class UpdateDispatcher {
     private final List<CallbackHandler> handlers;
 
     public void dispatch(Update update) {
-        if (!update.hasCallbackQuery()) return;
+        if (!update.hasCallbackQuery()) {
+            return;
+        }
+
+        Long chatId = update.getCallbackQuery().getMessage().getChatId();
+        // Получаем объект Telegram-пользователя
+        org.telegram.telegrambots.meta.api.objects.User tgUser = update
+                .getCallbackQuery()
+                .getFrom();
+
+        // Устанавливаем оба значения в BotContext
+        BotContext.setContext(chatId, tgUser);
 
         String data = update.getCallbackQuery().getData();
         log.debug("Получен CallbackQuery: {}", data);
@@ -28,11 +39,14 @@ public class UpdateDispatcher {
                     handler.handle(update);
                 } catch (Exception e) {
                     log.error("Ошибка в обработчике для '{}'", data, e);
+                } finally {
+                    BotContext.clear();
                 }
                 return;
             }
         }
 
         log.warn("Нет обработчика для callbackData='{}'", data);
+        BotContext.clear();
     }
 }

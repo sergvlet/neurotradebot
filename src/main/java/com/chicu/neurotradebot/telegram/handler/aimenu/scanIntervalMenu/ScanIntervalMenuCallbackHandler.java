@@ -34,7 +34,7 @@ public class ScanIntervalMenuCallbackHandler implements CallbackHandler {
         sender.execute(new AnswerCallbackQuery(cq.getId()));
 
         // Редактируем текущее сообщение, показываем меню выбора интервала
-        BotContext.setChatId(chat);
+        
         sender.execute(EditMessageText.builder()
             .chatId(Long.toString(chat))
             .messageId(msg)

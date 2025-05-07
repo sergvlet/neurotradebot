@@ -42,7 +42,7 @@ public class ApiSetupCallbackHandler implements CallbackHandler {
         int  msgId  = cq.getMessage().getMessageId();
         String data = cq.getData();
 
-        BotContext.setChatId(chatId);
+
         try {
             // 1) ответ на callbackQuery (снимет спиннер)
             sender.execute(AnswerCallbackQuery.builder()

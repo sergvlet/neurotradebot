@@ -1,8 +1,8 @@
 // src/main/java/com/chicu/neurotradebot/trade/service/impl/BinanceAccountService.java
 package com.chicu.neurotradebot.trade.service.impl;
 
-import com.chicu.neurotradebot.exchange.binance.BinanceApiClient;
-import com.chicu.neurotradebot.exchange.binance.BinanceClientProvider;
+import com.chicu.neurotradebot.trade.service.binance.BinanceApiClient;
+import com.chicu.neurotradebot.trade.service.binance.BinanceClientProvider;
 import com.chicu.neurotradebot.trade.service.AccountService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -39,7 +39,7 @@ public class PairsManualEntryCallbackHandler implements CallbackHandler {
 
         // ответ на callback-кнопку
         sender.execute(new AnswerCallbackQuery(cq.getId()));
-        BotContext.setChatId(chat);
+
 
         try {
             // загружаем настройки

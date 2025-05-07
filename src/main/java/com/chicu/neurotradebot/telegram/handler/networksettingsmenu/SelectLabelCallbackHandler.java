@@ -38,7 +38,7 @@ public class SelectLabelCallbackHandler implements CallbackHandler {
         var cq = update.getCallbackQuery();
         Long chatId = cq.getMessage().getChatId();
         Integer msgId = cq.getMessage().getMessageId();
-        BotContext.setChatId(chatId);
+
 
         try {
             // Извлекаем метку из callbackData

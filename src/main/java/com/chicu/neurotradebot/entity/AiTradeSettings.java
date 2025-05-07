@@ -69,8 +69,11 @@ public class AiTradeSettings {
 
     // ========== Параметры AI-режима ==========
 
-    /** Включение/выключение автоматической торговли */
-    @Column(nullable = false, columnDefinition = "boolean default false")
+    /**
+     * true — автоматическая торговля включена; false — отключена.
+     * Используйте этот флаг в сервисах и хендлерах вместо ранее предложенного «tradingEnabled».
+     */
+    @Column(name = "enabled", nullable = false, columnDefinition = "boolean default false")
     @Builder.Default
     private boolean enabled = false;
 

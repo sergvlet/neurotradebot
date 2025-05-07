@@ -27,7 +27,7 @@ public class ToggleAiCallbackHandler implements CallbackHandler {
     public void handle(Update update) throws Exception {
         var cq = update.getCallbackQuery();
         Long chatId = cq.getMessage().getChatId();
-        BotContext.setChatId(chatId);
+
         try {
             // Ваша логика переключения AI
             boolean newState = true; // пример: переключили в состояние ON

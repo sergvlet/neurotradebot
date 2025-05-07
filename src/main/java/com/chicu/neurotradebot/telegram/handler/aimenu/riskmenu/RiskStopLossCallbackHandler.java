@@ -38,7 +38,7 @@ public class RiskStopLossCallbackHandler implements CallbackHandler {
         sender.execute(new AnswerCallbackQuery(cq.getId()));
 
         // 2) Сохраняем шаг и ID сообщения
-        BotContext.setChatId(chat);
+        
         var cfg = settingsService.getOrCreate(userService.getOrCreate(chat));
         cfg.setApiSetupStep(ApiSetupStep.ENTER_RISK_SL);
         cfg.setApiSetupPromptMsgId(msgId);

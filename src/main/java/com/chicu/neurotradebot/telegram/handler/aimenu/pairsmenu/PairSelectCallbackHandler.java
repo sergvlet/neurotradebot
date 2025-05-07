@@ -45,7 +45,7 @@ public class PairSelectCallbackHandler implements CallbackHandler {
 
         // Подтверждаем callback и контекст
         sender.execute(new AnswerCallbackQuery(cq.getId()));
-        BotContext.setChatId(chat);
+        
 
         try {
             var user     = userService.getOrCreate(chat);

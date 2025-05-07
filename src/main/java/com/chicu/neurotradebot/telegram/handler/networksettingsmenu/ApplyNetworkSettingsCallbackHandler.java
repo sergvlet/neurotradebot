@@ -45,7 +45,7 @@ public class ApplyNetworkSettingsCallbackHandler implements CallbackHandler {
         // откуда пришли — поймём по callbackData
         boolean fromAi = "apply_network_settings_ai".equals(cq.getData());
 
-        BotContext.setChatId(chat);
+        
         try {
             // сняли spinner
             sender.execute(new AnswerCallbackQuery(cq.getId()));

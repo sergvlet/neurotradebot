@@ -2,7 +2,7 @@
 package com.chicu.neurotradebot.telegram.handler.aimenu.pairsmenu;
 
 import com.chicu.neurotradebot.enums.ApiSetupStep;
-import com.chicu.neurotradebot.exchange.binance.BinanceClientProvider;
+import com.chicu.neurotradebot.trade.service.binance.BinanceClientProvider;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
 import com.chicu.neurotradebot.service.UserService;
 import com.chicu.neurotradebot.telegram.BotContext;
@@ -46,7 +46,7 @@ public class PairsImportCallbackHandler implements CallbackHandler {
 
         // Подтверждаем callback и ставим контекст
         sender.execute(new AnswerCallbackQuery(cq.getId()));
-        BotContext.setChatId(chat);
+        
 
         try {
             var user     = userService.getOrCreate(chat);

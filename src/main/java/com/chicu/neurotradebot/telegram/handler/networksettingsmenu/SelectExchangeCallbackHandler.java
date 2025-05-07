@@ -33,7 +33,7 @@ public class SelectExchangeCallbackHandler implements CallbackHandler {
         Long chat = cq.getMessage().getChatId();
         Integer msgId = cq.getMessage().getMessageId();
 
-        BotContext.setChatId(chat);
+
         try {
             // убрать спиннер
             sender.execute(new AnswerCallbackQuery(cq.getId()));

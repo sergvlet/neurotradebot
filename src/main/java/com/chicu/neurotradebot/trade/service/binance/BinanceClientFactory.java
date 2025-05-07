@@ -1,5 +1,5 @@
 // src/main/java/com/chicu/neurotradebot/exchange/binance/BinanceClientFactory.java
-package com.chicu.neurotradebot.exchange.binance;
+package com.chicu.neurotradebot.trade.service.binance;
 
 /**
  * Фабрика SpotClientImpl для Binance.

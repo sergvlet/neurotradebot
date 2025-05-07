@@ -1,5 +1,5 @@
 // src/main/java/com/chicu/neurotradebot/exchange/binance/BinanceClientFactoryImpl.java
-package com.chicu.neurotradebot.exchange.binance;
+package com.chicu.neurotradebot.trade.service.binance;
 
 import com.binance.connector.client.impl.SpotClientImpl;
 import org.springframework.stereotype.Component;

@@ -4,6 +4,7 @@ package com.chicu.neurotradebot.trade.service;
 
 import com.chicu.neurotradebot.entity.Bar;
 
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -17,7 +18,8 @@ public interface MarketDataService {
      * @param symbol   тикер (например, "BTCUSDT")
      * @param interval таймфрейм в формате Binance ("1m", "5m" и т.п.)
      * @param limit    максимальное число баров
+     * @param chatId  Telegram-чат, от имени которого идёт запрос
      * @return список баров в хронологическом порядке
      */
-    List<Bar> getHistoricalBars(String symbol, String interval, int limit);
+    List<Bar> getHistoricalBars(String symbol, Duration interval, int limit, Long chatId);
 }

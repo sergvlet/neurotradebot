@@ -4,6 +4,8 @@ package com.chicu.neurotradebot.service;
 import com.chicu.neurotradebot.entity.AiTradeSettings;
 import com.chicu.neurotradebot.entity.User;
 
+import java.util.List;
+
 public interface AiTradeSettingsService {
     /**
      * Получить или создать настройки пользователя.
@@ -17,4 +19,11 @@ public interface AiTradeSettingsService {
 
     /** Получить настройки для «текущего» пользователя (из BotContext). */
     AiTradeSettings getForCurrentUser();
+    /** Найти настройки по Telegram chatId (user.id). */
+    AiTradeSettings getByChatId(Long chatId);
+
+    /** Вернуть все настройки, у которых включена автоматическая торговля (enabled==true). */
+    List<AiTradeSettings> findAllActive();
+
+    
 }

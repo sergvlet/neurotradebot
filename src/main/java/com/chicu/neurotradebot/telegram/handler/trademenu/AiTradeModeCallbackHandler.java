@@ -36,7 +36,7 @@ public class AiTradeModeCallbackHandler implements CallbackHandler {
         Long chat = cq.getMessage().getChatId();
         int  msg  = cq.getMessage().getMessageId();
 
-        BotContext.setChatId(chat);
+        
         try {
             // Убедимся, что настройки существуют (инициализируем если нужно)
             var user     = userService.getOrCreate(chat);

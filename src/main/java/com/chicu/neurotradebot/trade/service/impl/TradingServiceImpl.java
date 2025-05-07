@@ -1,129 +1,101 @@
-// src/main/java/com/chicu/neurotradebot/trade/service/impl/TradingServiceImpl.java
 package com.chicu.neurotradebot.trade.service.impl;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
+
 import com.chicu.neurotradebot.entity.Bar;
-import com.chicu.neurotradebot.entity.RiskConfig;
-                        // ваш Bar из enums
+import com.chicu.neurotradebot.entity.RsiMacdConfig;
 import com.chicu.neurotradebot.enums.TradeMode;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
+import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.trade.model.Signal;
-import com.chicu.neurotradebot.trade.service.*;
-
 import com.chicu.neurotradebot.trade.risk.RiskManager;
 import com.chicu.neurotradebot.trade.risk.RiskResult;
-
+import com.chicu.neurotradebot.trade.service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Сервис исполнения торговых операций:
- * - автоматический цикл по сигналам стратегии
- * - ручные ордера по запросу пользователя
- */
 @Service
 @RequiredArgsConstructor
 public class TradingServiceImpl implements TradingService {
 
     private final AiTradeSettingsService settingsService;
-    private final MarketDataService      marketDataService;
+    private final MarketDataService marketDataService;
     private final TradingStrategy rsiMacdStrategy;
-    private final RiskManager            riskManager;
+    private final RiskManager riskManager;
     private final SpotTradeExecutor spotExecutor;
-    private final AccountService         accountService;
+    private final AccountService accountService;
 
-    /**
-     * Автоматический торговый цикл:
-     * - запускается с задержкой, заданной в настройках (scanInterval)
-     * - для каждой валютной пары:
-     *   1) загружает историю баров
-     *   2) генерирует сигнал RSI+MACD
-     *   3) рассчитывает объём и уровни SL/TP
-     *   4) исполняет ордер на спотовом рынке
-     */
     @Override
-    @Scheduled(fixedDelayString = "#{@aiTradeSettingsService.getScanIntervalMillis()}")
     public void executeCycle() {
-        AiTradeSettings cfg = settingsService.getForCurrentUser();
+        // этот метод больше не используется внутри планировщика
+        throw new UnsupportedOperationException("Use executeCycle(chatId)");
+    }
+
+    @Override
+    @Transactional
+    public void executeCycle(Long chatId) {
+        AiTradeSettings cfg = settingsService.getByChatId(chatId);
         if (!cfg.isEnabled() || cfg.getTradeMode() != TradeMode.SPOT) {
             return;
         }
-        RiskConfig riskCfg = cfg.getRiskConfig();
+
+        RsiMacdConfig rsiCfg = cfg.getRsiMacdConfig();
+        if (rsiCfg == null) {
+            rsiCfg = new RsiMacdConfig();
+        }
+        int neededBars = rsiCfg.getMacdSlow() + rsiCfg.getMacdSignal() + 1;
+        Long userId = cfg.getUser().getId();
 
         for (String symbol : cfg.getPairs()) {
-            var rsiCfg = cfg.getRsiMacdConfig();
-            int neededBars = rsiCfg.getMacdSlow() + rsiCfg.getMacdSignal() + 1;
-
-            // 1) Получаем историю баров
             List<Bar> history = marketDataService.getHistoricalBars(
-                symbol,
-                cfg.getScanInterval().toString(),
-                neededBars
+                    symbol,
+                    cfg.getScanInterval(),                     neededBars,
+                    chatId
             );
 
-            // 2) Генерируем торговый сигнал
             Signal signal = rsiMacdStrategy.generateSignal(symbol, history, cfg);
-            if (signal == Signal.HOLD) {
-                continue;
-            }
+            if (signal == Signal.HOLD) continue;
 
-            // 3) Последняя цена закрытия
             BigDecimal entryPrice = history.get(history.size() - 1).getClose();
-
-            // 4) Свободный баланс котируемой валюты (например, "USDT")
             String quoteAsset = symbol.substring(symbol.length() - 4);
-            BigDecimal freeBalance = accountService.getFreeBalance(
-                cfg.getUser().getId(), quoteAsset
-            );
+            BigDecimal freeBalance = accountService.getFreeBalance(userId, quoteAsset);
 
-            // 5) Рассчитываем объём, стоп-лосс и тейк-профит
-            RiskResult rr = riskManager.calculate(riskCfg, freeBalance, entryPrice);
+            RiskResult rr = riskManager.calculate(cfg.getRiskConfig(), freeBalance, entryPrice);
 
-            // 6) Исполняем ордер BUY или SELL
             if (signal == Signal.BUY) {
-                spotExecutor.buy(cfg.getUser().getId(), symbol, rr.getQuantity());
+                spotExecutor.buy(userId, symbol, rr.getQuantity());
             } else {
-                spotExecutor.sell(cfg.getUser().getId(), symbol, rr.getQuantity());
+                spotExecutor.sell(userId, symbol, rr.getQuantity());
             }
         }
     }
 
-    /**
-     * Ручной ордер:
-     * - загружает минимальный объём баров для стратегии
-     * - игнорирует сигнал стратегии и исполняет ордер по флагу buy
-     *
-     * @param symbol тикер пары, например "BTCUSDT"
-     * @param buy    true — купить, false — продать
-     */
     @Override
     public void executeManualOrder(String symbol, boolean buy) {
         AiTradeSettings cfg = settingsService.getForCurrentUser();
-        var rsiCfg = cfg.getRsiMacdConfig();
+        // ... аналогично, здесь chatId внутри getForCurrentUser()
+        Long userId = cfg.getUser().getId();
+        RsiMacdConfig rsiCfg = cfg.getRsiMacdConfig();
+        if (rsiCfg == null) rsiCfg = new RsiMacdConfig();
         int neededBars = rsiCfg.getMacdSlow() + rsiCfg.getMacdSignal() + 1;
 
         List<Bar> history = marketDataService.getHistoricalBars(
-            symbol,
-            cfg.getScanInterval().toString(),
-            neededBars
+                symbol,
+                cfg.getScanInterval(),                 neededBars,
+                BotContext.getChatId()
         );
 
         BigDecimal entryPrice = history.get(history.size() - 1).getClose();
         String quoteAsset = symbol.substring(symbol.length() - 4);
-        BigDecimal freeBalance = accountService.getFreeBalance(
-            cfg.getUser().getId(), quoteAsset
-        );
+        BigDecimal freeBalance = accountService.getFreeBalance(userId, quoteAsset);
 
         RiskResult rr = riskManager.calculate(cfg.getRiskConfig(), freeBalance, entryPrice);
 
-        if (buy) {
-            spotExecutor.buy(cfg.getUser().getId(), symbol, rr.getQuantity());
-        } else {
-            spotExecutor.sell(cfg.getUser().getId(), symbol, rr.getQuantity());
-        }
+        if (buy) spotExecutor.buy(userId, symbol, rr.getQuantity());
+        else     spotExecutor.sell(userId, symbol, rr.getQuantity());
     }
 }

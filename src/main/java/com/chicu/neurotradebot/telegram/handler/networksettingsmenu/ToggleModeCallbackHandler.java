@@ -35,7 +35,6 @@ public class ToggleModeCallbackHandler implements CallbackHandler {
         var cq = update.getCallbackQuery();
         Long chatId = cq.getMessage().getChatId();
         int msgId = cq.getMessage().getMessageId();
-        BotContext.setChatId(chatId);
 
         try {
             // 1) переключаем testMode в настройках

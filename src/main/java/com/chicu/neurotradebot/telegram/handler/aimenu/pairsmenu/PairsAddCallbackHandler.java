@@ -40,7 +40,7 @@ public class PairsAddCallbackHandler implements CallbackHandler {
         sender.execute(new AnswerCallbackQuery(cq.getId()));
 
         // 2) Выводим подменю
-        BotContext.setChatId(chat);
+        
         try {
             // Ensure settings exists
             var user = userService.getOrCreate(chat);

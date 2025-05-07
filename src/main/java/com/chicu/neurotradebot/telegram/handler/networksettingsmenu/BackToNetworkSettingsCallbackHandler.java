@@ -31,7 +31,7 @@ public class BackToNetworkSettingsCallbackHandler implements CallbackHandler {
     @Override
     public void handle(Update update) {
         Long chatId = update.getCallbackQuery().getMessage().getChatId();
-        BotContext.setChatId(chatId);
+
         try {
             // Получаем текущие настройки (режим testMode уже в них хранится)
             settingsService.getOrCreate(userService.getOrCreate(chatId));

@@ -37,7 +37,6 @@ public class TradeModeCallbackHandler implements CallbackHandler {
         int  msgId = cq.getMessage().getMessageId();
         String data = cq.getData();  // e.g. "mode_SPOT"
 
-        BotContext.setChatId(chat);
         try {
             // 1) Получаем пользователя и его настройки
             User user = userService.getOrCreate(chat);

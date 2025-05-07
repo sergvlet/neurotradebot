@@ -35,7 +35,7 @@ public class StrategySelectCallbackHandler implements CallbackHandler {
         int  msg  = cq.getMessage().getMessageId();
         String data = cq.getData(); // "strat_RSI_MACD" и т.п.
 
-        BotContext.setChatId(chat);
+
         try {
             User user = userService.getOrCreate(chat);
             var settings = settingsService.getOrCreate(user);

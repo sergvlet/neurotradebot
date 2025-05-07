@@ -30,7 +30,7 @@ public class StartMenuCallbackHandler implements CallbackHandler {
         Long chat = cq.getMessage().getChatId();
         Integer msgId = cq.getMessage().getMessageId();
 
-        BotContext.setChatId(chat);
+        
         try {
             // 1) удаляем старое сообщение, если хотим полностью заменить
             sender.execute(DeleteMessage.builder()

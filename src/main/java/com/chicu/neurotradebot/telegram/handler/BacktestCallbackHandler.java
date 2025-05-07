@@ -36,7 +36,7 @@ public class BacktestCallbackHandler implements CallbackHandler {
 
         // 1) Подтверждаем callback без спама
         sender.execute(new AnswerCallbackQuery(cq.getId()));
-        BotContext.setChatId(chat);
+
 
         try {
             AiTradeSettings cfg = settingsService.getOrCreate(userService.getOrCreate(chat));

@@ -34,7 +34,6 @@ public class RiskMenuCallbackHandler implements CallbackHandler {
         int msgId = cq.getMessage().getMessageId();
 
         sender.execute(new AnswerCallbackQuery(cq.getId())); // без текста
-        BotContext.setChatId(chat);
 
         sender.execute(EditMessageText.builder()
                 .chatId(Long.toString(chat))

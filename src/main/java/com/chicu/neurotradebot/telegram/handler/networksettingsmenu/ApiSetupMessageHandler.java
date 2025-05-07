@@ -51,7 +51,7 @@ public class ApiSetupMessageHandler implements MessageHandler {
         Long chatId = incoming.getChatId();
         String text  = incoming.getText().trim();
 
-        BotContext.setChatId(chatId);
+
         try {
             User user = userService.getOrCreate(chatId);
             AiTradeSettings cfg = cfgService.getOrCreate(user);

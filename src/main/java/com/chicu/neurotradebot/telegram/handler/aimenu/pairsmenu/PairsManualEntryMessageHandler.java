@@ -43,7 +43,7 @@ public class PairsManualEntryMessageHandler implements MessageHandler {
         AiTradeSettings cfg = settingsService.getOrCreate(userService.getOrCreate(chatId));
         Integer promptId = cfg.getApiSetupPromptMsgId();
 
-        BotContext.setChatId(chatId);
+
         try {
             // 1) Собираем введённые пары
             List<String> pairs = Arrays.stream(u.getMessage().getText().split(","))

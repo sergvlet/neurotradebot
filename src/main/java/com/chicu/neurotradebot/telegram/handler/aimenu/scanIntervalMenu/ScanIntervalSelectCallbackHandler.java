@@ -41,7 +41,7 @@ public class ScanIntervalSelectCallbackHandler implements CallbackHandler {
     sender.execute(new AnswerCallbackQuery(cq.getId()));
 
     // 2) Сохраняем новый интервал
-    BotContext.setChatId(chatId);
+    
     var user = userService.getOrCreate(chatId);
     var cfg  = settingsService.getOrCreate(user);
 
