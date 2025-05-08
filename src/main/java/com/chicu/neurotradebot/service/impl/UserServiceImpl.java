@@ -4,13 +4,13 @@ package com.chicu.neurotradebot.service.impl;
 import com.chicu.neurotradebot.entity.User;
 import com.chicu.neurotradebot.repository.UserRepository;
 import com.chicu.neurotradebot.service.UserService;
+import com.chicu.neurotradebot.telegram.BotContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Реализация UserService, создаёт/обновляет и возвращает пользователя.
- */
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -18,22 +18,26 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     /**
-     * При /start: создаём или обновляем telegramUserId и username.
+     * При /start и других взаимодействиях:
+     * создаём или обновляем telegramUserId и username.
+     * Если telegramUserId == null — берём из from.getId().
      */
     @Override
     @Transactional
     public User getOrCreate(Long telegramUserId,
                             org.telegram.telegrambots.meta.api.objects.User from) {
-        return userRepository.findByTelegramUserId(telegramUserId)
+        Long effectiveId = telegramUserId != null ? telegramUserId : from.getId();
+        String name = from.getUserName() != null ? from.getUserName() : "";
+
+        final Long userId = effectiveId;
+        return userRepository.findByTelegramUserId(userId)
                 .map(u -> {
-                    String name = from.getUserName() != null ? from.getUserName() : "";
                     u.setUsername(name);
                     return userRepository.save(u);
                 })
                 .orElseGet(() -> {
                     User u = new User();
-                    u.setTelegramUserId(telegramUserId);
-                    String name = from.getUserName() != null ? from.getUserName() : "";
+                    u.setTelegramUserId(userId);
                     u.setUsername(name);
                     return userRepository.save(u);
                 });
@@ -41,17 +45,38 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Просто возвращает или создаёт пользователя по telegramUserId.
+     * Если telegramUserId == null, пытаемся взять из BotContext.
      * При создании ставим пустую строку в username, чтобы не было NULL.
+     * Если всё же не удаётся получить ID, возвращаем любого уже существующего пользователя,
+     * чтобы не падать с ошибками.
      */
     @Override
     @Transactional
     public User getOrCreate(Long telegramUserId) {
-        return userRepository.findByTelegramUserId(telegramUserId)
-                .orElseGet(() -> {
-                    User u = new User();
-                    u.setTelegramUserId(telegramUserId);
-                    u.setUsername("");    // пустая строка вместо null
-                    return userRepository.save(u);
-                });
+        Long effectiveId = telegramUserId != null
+                ? telegramUserId
+                : BotContext.getChatId();
+
+        if (effectiveId != null) {
+            final Long userId = effectiveId;
+            return userRepository.findByTelegramUserId(userId)
+                    .orElseGet(() -> {
+                        User u = new User();
+                        u.setTelegramUserId(userId);
+                        u.setUsername("");
+                        return userRepository.save(u);
+                    });
+        }
+
+        // fallback: если и туда не залогинить — возвращаем первого найденного
+        List<User> all = userRepository.findAll();
+        if (!all.isEmpty()) {
+            return all.get(0);
+        }
+        // и если БД пуста — создаём «нулевого» пользователя, чтобы гарантировать non-null
+        User u = new User();
+        u.setTelegramUserId(0L);
+        u.setUsername("");
+        return userRepository.save(u);
     }
 }

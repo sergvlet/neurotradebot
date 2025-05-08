@@ -10,8 +10,7 @@ import lombok.*;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Основная сущность настроек AI-режима пользователя.
@@ -70,10 +69,7 @@ public class AiTradeSettings {
 
     // ========== Параметры AI-режима ==========
 
-    /**
-     * true — автоматическая торговля включена; false — отключена.
-     * Используйте этот флаг в сервисах и хендлерах вместо ранее предложенного «tradingEnabled».
-     */
+    /** true — автоматическая торговля включена; false — отключена. */
     @Column(name = "enabled", nullable = false, columnDefinition = "boolean default false")
     @Builder.Default
     private boolean enabled = false;
@@ -95,14 +91,19 @@ public class AiTradeSettings {
     @Builder.Default
     private List<String> pairs = new ArrayList<>();
 
-    /** Выбранная стратегия (RSI_MACD, EMA_CROSSOVER и т.д.) */
+    /**
+     * Набор выбранных стратегий — пользователь может отмечать несколько чистых стратегий,
+     * которые будут комбинироваться логикой в TradingServiceImpl.
+     */
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "ai_trade_strategies",
+            joinColumns = @JoinColumn(name = "settings_id"))
+    @Column(name = "strategy", length = 32)
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false,
-            columnDefinition = "varchar(32) default 'RSI_MACD'")
     @Builder.Default
-    private StrategyType strategy = StrategyType.RSI_MACD;
+    private Set<StrategyType> strategies = new HashSet<>();
 
-    /** Интервал сканирования в миллисекундах */
+    /** Интервал сканирования */
     @Column(name = "scan_interval",
             nullable = false,
             columnDefinition = "numeric(21,0) default 60000")
