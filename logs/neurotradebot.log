@@ -14430,3 +14430,413 @@ java.lang.IllegalStateException: Нет ни одной валидной стр�
 2025-05-08T14:32:39.795+02:00  INFO 10928 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
 2025-05-08T14:32:39.800+02:00  WARN 10928 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
 2025-05-08T14:32:39.800+02:00  WARN 10928 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T14:34:41.999+02:00  INFO 10928 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T14:34:41.999+02:00  INFO 10928 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=fe9575a63b2124e592b51b60c5bdafe81224dc7759e590264c2d3dd1a744fab7&timestamp=1746707681999
+2025-05-08T14:34:42.285+02:00  INFO 10928 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T14:34:42.374+02:00  INFO 10928 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T14:34:52.843+02:00  INFO 10928 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T14:35:48.217+02:00  INFO 10928 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.s.ToggleAiCallbackHandler      : AI toggled to true
+2025-05-08T14:37:25.498+02:00  INFO 10928 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T14:37:25.499+02:00  INFO 10928 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=3c10b8e172d4fb34622eac1301ff723245c30de9276cfdfde8231ecae818539d&timestamp=1746707845498
+2025-05-08T14:37:25.898+02:00  INFO 10928 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T14:37:26.006+02:00  INFO 10928 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T14:37:27.842+02:00  INFO 10928 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T14:45:01.291+02:00  INFO 10928 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T14:45:01.301+02:00  INFO 10928 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T14:45:01.333+02:00  INFO 10928 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T14:45:01.337+02:00  INFO 10928 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T14:45:01.342+02:00  INFO 10928 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T16:16:25.672+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 17188 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T16:16:25.674+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T16:16:25.729+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T16:16:25.729+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T16:16:26.251+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T16:16:26.373+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 115 ms. Found 3 JPA repository interfaces.
+2025-05-08T16:16:26.827+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T16:16:26.836+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T16:16:26.836+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T16:16:26.876+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T16:16:26.876+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1146 ms
+2025-05-08T16:16:26.989+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T16:16:27.023+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T16:16:27.044+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T16:16:27.230+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T16:16:27.249+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T16:16:27.360+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5f5fa453
+2025-05-08T16:16:27.361+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T16:16:27.383+02:00  WARN 17188 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T16:16:27.397+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T16:16:28.086+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T16:16:28.362+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T16:16:29.411+02:00  WARN 17188 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T16:16:29.626+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T16:16:29.686+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T16:16:29.693+02:00  INFO 17188 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.317 seconds (process running for 4.845)
+2025-05-08T16:16:33.385+02:00  INFO 17188 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T16:16:33.390+02:00  INFO 17188 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=cea4124728fd027c97e8e7560fca81bfe13cfcd9fc5e09862ea68e8a8d161b7b&timestamp=1746713793389
+2025-05-08T16:16:33.912+02:00  INFO 17188 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T16:16:34.160+02:00  INFO 17188 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T16:16:37.222+02:00  INFO 17188 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T16:19:58.745+02:00  INFO 17188 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T16:19:58.750+02:00  INFO 17188 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T16:19:58.770+02:00  INFO 17188 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T16:19:58.773+02:00  INFO 17188 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T16:19:58.776+02:00  INFO 17188 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T16:20:01.937+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 15796 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T16:20:01.938+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T16:20:01.981+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T16:20:01.982+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T16:20:02.531+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T16:20:02.673+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 134 ms. Found 3 JPA repository interfaces.
+2025-05-08T16:20:03.128+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T16:20:03.138+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T16:20:03.139+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T16:20:03.175+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T16:20:03.176+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1194 ms
+2025-05-08T16:20:03.279+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T16:20:03.316+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T16:20:03.334+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T16:20:03.506+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T16:20:03.526+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T16:20:03.642+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2c568c32
+2025-05-08T16:20:03.643+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T16:20:03.663+02:00  WARN 15796 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T16:20:03.675+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T16:20:04.350+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T16:20:04.593+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T16:20:05.579+02:00  WARN 15796 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T16:20:05.823+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T16:20:05.886+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T16:20:05.893+02:00  INFO 15796 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.266 seconds (process running for 4.817)
+2025-05-08T16:20:29.178+02:00  INFO 15796 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T16:20:29.184+02:00  INFO 15796 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=2b8de5d4693867057a53044befd9e0dd111591302634960139d805924d0ac2f5&timestamp=1746714029182
+2025-05-08T16:20:29.752+02:00  INFO 15796 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T16:20:29.876+02:00  INFO 15796 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T16:20:31.864+02:00  INFO 15796 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T16:24:34.187+02:00  INFO 15796 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T16:24:34.192+02:00  INFO 15796 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T16:24:34.214+02:00  INFO 15796 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T16:24:34.216+02:00  INFO 15796 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T16:24:34.218+02:00  INFO 15796 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T16:24:37.024+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 3144 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T16:24:37.025+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T16:24:37.073+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T16:24:37.073+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T16:24:37.586+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T16:24:37.712+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 119 ms. Found 3 JPA repository interfaces.
+2025-05-08T16:24:38.157+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T16:24:38.168+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T16:24:38.168+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T16:24:38.206+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T16:24:38.206+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1133 ms
+2025-05-08T16:24:38.310+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T16:24:38.345+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T16:24:38.366+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T16:24:38.541+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T16:24:38.560+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T16:24:38.672+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5ce2f1e1
+2025-05-08T16:24:38.673+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T16:24:38.695+02:00  WARN 3144 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T16:24:38.708+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T16:24:39.398+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T16:24:39.644+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T16:24:40.938+02:00  WARN 3144 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T16:24:41.153+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T16:24:41.209+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T16:24:41.215+02:00  INFO 3144 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.477 seconds (process running for 4.993)
+2025-05-08T16:24:53.822+02:00  INFO 3144 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T16:24:53.829+02:00  INFO 3144 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=d636cc1e393c336111eec945e3e18b06b272b77dd4258dd1e144e41e997d3023&timestamp=1746714293827
+2025-05-08T16:24:54.689+02:00  INFO 3144 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T16:24:54.794+02:00  INFO 3144 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T16:24:59.221+02:00  INFO 3144 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T16:38:57.309+02:00  INFO 3144 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T16:38:57.314+02:00  INFO 3144 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T16:38:57.336+02:00  INFO 3144 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T16:38:57.339+02:00  INFO 3144 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T16:38:57.342+02:00  INFO 3144 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T17:05:49.591+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 11092 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T17:05:49.592+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T17:05:49.641+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T17:05:49.641+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T17:05:50.182+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T17:05:50.318+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 129 ms. Found 3 JPA repository interfaces.
+2025-05-08T17:05:50.807+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T17:05:50.827+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T17:05:50.827+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T17:05:50.866+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T17:05:50.867+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1226 ms
+2025-05-08T17:05:50.973+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T17:05:51.007+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T17:05:51.029+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T17:05:51.207+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T17:05:51.227+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T17:05:51.341+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@57542d66
+2025-05-08T17:05:51.342+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T17:05:51.366+02:00  WARN 11092 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T17:05:51.381+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T17:05:52.108+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T17:05:52.352+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:05:53.530+02:00  WARN 11092 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T17:05:53.741+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T17:05:53.808+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T17:05:53.814+02:00  INFO 11092 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.532 seconds (process running for 5.078)
+2025-05-08T17:05:59.673+02:00  WARN 11092 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Нет обработчика для callbackData='config_strat_RSI'
+2025-05-08T17:06:08.944+02:00  WARN 11092 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Нет обработчика для callbackData='config_strat_RSI'
+2025-05-08T17:06:10.834+02:00  WARN 11092 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Нет обработчика для callbackData='config_strat_RSI'
+2025-05-08T17:09:07.282+02:00  INFO 11092 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T17:09:07.287+02:00  INFO 11092 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T17:09:07.309+02:00  INFO 11092 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:09:07.311+02:00  INFO 11092 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T17:09:07.313+02:00  INFO 11092 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T17:09:10.746+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 5044 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T17:09:10.748+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T17:09:10.805+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T17:09:10.805+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T17:09:11.345+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T17:09:11.475+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 123 ms. Found 3 JPA repository interfaces.
+2025-05-08T17:09:11.950+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T17:09:11.960+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T17:09:11.961+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T17:09:12.006+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T17:09:12.007+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1201 ms
+2025-05-08T17:09:12.121+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T17:09:12.156+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T17:09:12.180+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T17:09:12.360+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T17:09:12.381+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T17:09:12.505+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@75694ca2
+2025-05-08T17:09:12.507+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T17:09:12.529+02:00  WARN 5044 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T17:09:12.541+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T17:09:13.288+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T17:09:13.537+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:09:14.979+02:00  WARN 5044 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T17:09:15.199+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T17:09:15.258+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T17:09:15.267+02:00  INFO 5044 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.857 seconds (process running for 5.481)
+2025-05-08T17:09:21.689+02:00  WARN 5044 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Нет обработчика для callbackData='config_strat_RSI'
+2025-05-08T17:09:26.209+02:00  INFO 5044 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T17:09:26.214+02:00  INFO 5044 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=843fd69e3cc6a46c484cb90553e84d94127e6fa6a0e61773ee43d016a1fd5ed3&timestamp=1746716966213
+2025-05-08T17:09:26.837+02:00  INFO 5044 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T17:09:26.972+02:00  INFO 5044 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T17:09:28.907+02:00  INFO 5044 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T17:09:32.201+02:00  WARN 5044 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Нет обработчика для callbackData='config_strat_RSI'
+2025-05-08T17:09:37.667+02:00  WARN 5044 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Нет обработчика для callbackData='config_strat_RSI'
+2025-05-08T17:10:33.204+02:00  WARN 5044 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Нет обработчика для callbackData='config_strat_RSI'
+2025-05-08T17:11:50.622+02:00  INFO 5044 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T17:11:50.629+02:00  INFO 5044 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T17:11:50.654+02:00  INFO 5044 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:11:50.657+02:00  INFO 5044 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T17:11:50.661+02:00  INFO 5044 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T17:11:53.188+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 8148 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T17:11:53.192+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T17:11:53.278+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T17:11:53.278+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T17:11:54.224+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T17:11:54.436+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 199 ms. Found 3 JPA repository interfaces.
+2025-05-08T17:11:55.175+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T17:11:55.192+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T17:11:55.193+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T17:11:55.251+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T17:11:55.252+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1972 ms
+2025-05-08T17:11:55.442+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T17:11:55.496+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T17:11:55.532+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T17:11:55.803+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T17:11:55.831+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T17:11:55.995+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4ea50ebf
+2025-05-08T17:11:55.997+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T17:11:56.031+02:00  WARN 8148 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T17:11:56.051+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T17:11:57.062+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T17:11:57.395+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:11:58.558+02:00  WARN 8148 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T17:11:58.835+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T17:11:58.915+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T17:11:58.923+02:00  INFO 8148 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 6.353 seconds (process running for 7.331)
+2025-05-08T17:12:00.952+02:00  INFO 8148 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T17:12:00.959+02:00  INFO 8148 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=53431224d00f258220b7145f975fb0faefe66d2f5c84fb1e2a09b3b771c0c307&timestamp=1746717120957
+2025-05-08T17:12:01.698+02:00  INFO 8148 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T17:12:01.822+02:00  INFO 8148 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T17:12:03.891+02:00  INFO 8148 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T17:14:37.459+02:00  INFO 8148 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T17:14:37.464+02:00  INFO 8148 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T17:14:37.485+02:00  INFO 8148 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:14:37.487+02:00  INFO 8148 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T17:14:37.490+02:00  INFO 8148 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T17:16:17.606+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 9512 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T17:16:17.609+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T17:16:17.660+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T17:16:17.660+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T17:16:18.187+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T17:16:18.313+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 119 ms. Found 3 JPA repository interfaces.
+2025-05-08T17:16:18.772+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T17:16:18.782+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T17:16:18.783+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T17:16:18.827+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T17:16:18.827+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1167 ms
+2025-05-08T17:16:18.936+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T17:16:18.966+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T17:16:18.993+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T17:16:19.168+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T17:16:19.186+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T17:16:19.306+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@18f45f72
+2025-05-08T17:16:19.307+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T17:16:19.330+02:00  WARN 9512 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T17:16:19.344+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T17:16:20.073+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T17:16:20.310+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:16:21.362+02:00  WARN 9512 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T17:16:21.576+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T17:16:21.637+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T17:16:21.644+02:00  INFO 9512 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.361 seconds (process running for 4.919)
+2025-05-08T17:16:33.307+02:00  INFO 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T17:16:33.312+02:00  INFO 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=e2dc1016679f5ed37028c99c0cff9115e144d6b725cc4fb3a2a60c3d99075ddf&timestamp=1746717393311
+2025-05-08T17:16:34.833+02:00  INFO 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T17:16:34.947+02:00  INFO 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T17:16:36.418+02:00  INFO 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T17:16:58.400+02:00  WARN 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-05-08T17:17:20.948+02:00  WARN 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Нет обработчика для callbackData='strategies:menu'
+2025-05-08T17:17:27.783+02:00  WARN 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-05-08T17:17:28.745+02:00  WARN 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-05-08T17:17:29.732+02:00  WARN 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-05-08T17:17:48.540+02:00  WARN 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Нет обработчика для callbackData='strategies:menu'
+2025-05-08T17:18:33.539+02:00  WARN 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-05-08T17:18:38.064+02:00  WARN 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-05-08T17:18:38.261+02:00  WARN 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-05-08T17:19:08.507+02:00  WARN 9512 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Нет обработчика для callbackData='strategies:menu'
+2025-05-08T17:33:11.494+02:00  INFO 9512 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T17:33:11.499+02:00  INFO 9512 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T17:33:11.524+02:00  INFO 9512 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:33:11.528+02:00  INFO 9512 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T17:33:11.531+02:00  INFO 9512 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T17:33:16.125+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 11164 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T17:33:16.126+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T17:33:16.184+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T17:33:16.185+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T17:33:16.719+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T17:33:16.853+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 128 ms. Found 3 JPA repository interfaces.
+2025-05-08T17:33:17.329+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T17:33:17.351+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T17:33:17.351+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T17:33:17.389+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T17:33:17.390+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1205 ms
+2025-05-08T17:33:17.497+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T17:33:17.530+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T17:33:17.552+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T17:33:17.724+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T17:33:17.746+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T17:33:17.857+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@56e929ea
+2025-05-08T17:33:17.859+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T17:33:17.881+02:00  WARN 11164 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T17:33:17.893+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T17:33:18.623+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T17:33:18.874+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:33:21.152+02:00  WARN 11164 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T17:33:21.364+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T17:33:21.426+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T17:33:21.433+02:00  INFO 11164 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 5.636 seconds (process running for 6.21)
+2025-05-08T17:33:31.568+02:00  INFO 11164 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.startmenu.StartCommandHandler  : ▶️ Обработан /start для chatId=5316412277
+2025-05-08T17:33:32.906+02:00  INFO 11164 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T17:33:32.911+02:00  INFO 11164 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=d8b6fe3fea2cdfd11a8ca894b65ce25fdd11549c546c95dbe41db9707032d675&timestamp=1746718412910
+2025-05-08T17:33:33.577+02:00  INFO 11164 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T17:33:33.696+02:00  INFO 11164 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T17:33:35.591+02:00  INFO 11164 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T17:33:48.826+02:00  WARN 11164 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-05-08T17:33:56.521+02:00  WARN 11164 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-05-08T17:38:44.400+02:00  INFO 11164 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T17:38:44.408+02:00  INFO 11164 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T17:38:44.434+02:00  INFO 11164 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:38:44.437+02:00  INFO 11164 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T17:38:44.439+02:00  INFO 11164 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T17:38:49.126+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 6972 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T17:38:49.128+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T17:38:49.179+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T17:38:49.179+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T17:38:49.721+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T17:38:49.842+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 115 ms. Found 3 JPA repository interfaces.
+2025-05-08T17:38:50.330+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T17:38:50.341+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T17:38:50.342+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T17:38:50.382+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T17:38:50.383+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1202 ms
+2025-05-08T17:38:50.491+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T17:38:50.526+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T17:38:50.554+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T17:38:50.739+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T17:38:50.761+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T17:38:50.882+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6d210559
+2025-05-08T17:38:50.884+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T17:38:50.905+02:00  WARN 6972 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T17:38:50.920+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T17:38:51.672+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T17:38:51.926+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:38:52.978+02:00  WARN 6972 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T17:38:53.198+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T17:38:53.260+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T17:38:53.266+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.47 seconds (process running for 5.045)
+2025-05-08T17:39:34.197+02:00  WARN 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-05-08T17:40:07.646+02:00  WARN 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message

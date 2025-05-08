@@ -3,6 +3,8 @@ package com.chicu.neurotradebot.service;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
 import com.chicu.neurotradebot.entity.User;
+import com.chicu.neurotradebot.enums.ConfigWaiting;
+import com.chicu.neurotradebot.enums.StrategyType;
 
 import java.util.List;
 
@@ -24,6 +26,12 @@ public interface AiTradeSettingsService {
 
     /** Вернуть все настройки, у которых включена автоматическая торговля (enabled==true). */
     List<AiTradeSettings> findAllActive();
-
+    /**
+     * Помечает, что для данного chatId бот ожидает ввода конкретного параметра.
+     */
+    void markWaiting(Long chatId, ConfigWaiting what);
+    ConfigWaiting getWaiting(Long chatId);
+    void clearWaiting(Long chatId);
+    void toggleStrategy(Long chatId, StrategyType type);
     
 }

@@ -6,7 +6,7 @@ import com.chicu.neurotradebot.service.AiTradeSettingsService;
 import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.telegram.TelegramSender;
 import com.chicu.neurotradebot.telegram.handler.CallbackHandler;
-import com.chicu.neurotradebot.telegram.view.aimenu.StrategyMenuBuilder;
+import com.chicu.neurotradebot.telegram.view.aimenu.strtegymenu.StrategyMenuBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;

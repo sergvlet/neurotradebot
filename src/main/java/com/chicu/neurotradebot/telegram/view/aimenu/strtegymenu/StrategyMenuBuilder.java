@@ -1,10 +1,11 @@
-// src/main/java/com/chicu/neurotradebot/telegram/view/aimenu/StrategyMenuBuilder.java
-package com.chicu.neurotradebot.telegram.view.aimenu;
+// src/main/java/com/chicu/neurotradebot/telegram/view/aimenu/strtegymenu/StrategyMenuBuilder.java
+package com.chicu.neurotradebot.telegram.view.aimenu.strtegymenu;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
 import com.chicu.neurotradebot.enums.StrategyType;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
 import com.chicu.neurotradebot.telegram.handler.MenuDefinition;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -14,16 +15,14 @@ import java.util.List;
 import java.util.Set;
 
 @Component
+@RequiredArgsConstructor
 public class StrategyMenuBuilder implements MenuDefinition {
 
     private final AiTradeSettingsService settingsService;
 
-    public StrategyMenuBuilder(AiTradeSettingsService settingsService) {
-        this.settingsService = settingsService;
-    }
-
     @Override
     public Set<String> keys() {
+        // именно этим ключом меню регистрируется в диспетчере
         return Set.of("ai_strategies");
     }
 
@@ -40,15 +39,21 @@ public class StrategyMenuBuilder implements MenuDefinition {
         List<List<InlineKeyboardButton>> rows = new ArrayList<>();
         for (StrategyType st : StrategyType.values()) {
             boolean isOn = selected.contains(st);
-            String text = (isOn ? "✅ " : "☐ ") + st.name();
-            rows.add(List.of(
-                InlineKeyboardButton.builder()
-                    .text(text)
-                    .callbackData("toggle_strat_" + st.name())
-                    .build()
-            ));
+
+            InlineKeyboardButton toggleBtn = InlineKeyboardButton.builder()
+                .text(isOn ? "✅" : "☐")
+                .callbackData("toggle_strat_" + st.name())
+                .build();
+
+            InlineKeyboardButton configBtn = InlineKeyboardButton.builder()
+                .text(st.getDisplayName())
+                .callbackData("config_strat_" + st.name())
+                .build();
+
+            rows.add(List.of(toggleBtn, configBtn));
         }
-        // кнопка «Сохранить и назад»
+
+        // кнопка «Назад»
         rows.add(List.of(
             InlineKeyboardButton.builder()
                 .text("⬅️ Назад")
@@ -56,6 +61,8 @@ public class StrategyMenuBuilder implements MenuDefinition {
                 .build()
         ));
 
-        return InlineKeyboardMarkup.builder().keyboard(rows).build();
+        return InlineKeyboardMarkup.builder()
+                .keyboard(rows)
+                .build();
     }
 }
