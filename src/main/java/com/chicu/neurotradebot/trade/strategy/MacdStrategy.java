@@ -2,7 +2,7 @@ package com.chicu.neurotradebot.trade.strategy;
 
 import com.chicu.neurotradebot.entity.Bar;
 import com.chicu.neurotradebot.entity.AiTradeSettings;
-import com.chicu.neurotradebot.entity.RsiMacdConfig;
+import com.chicu.neurotradebot.entity.MacdConfig;
 import com.chicu.neurotradebot.trade.model.Signal;
 import com.chicu.neurotradebot.trade.service.TradingStrategy;
 import org.springframework.stereotype.Component;
@@ -18,10 +18,10 @@ public class MacdStrategy implements TradingStrategy {
                                  List<Bar> history,
                                  AiTradeSettings settings) {
         // Из настроек берем параметры MACD
-        RsiMacdConfig cfg = settings.getRsiMacdConfig();
-        int fastPeriod   = cfg.getMacdFast();
-        int slowPeriod   = cfg.getMacdSlow();
-        int signalPeriod = cfg.getMacdSignal();
+        MacdConfig cfg = settings.getMacdConfig();
+        int fastPeriod   = cfg.getFast();
+        int slowPeriod   = cfg.getSlow();
+        int signalPeriod = cfg.getSignal();
 
         // массив закрытий
         BigDecimal[] closes = history.stream()
@@ -61,8 +61,8 @@ public class MacdStrategy implements TradingStrategy {
     public int requiredBars(AiTradeSettings settings) {
         // Чтобы посчитать MACD и сигнальную линию, нужно минимум:
         // slowPeriod + signalPeriod + 1 бар
-        RsiMacdConfig cfg = settings.getRsiMacdConfig();
-        return cfg.getMacdSlow() + cfg.getMacdSignal() + 1;
+        MacdConfig cfg = settings.getMacdConfig();
+        return cfg.getSlow() + cfg.getSignal() + 1;
     }
 
     private BigDecimal[] calculateEMA(BigDecimal[] data, int period) {

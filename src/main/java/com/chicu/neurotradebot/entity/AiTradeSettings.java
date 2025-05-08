@@ -1,3 +1,4 @@
+// src/main/java/com/chicu/neurotradebot/entity/AiTradeSettings.java
 package com.chicu.neurotradebot.entity;
 
 import com.chicu.neurotradebot.enums.ApiSetupStep;
@@ -12,9 +13,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 
-/**
- * Основная сущность настроек AI-режима пользователя.
- */
 @Entity
 @Table(name = "ai_trade_settings")
 @Getter
@@ -50,53 +48,54 @@ public class AiTradeSettings {
     @Builder.Default
     private ApiSetupStep apiSetupStep = ApiSetupStep.NONE;
 
+    /** ID подсказочного сообщения при вводе ключей */
+    @Column(name = "api_setup_prompt_msg_id")
+    private Integer apiSetupPromptMsgId;
+
     /** Когда запись создана */
     @Column(name = "created_at", updatable = false, nullable = false)
     private Instant createdAt;
 
-    /** Когда запись в последний раз обновлялась */
+    /** Когда запись обновлялась */
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    /** Сохранённые API-учётные данные для этой записи */
+    /** API-учётные данные */
     @OneToMany(mappedBy = "settings", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<ApiCredentials> credentials = new ArrayList<>();
 
-    /** ID последнего подсказочного сообщения бота при вводе ключей */
-    @Column(name = "api_setup_prompt_msg_id")
-    private Integer apiSetupPromptMsgId;
-
     // ========== Параметры AI-режима ==========
 
-    /** true — автоматическая торговля включена; false — отключена. */
+    /** Включена ли автоматическая торговля */
     @Column(name = "enabled", nullable = false)
     @ColumnDefault("false")
     @Builder.Default
     private boolean enabled = false;
 
-    /** Режим торговли (SPOT, MARGIN, FUTURES_USDT, FUTURES_COIN) */
+    /** Режим торговли */
     @Enumerated(EnumType.STRING)
     @Column(name = "trade_mode", nullable = false, length = 32)
     @ColumnDefault("'SPOT'")
     @Builder.Default
     private TradeMode tradeMode = TradeMode.SPOT;
 
-    /** Список валютных пар */
+    /** Валютные пары */
     @ElementCollection
-    @CollectionTable(name = "ai_trade_pairs",
-            joinColumns = @JoinColumn(name = "settings_id"))
+    @CollectionTable(
+      name = "ai_trade_pairs",
+      joinColumns = @JoinColumn(name = "settings_id")
+    )
     @Column(name = "pair", length = 16)
     @Builder.Default
     private List<String> pairs = new ArrayList<>();
 
-    /**
-     * Набор выбранных стратегий — пользователь может отмечать несколько чистых стратегий,
-     * которые будут комбинироваться логикой в TradingServiceImpl.
-     */
+    /** Выбранные стратегии */
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "ai_trade_strategies",
-            joinColumns = @JoinColumn(name = "settings_id"))
+    @CollectionTable(
+      name = "ai_trade_strategies",
+      joinColumns = @JoinColumn(name = "settings_id")
+    )
     @Column(name = "strategy", length = 32)
     @Enumerated(EnumType.STRING)
     @Builder.Default
@@ -108,15 +107,30 @@ public class AiTradeSettings {
     @Builder.Default
     private Duration scanInterval = Duration.ofMinutes(1);
 
-    /** Встроенный конфиг параметров RSI+MACD */
-    @Embedded
-    @Builder.Default
-    private RsiMacdConfig rsiMacdConfig = new RsiMacdConfig();
-
-    /** Встроенный конфиг управления рисками */
+    /** Общий конфиг риск-менеджмента */
     @Embedded
     @Builder.Default
     private RiskConfig riskConfig = new RiskConfig();
+
+    // ========== Отдельные таблицы под стратегии ==========
+
+    @OneToOne(mappedBy = "settings", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private RsiConfig rsiConfig;
+
+    @OneToOne(mappedBy = "settings", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private MacdConfig macdConfig;
+
+    @OneToOne(mappedBy = "settings", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private EmaCrossoverConfig emaCrossoverConfig;
+
+    @OneToOne(mappedBy = "settings", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private BollingerConfig bollingerConfig;
+
+    @OneToOne(mappedBy = "settings", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private DcaConfig dcaConfig;
+
+    @OneToOne(mappedBy = "settings", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private ScalpingConfig scalpingConfig;
 
     // ============================================
 

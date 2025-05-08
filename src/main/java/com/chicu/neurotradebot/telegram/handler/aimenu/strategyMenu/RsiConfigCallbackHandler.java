@@ -1,7 +1,8 @@
+// src/main/java/com/chicu/neurotradebot/telegram/handler/aimenu/strategyMenu/RsiConfigCallbackHandler.java
 package com.chicu.neurotradebot.telegram.handler.aimenu.strategyMenu;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
-import com.chicu.neurotradebot.entity.RsiMacdConfig;
+import com.chicu.neurotradebot.entity.RsiConfig;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
 import com.chicu.neurotradebot.telegram.handler.CallbackHandler;
 import com.chicu.neurotradebot.telegram.view.aimenu.strtegymenu.RsiConfigMenuBuilder;
@@ -17,53 +18,46 @@ import java.math.BigDecimal;
 public class RsiConfigCallbackHandler implements CallbackHandler {
 
     private final AiTradeSettingsService settingsService;
-    private final RsiConfigMenuBuilder    menuBuilder;
-
+    private final RsiConfigMenuBuilder menuBuilder;
 
     @Override
     public boolean canHandle(Update update) {
         if (!update.hasCallbackQuery()) return false;
-        String data = update.getCallbackQuery().getData();
-        return data != null && data.startsWith("rsi:");
+        return update.getCallbackQuery().getData().startsWith("rsi:");
     }
 
     @Override
-    public void handle(Update update) throws Exception {
-        CallbackQuery cq   = update.getCallbackQuery();
-        Long chatId        = cq.getMessage().getChatId();
-        Integer messageId  = cq.getMessage().getMessageId();
-        String data        = cq.getData();
+    public void handle(Update update) {
+        CallbackQuery cq       = update.getCallbackQuery();
+        Long chatId            = cq.getMessage().getChatId();
+        Integer messageId      = cq.getMessage().getMessageId();
+        String data            = cq.getData();
 
-        // Получаем настройки и текущий RSI-конфиг
-        AiTradeSettings cfg = settingsService.getByChatId(chatId);
-        RsiMacdConfig c     = cfg.getRsiMacdConfig();
-
-        // Обрабатываем инк/дек и сброс
-        switch (data) {
-            case "rsi:incPeriod" -> 
-                c.setRsiPeriod(Math.min(100, c.getRsiPeriod() + 1));
-            case "rsi:decPeriod" -> 
-                c.setRsiPeriod(Math.max(1, c.getRsiPeriod() - 1));
-            case "rsi:incLower"  -> 
-                c.setRsiLower(c.getRsiLower().add(BigDecimal.ONE).min(BigDecimal.valueOf(100)));
-            case "rsi:decLower"  -> 
-                c.setRsiLower(c.getRsiLower().subtract(BigDecimal.ONE).max(BigDecimal.ZERO));
-            case "rsi:incUpper"  -> 
-                c.setRsiUpper(c.getRsiUpper().add(BigDecimal.ONE).min(BigDecimal.valueOf(100)));
-            case "rsi:decUpper"  -> 
-                c.setRsiUpper(c.getRsiUpper().subtract(BigDecimal.ONE).max(BigDecimal.ZERO));
-            case "rsi:reset"     -> 
-                cfg.setRsiMacdConfig(menuBuilder.getDefaultConfig());
-            case "rsi:menu"      -> {
-                // просто перерисуем текущее меню
-            }
-            default -> {
-                // ничего не делать
-            }
+        // если это просто "rsi:menu" — не вызываем editMessage, чтобы избежать "message not modified"
+        if ("rsi:menu".equals(data)) {
+            return;
         }
 
-        // Сохраняем изменения и перерисовываем меню в том же сообщении
-        settingsService.save(cfg);
+        AiTradeSettings settings = settingsService.getByChatId(chatId);
+        RsiConfig cfg            = settings.getRsiConfig();
+
+        switch (data) {
+            case "rsi:incPeriod" -> cfg.setPeriod(cfg.getPeriod() + 1);
+            case "rsi:decPeriod" -> cfg.setPeriod(Math.max(1, cfg.getPeriod() - 1));
+            case "rsi:incLower"  -> cfg.setLower(cfg.getLower().add(BigDecimal.ONE));
+            case "rsi:decLower"  -> cfg.setLower(cfg.getLower().subtract(BigDecimal.ONE).max(BigDecimal.ZERO));
+            case "rsi:incUpper"  -> cfg.setUpper(cfg.getUpper().add(BigDecimal.ONE));
+            case "rsi:decUpper"  -> cfg.setUpper(cfg.getUpper().subtract(BigDecimal.ONE).max(BigDecimal.ZERO));
+            case "rsi:reset"     -> {
+                var def = menuBuilder.getDefaultConfig();
+                cfg.setPeriod(def.getPeriod());
+                cfg.setLower(def.getLower());
+                cfg.setUpper(def.getUpper());
+            }
+            default               -> { return; }
+        }
+
+        settingsService.save(settings);
         menuBuilder.buildOrEditMenu(chatId, messageId);
     }
 }

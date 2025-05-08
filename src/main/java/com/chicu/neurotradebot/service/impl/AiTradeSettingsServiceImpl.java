@@ -1,9 +1,7 @@
 // src/main/java/com/chicu/neurotradebot/service/impl/AiTradeSettingsServiceImpl.java
 package com.chicu.neurotradebot.service.impl;
 
-import com.chicu.neurotradebot.entity.AiTradeSettings;
-import com.chicu.neurotradebot.entity.User;
-import com.chicu.neurotradebot.entity.RsiMacdConfig;
+import com.chicu.neurotradebot.entity.*;
 import com.chicu.neurotradebot.enums.ConfigWaiting;
 import com.chicu.neurotradebot.enums.StrategyType;
 import com.chicu.neurotradebot.repository.AiTradeSettingsRepository;
@@ -13,10 +11,7 @@ import com.chicu.neurotradebot.telegram.BotContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
@@ -26,27 +21,61 @@ public class AiTradeSettingsServiceImpl implements AiTradeSettingsService {
     private final AiTradeSettingsRepository repo;
     private final UserService userService;
 
-    /** Хранилище текущего состояния ожидания от каждого chatId */
     private final Map<Long, ConfigWaiting> waitingMap = new ConcurrentHashMap<>();
 
     @Override
     public AiTradeSettings getOrCreate(User user) {
-        return repo.findByUser(user)
-                .orElseGet(() -> {
-                    RsiMacdConfig defaultRsiMacd = RsiMacdConfig.builder()
-                            .rsiPeriod(14)
-                            .rsiLower(BigDecimal.valueOf(30))
-                            .rsiUpper(BigDecimal.valueOf(70))
-                            .macdFast(12)
-                            .macdSlow(26)
-                            .macdSignal(9)
-                            .build();
-                    AiTradeSettings s = AiTradeSettings.builder()
-                            .user(user)
-                            .rsiMacdConfig(defaultRsiMacd)
-                            .build();
-                    return repo.save(s);
-                });
+        AiTradeSettings settings = repo.findByUser(user)
+            .orElseGet(() -> repo.save(AiTradeSettings.builder().user(user).build()));
+
+        boolean changed = false;
+
+        if (settings.getRsiConfig() == null) {
+            RsiConfig r = new RsiConfig();
+            r.setSettings(settings);
+            settings.setRsiConfig(r);
+            changed = true;
+        }
+
+        if (settings.getMacdConfig() == null) {
+            MacdConfig m = new MacdConfig();
+            m.setSettings(settings);
+            settings.setMacdConfig(m);
+            changed = true;
+        }
+
+        if (settings.getEmaCrossoverConfig() == null) {
+            EmaCrossoverConfig e = new EmaCrossoverConfig();
+            e.setSettings(settings);
+            settings.setEmaCrossoverConfig(e);
+            changed = true;
+        }
+
+        if (settings.getBollingerConfig() == null) {
+            BollingerConfig b = new BollingerConfig();
+            b.setSettings(settings);
+            settings.setBollingerConfig(b);
+            changed = true;
+        }
+
+        if (settings.getDcaConfig() == null) {
+            DcaConfig d = new DcaConfig();
+            d.setSettings(settings);
+            settings.setDcaConfig(d);
+            changed = true;
+        }
+
+        if (settings.getScalpingConfig() == null) {
+            ScalpingConfig s = new ScalpingConfig();
+            s.setSettings(settings);
+            settings.setScalpingConfig(s);
+            changed = true;
+        }
+
+        if (changed) {
+            settings = repo.save(settings);
+        }
+        return settings;
     }
 
     @Override
@@ -72,8 +101,6 @@ public class AiTradeSettingsServiceImpl implements AiTradeSettingsService {
         return repo.findByEnabledTrue();
     }
 
-    // === Методы для механизма ожидания ввода параметров RSI ===
-
     @Override
     public void markWaiting(Long chatId, ConfigWaiting what) {
         waitingMap.put(chatId, what);
@@ -91,12 +118,10 @@ public class AiTradeSettingsServiceImpl implements AiTradeSettingsService {
 
     @Override
     public void toggleStrategy(Long chatId, StrategyType type) {
-        AiTradeSettings cfg = getByChatId(chatId);
-        Set<StrategyType> s = cfg.getStrategies();
-        if (s.contains(type)) s.remove(type);
-        else                  s.add(type);
-        repo.save(cfg);
+        AiTradeSettings settings = getByChatId(chatId);
+        Set<StrategyType> st = settings.getStrategies();
+        if (st.contains(type)) st.remove(type);
+        else                    st.add(type);
+        repo.save(settings);
     }
-
-
 }

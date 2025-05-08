@@ -2,7 +2,7 @@
 package com.chicu.neurotradebot.telegram.view.aimenu.strtegymenu;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
-import com.chicu.neurotradebot.entity.RsiMacdConfig;
+import com.chicu.neurotradebot.entity.MacdConfig;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
 import com.chicu.neurotradebot.telegram.TelegramSender;
 import lombok.RequiredArgsConstructor;
@@ -20,29 +20,43 @@ public class MacdConfigMenuBuilder {
     private final AiTradeSettingsService settingsService;
     private final TelegramSender sender;
 
-    // стандартные параметры MACD: fast=12, slow=26, signal=9
-    private static final RsiMacdConfig DEFAULT = RsiMacdConfig.builder()
-        .macdFast(12)
-        .macdSlow(26)
-        .macdSignal(9)
+    // Дефолтные параметры MACD: fast=12, slow=26, signal=9
+    private static final MacdConfig DEFAULT = MacdConfig.builder()
+        .fast(12)
+        .slow(26)
+        .signal(9)
         .build();
 
-    public RsiMacdConfig getDefaultConfig() {
+    public MacdConfig getDefaultConfig() {
         return DEFAULT;
     }
 
     public void buildOrEditMenu(Long chatId, Integer messageId) {
-        AiTradeSettings cfg = settingsService.getByChatId(chatId);
-        RsiMacdConfig c = cfg.getRsiMacdConfig();
-        boolean isDefault = c.equals(DEFAULT);
+        AiTradeSettings settings = settingsService.getByChatId(chatId);
+        MacdConfig cfg = settings.getMacdConfig();
+        if (cfg == null) {
+            // Если ещё нет конфигурации — создаём с дефолтами
+            cfg = MacdConfig.builder()
+                .fast(DEFAULT.getFast())
+                .slow(DEFAULT.getSlow())
+                .signal(DEFAULT.getSignal())
+                .build();
+            cfg.setSettings(settings);
+            settings.setMacdConfig(cfg);
+            settingsService.save(settings);
+        }
+
+        boolean isDefault = cfg.getFast() == DEFAULT.getFast()
+                         && cfg.getSlow() == DEFAULT.getSlow()
+                         && cfg.getSignal() == DEFAULT.getSignal();
 
         StringBuilder text = new StringBuilder();
         text.append(isDefault
             ? "*Дефолтные* настройки MACD\n"
             : "*Пользовательские* настройки MACD\n");
-        text.append("• fast: ").append(c.getMacdFast()).append("\n");
-        text.append("• slow: ").append(c.getMacdSlow()).append("\n");
-        text.append("• signal: ").append(c.getMacdSignal()).append("\n\n");
+        text.append("• fast: ").append(cfg.getFast()).append("\n");
+        text.append("• slow: ").append(cfg.getSlow()).append("\n");
+        text.append("• signal: ").append(cfg.getSignal()).append("\n\n");
 
         InlineKeyboardMarkup kb = InlineKeyboardMarkup.builder()
             .keyboard(List.of(

@@ -2,7 +2,7 @@
 package com.chicu.neurotradebot.telegram.handler.aimenu.strategyMenu;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
-import com.chicu.neurotradebot.entity.RsiMacdConfig;
+import com.chicu.neurotradebot.entity.MacdConfig;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
 import com.chicu.neurotradebot.telegram.handler.CallbackHandler;
 import com.chicu.neurotradebot.telegram.view.aimenu.strtegymenu.MacdConfigMenuBuilder;
@@ -21,39 +21,41 @@ public class MacdConfigCallbackHandler implements CallbackHandler {
     @Override
     public boolean canHandle(Update update) {
         if (!update.hasCallbackQuery()) return false;
-        String data = update.getCallbackQuery().getData();
-        return data.startsWith("macd:");
+        return update.getCallbackQuery().getData().startsWith("macd:");
     }
 
     @Override
-    public void handle(Update update) throws Exception {
-        CallbackQuery cq = update.getCallbackQuery();
-        Long chatId = cq.getMessage().getChatId();
-        Integer messageId = cq.getMessage().getMessageId();
-        String data = cq.getData();
+    public void handle(Update update) {
+        CallbackQuery cq   = update.getCallbackQuery();
+        Long chatId        = cq.getMessage().getChatId();
+        Integer messageId  = cq.getMessage().getMessageId();
+        String data        = cq.getData();
 
-        AiTradeSettings cfg = settingsService.getByChatId(chatId);
-        RsiMacdConfig c   = cfg.getRsiMacdConfig();
-
-        switch (data) {
-            case "macd:incFast"   -> c.setMacdFast(c.getMacdFast() + 1);
-            case "macd:decFast"   -> c.setMacdFast(Math.max(1, c.getMacdFast() - 1));
-            case "macd:incSlow"   -> c.setMacdSlow(c.getMacdSlow() + 1);
-            case "macd:decSlow"   -> c.setMacdSlow(Math.max(1, c.getMacdSlow() - 1));
-            case "macd:incSignal" -> c.setMacdSignal(c.getMacdSignal() + 1);
-            case "macd:decSignal" -> c.setMacdSignal(Math.max(1, c.getMacdSignal() - 1));
-            case "macd:reset"     -> cfg.setRsiMacdConfig(menuBuilder.getDefaultConfig());
-            case "macd:menu"      -> {
-                // noop: просто перерисуем текущее меню
-            }
-            default               -> {
-                // для всех прочих данных — ничего не делать
-                return;
-            }
+        // Если это просто запрос перерисовать меню без изменений — выходим
+        if ("macd:menu".equals(data)) {
+            return;
         }
 
-        // Сохраняем обновлённую конфигурацию и перерисовываем меню в том же сообщении
-        settingsService.save(cfg);
+        AiTradeSettings settings = settingsService.getByChatId(chatId);
+        MacdConfig cfg           = settings.getMacdConfig();
+
+        switch (data) {
+            case "macd:incFast"   -> cfg.setFast(cfg.getFast() + 1);
+            case "macd:decFast"   -> cfg.setFast(Math.max(1, cfg.getFast() - 1));
+            case "macd:incSlow"   -> cfg.setSlow(cfg.getSlow() + 1);
+            case "macd:decSlow"   -> cfg.setSlow(Math.max(1, cfg.getSlow() - 1));
+            case "macd:incSignal" -> cfg.setSignal(cfg.getSignal() + 1);
+            case "macd:decSignal" -> cfg.setSignal(Math.max(1, cfg.getSignal() - 1));
+            case "macd:reset"     -> {
+                var def = menuBuilder.getDefaultConfig();
+                cfg.setFast(def.getFast());
+                cfg.setSlow(def.getSlow());
+                cfg.setSignal(def.getSignal());
+            }
+            default                -> { return; }
+        }
+
+        settingsService.save(settings);
         menuBuilder.buildOrEditMenu(chatId, messageId);
     }
 }

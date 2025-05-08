@@ -2,7 +2,7 @@ package com.chicu.neurotradebot.trade.strategy;
 
 import com.chicu.neurotradebot.entity.Bar;
 import com.chicu.neurotradebot.entity.AiTradeSettings;
-import com.chicu.neurotradebot.entity.RsiMacdConfig;
+import com.chicu.neurotradebot.entity.RsiConfig;
 import com.chicu.neurotradebot.trade.model.Signal;
 import com.chicu.neurotradebot.trade.service.TradingStrategy;
 import org.springframework.stereotype.Component;
@@ -18,10 +18,11 @@ public class RsiStrategy implements TradingStrategy {
     public Signal generateSignal(String symbol,
                                  List<Bar> history,
                                  AiTradeSettings settings) {
-        RsiMacdConfig cfg = settings.getRsiMacdConfig();
-        int period = cfg.getRsiPeriod();
-        BigDecimal lower = cfg.getRsiLower();
-        BigDecimal upper = cfg.getRsiUpper();
+        // Из настроек берем параметры RSI
+        RsiConfig cfg = settings.getRsiConfig();
+        int period = cfg.getPeriod();
+        BigDecimal lower = cfg.getLower();
+        BigDecimal upper = cfg.getUpper();
 
         // собираем цены закрытия
         BigDecimal[] closes = history.stream()
@@ -37,7 +38,7 @@ public class RsiStrategy implements TradingStrategy {
     @Override
     public int requiredBars(AiTradeSettings settings) {
         // Для RSI нужен минимум period+1 цены
-        int period = settings.getRsiMacdConfig().getRsiPeriod();
+        int period = settings.getRsiConfig().getPeriod();
         return period + 1;
     }
 

@@ -1,4 +1,4 @@
-// src/main/java/com/chicu/neurotradebot/trade/strategy/StrategyType.java
+// src/main/java/com/chicu/neurotradebot/enums/StrategyType.java
 package com.chicu.neurotradebot.enums;
 
 public enum StrategyType {
@@ -11,10 +11,12 @@ public enum StrategyType {
     MOMENTUM("Momentum"),
     ATR_TRAILING_STOP("ATR Trailing Stop"),
     MEAN_REVERSION("Mean Reversion"),
-    VWAP("VWAP");
+    VWAP("VWAP"),
+    /** добавлены новые стратегии */
+    DCA("DCA"),
+    SCALPING("Scalping");
 
     private final String displayName;
     StrategyType(String displayName) { this.displayName = displayName; }
     public String getDisplayName() { return displayName; }
-    }
-
+}
