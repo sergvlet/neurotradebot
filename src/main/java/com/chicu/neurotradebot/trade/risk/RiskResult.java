@@ -12,4 +12,8 @@ public class RiskResult {
     private final BigDecimal quantity;
     private final BigDecimal stopLossPrice;
     private final BigDecimal takeProfitPrice;
+
+    public static RiskResult empty() {
+        return new RiskResult(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+    }
 }

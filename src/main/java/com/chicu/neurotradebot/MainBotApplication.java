@@ -11,6 +11,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 
 @SpringBootApplication
+@EnableScheduling
 public class MainBotApplication {
 
     public static void main(String[] args) {

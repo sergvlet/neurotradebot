@@ -10,7 +10,6 @@ import com.chicu.neurotradebot.trade.model.Signal;
 import com.chicu.neurotradebot.trade.risk.RiskManager;
 import com.chicu.neurotradebot.trade.risk.RiskResult;
 import com.chicu.neurotradebot.trade.service.*;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 @Service
@@ -28,12 +27,11 @@ import java.util.Set;
 public class TradingServiceImpl implements TradingService {
 
     private final AiTradeSettingsService settingsService;
-    private final MarketDataService       marketDataService;
-    /** Вместо одной стратегии — карта всех доступных */
-    private final Map<StrategyType, TradingStrategy> strategyMap;
-    private final RiskManager             riskManager;
+    private final MarketDataService marketDataService;
+    private final java.util.Map<StrategyType, TradingStrategy> strategyMap;
+    private final RiskManager riskManager;
     private final SpotTradeExecutor spotExecutor;
-    private final AccountService          accountService;
+    private final AccountService accountService;
 
     @Override
     public void executeCycle() {
@@ -62,10 +60,18 @@ public class TradingServiceImpl implements TradingService {
         Set<StrategyType> strategies = cfg.getStrategies();
         Long userId = cfg.getUser().getId();
 
-        // Для расчёта окна берём максимальный «needed» среди выбранных стратегий
+        // Вычисляем максимальное окно для всех выбранных стратегий (или 0, если нет валидных)
         int needed = strategies.stream()
-                .mapToInt(st -> strategyMap.get(st).requiredBars(cfg))
-                .max().orElse(0);
+                .map(strategyMap::get)
+                .filter(Objects::nonNull)
+                .mapToInt(strat -> strat.requiredBars(cfg))
+                .max()
+                .orElse(0);
+
+        if (needed <= 0) {
+            log.warn("Для chatId={} нет валидных стратегий или requiredBars=0 — пропускаем цикл", chatId);
+            return;
+        }
 
         for (String sym : cfg.getPairs()) {
             List<Bar> hist = marketDataService.getHistoricalBars(sym, interval, needed, chatId);
@@ -75,10 +81,14 @@ public class TradingServiceImpl implements TradingService {
                 continue;
             }
 
-            // объединяем сигналы: если хоть одна SELL — SELL; иначе если хоть одна BUY — BUY
+            // Объединяем сигналы: SELL превыше BUY, BUY — превыше HOLD
             Signal finalSignal = Signal.HOLD;
             for (StrategyType st : strategies) {
                 TradingStrategy strat = strategyMap.get(st);
+                if (strat == null) {
+                    log.warn("Стратегия {} не найдена — пропускаем", st);
+                    continue;
+                }
                 Signal s = strat.generateSignal(sym, hist, cfg);
                 log.info("Стратегия {} дала сигнал {} по {}", st, s, sym);
                 if (s == Signal.SELL) {
@@ -98,12 +108,19 @@ public class TradingServiceImpl implements TradingService {
             BigDecimal price = hist.get(hist.size() - 1).getClose();
             BigDecimal bal   = accountService.getFreeBalance(userId, sym.substring(sym.length() - 4));
             RiskResult rr    = riskManager.calculate(cfg.getRiskConfig(), bal, price);
+            BigDecimal qty   = rr.getQuantity();
 
-            log.info("Исполняем {} {} {} по цене {}", finalSignal, rr.getQuantity(), sym, price);
+            // Пропускаем нулевой или отрицательный объём
+            if (qty.compareTo(BigDecimal.ZERO) <= 0) {
+                log.warn("Для {} расчётный объём = {} ≤ 0, ордер пропускается", sym, qty);
+                continue;
+            }
+
+            log.info("Исполняем {} {} {} по цене {}", finalSignal, qty, sym, price);
             if (finalSignal == Signal.BUY) {
-                spotExecutor.buy(userId, sym, rr.getQuantity());
+                spotExecutor.buy(userId, sym, qty);
             } else {
-                spotExecutor.sell(userId, sym, rr.getQuantity());
+                spotExecutor.sell(userId, sym, qty);
             }
         }
     }
@@ -121,9 +138,18 @@ public class TradingServiceImpl implements TradingService {
         Duration interval = cfg.getScanInterval();
         Set<StrategyType> strategies = cfg.getStrategies();
         Long userId = cfg.getUser().getId();
+
         int needed = strategies.stream()
-                .mapToInt(st -> strategyMap.get(st).requiredBars(cfg))
-                .max().orElse(0);
+                .map(strategyMap::get)
+                .filter(Objects::nonNull)
+                .mapToInt(strat -> strat.requiredBars(cfg))
+                .max()
+                .orElse(0);
+
+        if (needed <= 0) {
+            log.warn("Для ручного ордера нет валидных стратегий или requiredBars=0 — отмена");
+            return;
+        }
 
         List<Bar> hist = marketDataService.getHistoricalBars(symbol, interval, needed, chatId);
         if (hist.size() < needed) {
@@ -135,13 +161,16 @@ public class TradingServiceImpl implements TradingService {
         BigDecimal price = hist.get(hist.size() - 1).getClose();
         BigDecimal bal   = accountService.getFreeBalance(userId, symbol.substring(symbol.length() - 4));
         RiskResult rr    = riskManager.calculate(cfg.getRiskConfig(), bal, price);
+        BigDecimal qty   = rr.getQuantity();
+
+        if (qty.compareTo(BigDecimal.ZERO) <= 0) {
+            log.warn("Ручной ордер {}: объём = {} ≤ 0, отменён", buy ? "BUY" : "SELL", qty);
+            return;
+        }
 
         log.info("Ручной ордер {}: {} {} по цене {}",
-                buy ? "BUY" : "SELL", rr.getQuantity(), symbol, price);
-        if (buy) {
-            spotExecutor.buy(userId, symbol, rr.getQuantity());
-        } else {
-            spotExecutor.sell(userId, symbol, rr.getQuantity());
-        }
+                buy ? "BUY" : "SELL", qty, symbol, price);
+        if (buy) spotExecutor.buy(userId, symbol, qty);
+        else     spotExecutor.sell(userId, symbol, qty);
     }
 }
