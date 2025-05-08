@@ -1,53 +1,61 @@
-// src/main/java/com/chicu/neurotradebot/telegram/view/aimenu/strategyMenu/StrategyMenuBuilder.java
+// src/main/java/com/chicu/neurotradebot/telegram/view/aimenu/StrategyMenuBuilder.java
 package com.chicu.neurotradebot.telegram.view.aimenu;
 
+import com.chicu.neurotradebot.entity.AiTradeSettings;
 import com.chicu.neurotradebot.enums.StrategyType;
+import com.chicu.neurotradebot.service.AiTradeSettingsService;
 import com.chicu.neurotradebot.telegram.handler.MenuDefinition;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Component
 public class StrategyMenuBuilder implements MenuDefinition {
 
+    private final AiTradeSettingsService settingsService;
+
+    public StrategyMenuBuilder(AiTradeSettingsService settingsService) {
+        this.settingsService = settingsService;
+    }
+
     @Override
     public Set<String> keys() {
-        return Set.of("ai_strategy");
+        return Set.of("ai_strategies");
     }
 
     @Override
     public String title() {
-        return "🔧 Выберите стратегии (несколько):";
+        return "Выберите стратегии:";
     }
 
     @Override
     public InlineKeyboardMarkup markup(Long chatId) {
+        AiTradeSettings cfg = settingsService.getByChatId(chatId);
+        Set<StrategyType> selected = cfg.getStrategies();
+
         List<List<InlineKeyboardButton>> rows = new ArrayList<>();
-        // по 2 кнопки на строку
-        List<StrategyType> types = List.of(StrategyType.values());
-        for (int i = 0; i < types.size(); i += 2) {
-            List<InlineKeyboardButton> row = new ArrayList<>();
-            for (int j = 0; j < 2 && i + j < types.size(); j++) {
-                StrategyType t = types.get(i + j);
-                row.add(InlineKeyboardButton.builder()
-                    .text(t.name().replace('_', ' '))
-                    .callbackData("strat_toggle_" + t.name())
-                    .build());
-            }
-            rows.add(row);
+        for (StrategyType st : StrategyType.values()) {
+            boolean isOn = selected.contains(st);
+            String text = (isOn ? "✅ " : "☐ ") + st.name();
+            rows.add(List.of(
+                InlineKeyboardButton.builder()
+                    .text(text)
+                    .callbackData("toggle_strat_" + st.name())
+                    .build()
+            ));
         }
-        // кнопка готово
+        // кнопка «Сохранить и назад»
         rows.add(List.of(
             InlineKeyboardButton.builder()
-                .text("✅ Готово")
-                .callbackData("strat_done")
+                .text("⬅️ Назад")
+                .callbackData("ai_control")
                 .build()
         ));
-        return InlineKeyboardMarkup.builder()
-            .keyboard(rows)
-            .build();
+
+        return InlineKeyboardMarkup.builder().keyboard(rows).build();
     }
 }

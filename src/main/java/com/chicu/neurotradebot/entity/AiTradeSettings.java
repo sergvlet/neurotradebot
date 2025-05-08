@@ -1,4 +1,3 @@
-// src/main/java/com/chicu/neurotradebot/entity/AiTradeSettings.java
 package com.chicu.neurotradebot.entity;
 
 import com.chicu.neurotradebot.enums.ApiSetupStep;
@@ -7,6 +6,7 @@ import com.chicu.neurotradebot.enums.TradeMode;
 import com.chicu.neurotradebot.trade.strategy.entity.RiskConfig;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -38,15 +38,15 @@ public class AiTradeSettings {
     private String exchange = "";
 
     /** true — TESTNET, false — REAL */
-    @Column(name = "test_mode", nullable = false, columnDefinition = "boolean default false")
+    @Column(name = "test_mode", nullable = false)
+    @ColumnDefault("false")
     @Builder.Default
     private boolean testMode = false;
 
     /** Шаг настройки API-ключей */
     @Enumerated(EnumType.STRING)
-    @Column(name = "api_setup_step",
-            nullable = false,
-            columnDefinition = "varchar(32) default 'NONE'")
+    @Column(name = "api_setup_step", nullable = false, length = 32)
+    @ColumnDefault("'NONE'")
     @Builder.Default
     private ApiSetupStep apiSetupStep = ApiSetupStep.NONE;
 
@@ -70,16 +70,15 @@ public class AiTradeSettings {
     // ========== Параметры AI-режима ==========
 
     /** true — автоматическая торговля включена; false — отключена. */
-    @Column(name = "enabled", nullable = false, columnDefinition = "boolean default false")
+    @Column(name = "enabled", nullable = false)
+    @ColumnDefault("false")
     @Builder.Default
     private boolean enabled = false;
 
     /** Режим торговли (SPOT, MARGIN, FUTURES_USDT, FUTURES_COIN) */
     @Enumerated(EnumType.STRING)
-    @Column(name = "trade_mode",
-            length = 32,
-            nullable = false,
-            columnDefinition = "varchar(32) default 'SPOT'")
+    @Column(name = "trade_mode", nullable = false, length = 32)
+    @ColumnDefault("'SPOT'")
     @Builder.Default
     private TradeMode tradeMode = TradeMode.SPOT;
 
@@ -104,9 +103,8 @@ public class AiTradeSettings {
     private Set<StrategyType> strategies = new HashSet<>();
 
     /** Интервал сканирования */
-    @Column(name = "scan_interval",
-            nullable = false,
-            columnDefinition = "numeric(21,0) default 60000")
+    @Column(name = "scan_interval", nullable = false)
+    @ColumnDefault("60000")
     @Builder.Default
     private Duration scanInterval = Duration.ofMinutes(1);
 

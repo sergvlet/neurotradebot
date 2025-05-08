@@ -1,15 +1,13 @@
-// src/main/java/com/chicu/neurotradebot/telegram/handler/aimenu/strategyMenu/StrategySelectCallbackHandler.java
+// src/main/java/com/chicu/neurotradebot/telegram/handler/aimenu/StrategySelectCallbackHandler.java
 package com.chicu.neurotradebot.telegram.handler.aimenu.strategyMenu;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
 import com.chicu.neurotradebot.enums.StrategyType;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
-import com.chicu.neurotradebot.service.UserService;
 import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.telegram.TelegramSender;
-import com.chicu.neurotradebot.telegram.handler.CallbackHandler;
 import com.chicu.neurotradebot.telegram.view.aimenu.StrategyMenuBuilder;
-import lombok.RequiredArgsConstructor;
+import com.chicu.neurotradebot.telegram.handler.CallbackHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
@@ -17,56 +15,56 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
-@RequiredArgsConstructor
 public class StrategySelectCallbackHandler implements CallbackHandler {
 
-    private final UserService userService;
     private final AiTradeSettingsService settingsService;
-    private final StrategyMenuBuilder menuBuilder;
-    private final TelegramSender sender;
+    private final StrategyMenuBuilder    menuBuilder;
+    private final TelegramSender         sender;
+
+    public StrategySelectCallbackHandler(AiTradeSettingsService settingsService,
+                                         StrategyMenuBuilder menuBuilder,
+                                         TelegramSender sender) {
+        this.settingsService = settingsService;
+        this.menuBuilder     = menuBuilder;
+        this.sender          = sender;
+    }
 
     @Override
     public boolean canHandle(Update u) {
-        if (!u.hasCallbackQuery()) return false;
-        String d = u.getCallbackQuery().getData();
-        return d.startsWith("strat_toggle_") || d.equals("strat_done");
+        return u.hasCallbackQuery() &&
+               u.getCallbackQuery().getData().startsWith("toggle_strat_");
     }
 
     @Override
     @Transactional
     public void handle(Update u) throws Exception {
         var cq     = u.getCallbackQuery();
-        long chat  = cq.getMessage().getChatId();
+        Long chat  = cq.getMessage().getChatId();
         int  msgId = cq.getMessage().getMessageId();
-        String data = cq.getData();
+        String data = cq.getData();                 // e.g. "toggle_strat_RSI"
 
         sender.execute(new AnswerCallbackQuery(cq.getId()));
 
-        var user = userService.getOrCreate(chat);
-        var cfg  = settingsService.getOrCreate(user);
+        String name = data.substring("toggle_strat_".length());
+        StrategyType strat = StrategyType.valueOf(name);
 
-        if (data.equals("strat_done")) {
-            // закрываем меню и показываем главное
+        AiTradeSettings cfg = settingsService.getByChatId(chat);
+        if (cfg.getStrategies().contains(strat)) {
+            cfg.getStrategies().remove(strat);
         } else {
-            String name = data.substring("strat_toggle_".length());
-            StrategyType t = StrategyType.valueOf(name);
-            if (cfg.getStrategies().contains(t)) {
-                cfg.getStrategies().remove(t);
-            } else {
-                cfg.getStrategies().add(t);
-            }
-            settingsService.save(cfg);
+            cfg.getStrategies().add(strat);
         }
+        settingsService.save(cfg);
 
-        var text   = menuBuilder.title();
-        var markup = menuBuilder.markup(chat);
-
+        // Редактируем текущее сообщение с обновлёнными «чекбоксами»
         sender.execute(EditMessageText.builder()
-            .chatId(Long.toString(chat))
+            .chatId(chat.toString())
             .messageId(msgId)
-            .text(text)
-            .replyMarkup(markup)
-            .build());
+            .text(menuBuilder.title())
+            .replyMarkup(menuBuilder.markup(chat))
+            .build()
+        );
+
         BotContext.clear();
     }
 }

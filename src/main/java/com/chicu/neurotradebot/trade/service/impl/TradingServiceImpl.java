@@ -2,7 +2,7 @@ package com.chicu.neurotradebot.trade.service.impl;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
 import com.chicu.neurotradebot.entity.Bar;
-import com.chicu.neurotradebot.entity.RsiMacdConfig;
+import com.chicu.neurotradebot.enums.StrategyType;
 import com.chicu.neurotradebot.enums.TradeMode;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
 import com.chicu.neurotradebot.telegram.BotContext;
@@ -10,6 +10,7 @@ import com.chicu.neurotradebot.trade.model.Signal;
 import com.chicu.neurotradebot.trade.risk.RiskManager;
 import com.chicu.neurotradebot.trade.risk.RiskResult;
 import com.chicu.neurotradebot.trade.service.*;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -26,9 +29,10 @@ public class TradingServiceImpl implements TradingService {
 
     private final AiTradeSettingsService settingsService;
     private final MarketDataService       marketDataService;
-    private final TradingStrategy         rsiMacdStrategy;
+    /** Вместо одной стратегии — карта всех доступных */
+    private final Map<StrategyType, TradingStrategy> strategyMap;
     private final RiskManager             riskManager;
-    private final SpotTradeExecutor       spotExecutor;
+    private final SpotTradeExecutor spotExecutor;
     private final AccountService          accountService;
 
     @Override
@@ -54,53 +58,49 @@ public class TradingServiceImpl implements TradingService {
             return;
         }
 
-        RsiMacdConfig c = cfg.getRsiMacdConfig();
-        if (c == null) {
-            log.warn("RsiMacdConfig не задан для chatId={} — ставлю дефолт", chatId);
-            c = RsiMacdConfig.builder()
-                    .macdFast(12)
-                    .macdSlow(26)
-                    .macdSignal(9)
-                    .rsiPeriod(14)
-                    .rsiLower(BigDecimal.valueOf(30))
-                    .rsiUpper(BigDecimal.valueOf(70))
-                    .build();
-            cfg.setRsiMacdConfig(c);
-            settingsService.save(cfg);
-        }
-
-        int needed = c.getMacdSlow() + c.getMacdSignal() + 1;
         Duration interval = cfg.getScanInterval();
+        Set<StrategyType> strategies = cfg.getStrategies();
         Long userId = cfg.getUser().getId();
 
+        // Для расчёта окна берём максимальный «needed» среди выбранных стратегий
+        int needed = strategies.stream()
+                .mapToInt(st -> strategyMap.get(st).requiredBars(cfg))
+                .max().orElse(0);
+
         for (String sym : cfg.getPairs()) {
-            List<Bar> hist = marketDataService.getHistoricalBars(sym, interval, 300, chatId);
-
+            List<Bar> hist = marketDataService.getHistoricalBars(sym, interval, needed, chatId);
             if (hist.size() < needed) {
-                log.warn("Недостаточно баров для {}: нужно={}, получили={} — пропускаем", sym, needed, hist.size());
+                log.warn("Недостаточно баров для {}: нужно={}, получили={} — пропускаем",
+                        sym, needed, hist.size());
                 continue;
             }
 
-            Signal sig;
-            try {
-                sig = rsiMacdStrategy.generateSignal(sym, hist, cfg);
-            } catch (Exception ex) {
-                log.error("Ошибка при расчёте сигнала для {}: {}", sym, ex.toString());
-                continue;
+            // объединяем сигналы: если хоть одна SELL — SELL; иначе если хоть одна BUY — BUY
+            Signal finalSignal = Signal.HOLD;
+            for (StrategyType st : strategies) {
+                TradingStrategy strat = strategyMap.get(st);
+                Signal s = strat.generateSignal(sym, hist, cfg);
+                log.info("Стратегия {} дала сигнал {} по {}", st, s, sym);
+                if (s == Signal.SELL) {
+                    finalSignal = Signal.SELL;
+                    break;
+                }
+                if (s == Signal.BUY) {
+                    finalSignal = Signal.BUY;
+                }
             }
 
-            log.info("Сигнал для {} = {} (chatId={})", sym, sig, chatId);
-            if (sig == Signal.HOLD) {
+            if (finalSignal == Signal.HOLD) {
+                log.info("По всем стратегиям HOLD для {} (chatId={})", sym, chatId);
                 continue;
             }
 
             BigDecimal price = hist.get(hist.size() - 1).getClose();
-            String quote    = sym.substring(sym.length() - 4);
-            BigDecimal bal   = accountService.getFreeBalance(userId, quote);
+            BigDecimal bal   = accountService.getFreeBalance(userId, sym.substring(sym.length() - 4));
             RiskResult rr    = riskManager.calculate(cfg.getRiskConfig(), bal, price);
 
-            log.info("Исполняем {} {} {} по цене {}", sig, rr.getQuantity(), sym, price);
-            if (sig == Signal.BUY) {
+            log.info("Исполняем {} {} {} по цене {}", finalSignal, rr.getQuantity(), sym, price);
+            if (finalSignal == Signal.BUY) {
                 spotExecutor.buy(userId, sym, rr.getQuantity());
             } else {
                 spotExecutor.sell(userId, sym, rr.getQuantity());
@@ -109,23 +109,21 @@ public class TradingServiceImpl implements TradingService {
     }
 
     @Override
+    @Transactional
     public void executeManualOrder(String symbol, boolean buy) {
         Long chatId = BotContext.getChatId();
         if (chatId == null) {
             log.warn("ChatId отсутствует в контексте — ручной ордер отменён");
             return;
         }
-
         AiTradeSettings cfg = settingsService.getForCurrentUser();
-        RsiMacdConfig c = cfg.getRsiMacdConfig();
-        if (c == null) {
-            log.warn("RsiMacdConfig не задан — ручной ордер отменён");
-            return;
-        }
 
-        int needed = c.getMacdSlow() + c.getMacdSignal() + 1;
         Duration interval = cfg.getScanInterval();
+        Set<StrategyType> strategies = cfg.getStrategies();
         Long userId = cfg.getUser().getId();
+        int needed = strategies.stream()
+                .mapToInt(st -> strategyMap.get(st).requiredBars(cfg))
+                .max().orElse(0);
 
         List<Bar> hist = marketDataService.getHistoricalBars(symbol, interval, needed, chatId);
         if (hist.size() < needed) {
@@ -135,9 +133,8 @@ public class TradingServiceImpl implements TradingService {
         }
 
         BigDecimal price = hist.get(hist.size() - 1).getClose();
-        String quote     = symbol.substring(symbol.length() - 4);
-        BigDecimal bal    = accountService.getFreeBalance(userId, quote);
-        RiskResult rr     = riskManager.calculate(cfg.getRiskConfig(), bal, price);
+        BigDecimal bal   = accountService.getFreeBalance(userId, symbol.substring(symbol.length() - 4));
+        RiskResult rr    = riskManager.calculate(cfg.getRiskConfig(), bal, price);
 
         log.info("Ручной ордер {}: {} {} по цене {}",
                 buy ? "BUY" : "SELL", rr.getQuantity(), symbol, price);
