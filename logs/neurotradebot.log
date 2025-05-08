@@ -6145,3 +6145,8 @@ java.lang.IllegalStateException: telegramUserId не может быть null
 2025-05-08T11:28:56.497+02:00  INFO 7884 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=TESTNET
 2025-05-08T11:28:56.570+02:00  INFO 7884 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
 2025-05-08T11:28:58.597+02:00  INFO 7884 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T11:32:26.761+02:00  INFO 7884 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T11:32:26.766+02:00  INFO 7884 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T11:32:26.792+02:00  INFO 7884 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T11:32:26.811+02:00  INFO 7884 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T11:32:26.814+02:00  INFO 7884 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
