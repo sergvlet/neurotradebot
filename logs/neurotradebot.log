@@ -14840,3 +14840,708 @@ java.lang.IllegalStateException: Нет ни одной валидной стр�
 2025-05-08T17:38:53.266+02:00  INFO 6972 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.47 seconds (process running for 5.045)
 2025-05-08T17:39:34.197+02:00  WARN 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
 2025-05-08T17:40:07.646+02:00  WARN 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.TelegramSender            : ⚠️ Ошибка при silent-отправке: Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText query: [400] Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-05-08T17:47:32.314+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T17:47:32.321+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=86d317a1e2ece2fb0c9b5f5fac44dc0d434af3f0fa9fb79c2c2ff253fc5ac44e&timestamp=1746719252319
+2025-05-08T17:47:32.976+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T17:47:33.086+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T17:47:35.359+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T17:47:50.382+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T17:47:50.383+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=84dfcbf25a5c25d9ce831c0bbcc0cc0497420772f389aa0b8b957adec2f373a1&timestamp=1746719270383
+2025-05-08T17:47:50.699+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T17:47:51.159+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T17:47:56.317+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T17:48:01.194+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T17:48:01.194+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=ebfa9edbffe51d78743abb8875cc46c257d18fc9f7be6932d16d76ee08eb26c1&timestamp=1746719281194
+2025-05-08T17:48:01.504+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T17:48:01.641+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T17:48:04.959+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T17:48:19.633+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T17:48:19.633+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=c8d3ab0f6a13a5517f8c4ae3f86c91bb85a3c62e46d90a7340673e445505494e&timestamp=1746719299633
+2025-05-08T17:48:19.940+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T17:48:20.039+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T17:48:22.182+02:00  INFO 6972 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T17:54:28.540+02:00  INFO 6972 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T17:54:28.547+02:00  INFO 6972 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T17:54:28.579+02:00  INFO 6972 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:54:28.582+02:00  INFO 6972 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T17:54:28.585+02:00  INFO 6972 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T17:56:03.438+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 19240 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T17:56:03.440+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T17:56:03.493+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T17:56:03.493+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T17:56:04.007+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T17:56:04.137+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 122 ms. Found 3 JPA repository interfaces.
+2025-05-08T17:56:04.611+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T17:56:04.632+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T17:56:04.632+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T17:56:04.670+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T17:56:04.670+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1177 ms
+2025-05-08T17:56:04.773+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T17:56:04.803+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T17:56:04.828+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T17:56:05.014+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T17:56:05.034+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T17:56:05.249+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6a9e698a
+2025-05-08T17:56:05.251+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T17:56:05.274+02:00  WARN 19240 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T17:56:05.287+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T17:56:05.997+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T17:56:06.239+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:56:09.477+02:00  WARN 19240 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T17:56:09.690+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T17:56:09.755+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T17:56:09.761+02:00  INFO 19240 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 6.641 seconds (process running for 7.212)
+2025-05-08T17:56:14.536+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:18.353+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:18.373+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:18.373+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:18.390+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:20.008+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:20.017+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:20.017+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:20.029+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-2] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:20.972+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-2] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:20.980+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-2] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:20.980+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-2] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:20.987+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:21.870+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:21.877+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:21.877+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:21.884+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:22.791+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:22.797+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:22.797+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:22.805+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-2] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:23.731+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-2] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:23.736+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-2] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:23.736+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-2] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:23.747+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:24.794+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:24.800+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:24.800+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:24.808+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:25.714+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:25.721+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:25.721+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:25.728+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:26.777+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:26.783+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:26.783+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:26.793+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:27.714+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:27.720+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:27.720+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:27.727+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:28.877+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:28.884+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:28.884+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:28.890+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:29.948+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:29.954+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:29.954+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:29.960+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:31.169+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:31.178+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:31.178+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:31.184+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:32.088+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:32.094+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:32.095+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:32.101+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:33.111+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:33.116+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:33.117+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:33.124+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:34.089+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:34.095+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:34.096+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:34.101+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:35.189+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:35.194+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:35.194+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:35.200+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:36.210+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:36.215+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:36.215+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:36.222+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:37.292+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:37.298+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:37.298+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:37.306+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:38.408+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:38.415+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:38.415+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:38.432+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:39.810+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:39.816+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:39.816+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:39.825+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:41.057+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:41.063+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:41.064+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:41.069+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:42.141+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:42.146+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:42.147+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:42.154+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:43.266+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:43.270+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:43.270+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:43.275+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:44.374+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:44.379+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:44.379+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:44.384+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:45.407+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:45.412+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:45.413+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:45.419+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:46.476+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:46.481+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:46.481+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:46.488+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:47.511+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:47.516+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:47.516+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:47.525+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:48.697+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:48.701+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:48.701+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:48.709+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:49.792+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:49.796+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:49.797+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:49.802+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:50.985+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:50.992+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:50.992+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:50.999+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:51.967+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:51.973+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:51.973+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:51.978+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:53.128+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:53.133+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:53.133+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:53.139+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:54.575+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:54.580+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:54.580+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:54.585+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:56.208+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:56.211+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:56.211+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:56.218+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:57.606+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:57.611+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:57.611+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:57.617+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:58.782+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:58.787+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:58.787+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:58.793+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:56:59.986+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:56:59.991+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:56:59.991+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:56:59.999+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:01.247+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:01.252+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:01.252+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:01.259+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:02.450+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:02.455+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:02.456+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-5] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:02.463+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:03.528+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:03.533+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:03.533+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:03.539+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:04.698+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:04.704+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:04.704+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:04.710+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:06.026+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:06.029+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:06.029+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:06.034+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:07.570+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:07.573+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:07.573+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:07.578+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:08.609+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:08.612+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:08.612+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:08.618+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:09.662+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:09.666+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:09.666+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:09.670+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:10.851+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:10.855+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:10.856+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:10.862+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:12.006+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:12.011+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:12.011+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:12.017+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:13.349+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:13.352+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:13.352+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:13.357+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:14.662+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:14.666+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:14.666+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:14.670+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:15.829+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:15.834+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:15.834+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:15.839+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:17.113+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:17.117+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:17.117+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:17.122+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:18.288+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:18.292+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:18.292+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:18.296+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:19.729+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:19.733+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:19.733+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:19.737+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:21.112+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:21.116+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:21.116+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:21.121+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:22.366+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:22.370+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:22.370+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:22.375+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:23.547+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:23.550+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:23.550+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:23.555+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:24.828+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:24.833+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:24.833+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:24.837+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:25.887+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:25.891+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:25.891+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-4] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:25.898+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:27.075+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:27.079+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:27.079+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:27.091+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:28.446+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:28.451+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:28.451+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:28.457+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:30.045+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:30.050+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:30.050+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-3] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:30.057+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:31.302+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:31.307+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:31.307+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-8] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:31.311+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:32.608+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:32.611+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:32.611+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:32.616+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:33.862+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:33.864+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:33.864+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:33.868+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:35.141+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:35.144+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:35.144+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-10] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:35.148+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:36.262+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:36.265+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:36.266+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:36.270+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:37.450+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:37.453+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:37.453+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:37.457+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:38.730+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:38.732+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:38.732+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-7] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:38.736+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:40.187+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:40.190+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:40.190+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:40.194+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:41.542+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:41.545+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:41.545+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:41.549+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:43.032+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:43.035+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:43.035+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:43.039+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:44.286+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:44.289+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:44.290+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:44.293+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:45.650+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:45.653+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:45.653+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:45.660+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:47.007+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:47.010+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:47.010+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:47.014+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:48.606+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:48.609+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:48.609+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:48.613+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:49.949+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:49.952+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:49.952+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:49.956+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:51.226+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:51.229+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:51.229+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:51.232+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:52.410+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:52.412+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:52.413+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:52.416+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:53.717+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:53.720+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:53.720+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:53.725+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:55.246+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:55.249+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:55.249+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:55.252+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:56.514+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:56.517+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:56.517+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:56.521+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:57.789+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:57.795+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:57.795+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:57.802+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:59.210+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:57:59.213+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:57:59.213+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:57:59.216+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/klines?symbol=USDTCOP&limit=13&interval=1s
+2025-05-08T17:57:59.711+02:00  INFO 19240 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T17:57:59.719+02:00  INFO 19240 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T17:58:00.512+02:00  INFO 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Стратегия RSI дала сигнал SELL по USDTCOP
+2025-05-08T17:58:00.515+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.trade.risk.RiskManager             : freeBalance пустой или <= 0 (0). Нечего рисковать.
+2025-05-08T17:58:00.516+02:00  WARN 19240 --- [neuro-trade-bot] [trading-scheduler-1] c.c.n.t.service.impl.TradingServiceImpl  : Для USDTCOP расчётный объём = 0 ≤ 0, ордер пропускается
+2025-05-08T17:58:00.543+02:00  INFO 19240 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:58:00.546+02:00  INFO 19240 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T17:58:00.549+02:00  INFO 19240 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T17:58:02.317+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 11908 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T17:58:02.319+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T17:58:02.366+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T17:58:02.367+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T17:58:02.915+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T17:58:03.047+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 125 ms. Found 3 JPA repository interfaces.
+2025-05-08T17:58:03.535+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T17:58:03.547+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T17:58:03.547+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T17:58:03.588+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T17:58:03.588+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1221 ms
+2025-05-08T17:58:03.701+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T17:58:03.734+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T17:58:03.758+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T17:58:03.937+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T17:58:03.957+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T17:58:04.074+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7f96440e
+2025-05-08T17:58:04.075+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T17:58:04.100+02:00  WARN 11908 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T17:58:04.115+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T17:58:04.852+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T17:58:05.104+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T17:58:11.122+02:00  WARN 11908 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T17:58:11.346+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T17:58:11.408+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T17:58:11.415+02:00  INFO 11908 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 9.427 seconds (process running for 10.047)
+2025-05-08T17:58:15.627+02:00 ERROR 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Ошибка в обработчике для 'ai_pairs'
+
+org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException: Error executing org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery query: [400] Bad Request: query is too old and response timeout expired or query ID is invalid
+	at org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod.deserializeResponseInternal(PartialBotApiMethod.java:54) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod.deserializeResponse(PartialBotApiMethod.java:34) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodBoolean.deserializeResponse(BotApiMethodBoolean.java:19) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodBoolean.deserializeResponse(BotApiMethodBoolean.java:14) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.bots.DefaultAbsSender.sendApiMethod(DefaultAbsSender.java:1096) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.meta.bots.AbsSender.execute(AbsSender.java:64) ~[telegrambots-meta-6.5.0.jar:na]
+	at com.chicu.neurotradebot.telegram.TelegramSender.executeInternal(TelegramSender.java:24) ~[classes/:na]
+	at com.chicu.neurotradebot.telegram.TelegramSender.execute(TelegramSender.java:32) ~[classes/:na]
+	at com.chicu.neurotradebot.telegram.handler.aimenu.pairsmenu.PairsCallbackHandler.handle(PairsCallbackHandler.java:37) ~[classes/:na]
+	at com.chicu.neurotradebot.telegram.UpdateDispatcher.dispatch(UpdateDispatcher.java:39) ~[classes/:na]
+	at com.chicu.neurotradebot.telegram.NeuroTradeBot.onUpdateReceived(NeuroTradeBot.java:33) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597) ~[na:na]
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312) ~[telegrambots-6.5.0.jar:na]
+
+2025-05-08T17:58:16.648+02:00 ERROR 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.telegram.UpdateDispatcher          : Ошибка в обработчике для 'pairs_autoconfig'
+
+org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException: Error executing org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery query: [400] Bad Request: query is too old and response timeout expired or query ID is invalid
+	at org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod.deserializeResponseInternal(PartialBotApiMethod.java:54) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod.deserializeResponse(PartialBotApiMethod.java:34) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodBoolean.deserializeResponse(BotApiMethodBoolean.java:19) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodBoolean.deserializeResponse(BotApiMethodBoolean.java:14) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.bots.DefaultAbsSender.sendApiMethod(DefaultAbsSender.java:1096) ~[telegrambots-6.5.0.jar:na]
+	at org.telegram.telegrambots.meta.bots.AbsSender.execute(AbsSender.java:64) ~[telegrambots-meta-6.5.0.jar:na]
+	at com.chicu.neurotradebot.telegram.TelegramSender.executeInternal(TelegramSender.java:24) ~[classes/:na]
+	at com.chicu.neurotradebot.telegram.TelegramSender.execute(TelegramSender.java:32) ~[classes/:na]
+	at com.chicu.neurotradebot.telegram.handler.aimenu.pairsmenu.PairsAutoconfigCallbackHandler.handle(PairsAutoconfigCallbackHandler.java:49) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-6.2.5.jar:6.2.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.2.5.jar:6.2.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.2.5.jar:6.2.5]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380) ~[spring-tx-6.2.5.jar:6.2.5]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.2.5.jar:6.2.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.5.jar:6.2.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727) ~[spring-aop-6.2.5.jar:6.2.5]
+	at com.chicu.neurotradebot.telegram.handler.aimenu.pairsmenu.PairsAutoconfigCallbackHandler$$SpringCGLIB$$0.handle(<generated>) ~[classes/:na]
+	at com.chicu.neurotradebot.telegram.UpdateDispatcher.dispatch(UpdateDispatcher.java:39) ~[classes/:na]
+	at com.chicu.neurotradebot.telegram.NeuroTradeBot.onUpdateReceived(NeuroTradeBot.java:33) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597) ~[na:na]
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312) ~[telegrambots-6.5.0.jar:na]
+
+2025-05-08T17:58:30.603+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/ticker/24hr
+2025-05-08T17:58:41.893+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.startmenu.StartCommandHandler  : ▶️ Обработан /start для chatId=5316412277
+2025-05-08T17:58:53.352+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T17:58:53.356+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=990147dcf61b2c8e37bb7b61d972bdd69cda39de175cd767376a39c356450600&timestamp=1746719933354
+2025-05-08T17:58:54.606+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T17:58:55.531+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T17:59:22.644+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=TESTNET → using label='binance_testnet', apiKey='vKNnyDrMzIsHsjFZEByUjtrNGxLlq98jbyT9e9curoQFc5i66vkggKiluqxxeWbS', apiSecret='****************************************************************'
+2025-05-08T17:59:22.645+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://testnet.binance.vision/api/v3/account?signature=b20a66c0b6075d3643734565b521e25aef0cd4e6983f71abebf76c6207ae5359&timestamp=1746719962645
+2025-05-08T17:59:27.854+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=TESTNET
+2025-05-08T17:59:29.018+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.n.ToggleModeCallbackHandler    : Переключили режим на TESTNET для chatId=5316412277
+2025-05-08T17:59:30.268+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=REAL → using label='binance_main', apiKey='JMOe4V5XIBmvu9vC90g1rsrMKOdJe0tbrflQJZjLHbZKgHv26VQMed7cJ7ZhjQFv', apiSecret='****************************************************************'
+2025-05-08T17:59:30.268+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://api.binance.com/api/v3/account?signature=c456ed9357afe4f1a69e0f397426ad21ea89229c8f128b71c104716962b595b4&timestamp=1746719970268
+2025-05-08T17:59:31.415+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=REAL
+2025-05-08T17:59:32.388+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.n.ToggleModeCallbackHandler    : Переключили режим на REAL для chatId=5316412277
+2025-05-08T17:59:42.403+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=TESTNET → using label='binance_testnet', apiKey='vKNnyDrMzIsHsjFZEByUjtrNGxLlq98jbyT9e9curoQFc5i66vkggKiluqxxeWbS', apiSecret='****************************************************************'
+2025-05-08T17:59:42.404+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://testnet.binance.vision/api/v3/account?signature=ea82bcf18542254b2a6ea6859dfe62a75eff36e932a6ffcd0a695b57dbc12587&timestamp=1746719982403
+2025-05-08T17:59:44.591+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=TESTNET
+2025-05-08T17:59:45.785+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.n.ToggleModeCallbackHandler    : Переключили режим на TESTNET для chatId=5316412277
+2025-05-08T17:59:53.967+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в Manual-меню for chatId=5316412277
+2025-05-08T18:00:02.122+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=TESTNET → using label='binance_testnet', apiKey='vKNnyDrMzIsHsjFZEByUjtrNGxLlq98jbyT9e9curoQFc5i66vkggKiluqxxeWbS', apiSecret='****************************************************************'
+2025-05-08T18:00:02.122+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://testnet.binance.vision/api/v3/account?signature=e45b3fb6ca259c1f6250e3f0d9835fc591afd3afb05e831fff5b0b3a65d35d92&timestamp=1746720002122
+2025-05-08T18:00:03.493+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=TESTNET
+2025-05-08T18:00:04.650+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T18:00:10.571+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T18:00:34.845+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=TESTNET → using label='binance_testnet', apiKey='vKNnyDrMzIsHsjFZEByUjtrNGxLlq98jbyT9e9curoQFc5i66vkggKiluqxxeWbS', apiSecret='****************************************************************'
+2025-05-08T18:00:34.845+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://testnet.binance.vision/api/v3/account?signature=28a5f84ba4668b30bb1c0c99152c6d3ebf38e75446f5756df9e1e295d76e0ab8&timestamp=1746720034845
+2025-05-08T18:00:36.845+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=TESTNET
+2025-05-08T18:00:37.933+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T18:01:02.623+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : 🔑 testConnection: userId=5316412277 exchange='binance' mode=TESTNET → using label='binance_testnet', apiKey='vKNnyDrMzIsHsjFZEByUjtrNGxLlq98jbyT9e9curoQFc5i66vkggKiluqxxeWbS', apiSecret='****************************************************************'
+2025-05-08T18:01:02.624+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.b.c.client.utils.RequestHandler        : GET https://testnet.binance.vision/api/v3/account?signature=b4783174f2faf4c9a794c9f9e3275c46250858affa520e3565c2e2881642dc9a&timestamp=1746720062623
+2025-05-08T18:01:03.017+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.s.impl.ApiCredentialsServiceImpl   : ✅ getAccountInfo OK for mode=TESTNET
+2025-05-08T18:01:03.220+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] c.c.n.t.h.a.AiControlCallbackHandler     : Перешли в сетевые настройки из AI-меню, chatId=5316412277
+2025-05-08T18:01:07.339+02:00  INFO 11908 --- [neuro-trade-bot] [@AITradeMasterBot Telegram Executor] .h.n.ApplyNetworkSettingsCallbackHandler : Перешли из сет.настроек в AI-меню for chatId=5316412277
+2025-05-08T18:01:34.996+02:00  INFO 11908 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T18:01:35.003+02:00  INFO 11908 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T18:01:35.032+02:00  INFO 11908 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T18:01:35.035+02:00  INFO 11908 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T18:01:35.040+02:00  INFO 11908 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T18:37:16.424+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 6348 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T18:37:16.426+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T18:37:16.482+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T18:37:16.483+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T18:37:17.016+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T18:37:17.154+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 131 ms. Found 3 JPA repository interfaces.
+2025-05-08T18:37:17.685+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T18:37:17.699+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T18:37:17.700+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T18:37:17.740+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T18:37:17.740+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1257 ms
+2025-05-08T18:37:17.848+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T18:37:17.880+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T18:37:17.905+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T18:37:18.087+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T18:37:18.108+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T18:37:18.232+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@548aa962
+2025-05-08T18:37:18.234+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T18:37:18.257+02:00  WARN 6348 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T18:37:18.271+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T18:37:19.014+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T18:37:19.285+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T18:37:20.527+02:00  WARN 6348 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T18:37:20.764+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T18:37:20.867+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T18:37:20.875+02:00  INFO 6348 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.78 seconds (process running for 5.338)
+2025-05-08T18:40:58.198+02:00  INFO 6348 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T18:40:58.204+02:00  INFO 6348 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T18:40:58.227+02:00  INFO 6348 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T18:40:58.229+02:00  INFO 6348 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T18:40:58.232+02:00  INFO 6348 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T18:41:01.689+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 19724 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T18:41:01.691+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T18:41:01.747+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T18:41:01.747+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T18:41:02.360+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T18:41:02.487+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 119 ms. Found 3 JPA repository interfaces.
+2025-05-08T18:41:02.985+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T18:41:03.002+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T18:41:03.003+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T18:41:03.041+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T18:41:03.042+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1293 ms
+2025-05-08T18:41:03.157+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T18:41:03.192+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T18:41:03.216+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T18:41:03.402+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T18:41:03.422+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T18:41:03.535+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6d4f9ac8
+2025-05-08T18:41:03.538+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T18:41:03.561+02:00  WARN 19724 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T18:41:03.575+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T18:41:04.346+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T18:41:04.613+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T18:41:05.584+02:00  WARN 19724 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T18:41:05.796+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T18:41:05.855+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T18:41:05.863+02:00  INFO 19724 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.498 seconds (process running for 5.07)
+2025-05-08T18:41:25.147+02:00  INFO 19724 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T18:41:25.152+02:00  INFO 19724 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T18:41:25.174+02:00  INFO 19724 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T18:41:25.176+02:00  INFO 19724 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T18:41:25.179+02:00  INFO 19724 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T18:41:28.763+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 17856 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T18:41:28.765+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T18:41:28.819+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T18:41:28.820+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T18:41:29.339+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T18:41:29.464+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 118 ms. Found 3 JPA repository interfaces.
+2025-05-08T18:41:29.924+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T18:41:29.933+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T18:41:29.934+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T18:41:29.972+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T18:41:29.972+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1151 ms
+2025-05-08T18:41:30.083+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T18:41:30.119+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T18:41:30.140+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T18:41:30.312+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T18:41:30.336+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T18:41:30.452+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@508d4a4b
+2025-05-08T18:41:30.454+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T18:41:30.475+02:00  WARN 17856 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T18:41:30.488+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T18:41:31.170+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T18:41:31.419+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T18:41:32.608+02:00  WARN 17856 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T18:41:32.808+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T18:41:32.867+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T18:41:32.874+02:00  INFO 17856 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.401 seconds (process running for 4.929)
+2025-05-08T18:46:57.175+02:00  INFO 17856 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T18:46:57.181+02:00  INFO 17856 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T18:46:57.203+02:00  INFO 17856 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T18:46:57.205+02:00  INFO 17856 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T18:46:57.207+02:00  INFO 17856 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T18:47:00.299+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 18148 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T18:47:00.301+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T18:47:00.346+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T18:47:00.347+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T18:47:00.854+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T18:47:00.976+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 114 ms. Found 3 JPA repository interfaces.
+2025-05-08T18:47:01.438+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T18:47:01.449+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T18:47:01.449+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T18:47:01.491+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T18:47:01.491+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1144 ms
+2025-05-08T18:47:01.595+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T18:47:01.623+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T18:47:01.648+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T18:47:01.826+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T18:47:01.844+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T18:47:01.962+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@712fd627
+2025-05-08T18:47:01.964+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T18:47:01.987+02:00  WARN 18148 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T18:47:02.004+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T18:47:02.707+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T18:47:02.952+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T18:47:04.176+02:00  WARN 18148 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T18:47:04.378+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T18:47:04.439+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T18:47:04.447+02:00  INFO 18148 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.459 seconds (process running for 4.997)
+2025-05-08T18:53:19.696+02:00  INFO 18148 --- [neuro-trade-bot] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-08T18:53:19.700+02:00  INFO 18148 --- [neuro-trade-bot] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-08T18:53:19.723+02:00  INFO 18148 --- [neuro-trade-bot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T18:53:19.725+02:00  INFO 18148 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T18:53:19.727+02:00  INFO 18148 --- [neuro-trade-bot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T18:53:22.893+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Starting MainBotApplication using Java 23.0.2 with PID 20556 (C:\Users\schic\IdeaProjects\neurotradebot\target\classes started by schic in C:\Users\schic\IdeaProjects\neurotradebot)
+2025-05-08T18:53:22.895+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T18:53:22.945+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-08T18:53:22.946+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-08T18:53:23.480+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T18:53:23.606+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 119 ms. Found 3 JPA repository interfaces.
+2025-05-08T18:53:24.079+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-08T18:53:24.096+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-08T18:53:24.097+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-08T18:53:24.135+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-08T18:53:24.135+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1189 ms
+2025-05-08T18:53:24.237+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T18:53:24.272+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-08T18:53:24.292+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T18:53:24.464+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T18:53:24.484+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T18:53:24.596+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7920bff2
+2025-05-08T18:53:24.597+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T18:53:24.621+02:00  WARN 20556 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T18:53:24.637+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T18:53:25.333+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T18:53:25.577+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T18:53:26.715+02:00  WARN 20556 --- [neuro-trade-bot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T18:53:26.929+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-08T18:53:26.991+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-08T18:53:26.997+02:00  INFO 20556 --- [neuro-trade-bot] [restartedMain] c.c.neurotradebot.MainBotApplication     : Started MainBotApplication in 4.42 seconds (process running for 4.975)
