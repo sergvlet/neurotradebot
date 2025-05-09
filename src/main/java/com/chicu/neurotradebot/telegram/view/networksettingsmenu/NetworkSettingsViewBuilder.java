@@ -1,32 +1,46 @@
-// src/main/java/com/chicu/neurotradebot/view/NetworkSettingsViewBuilder.java
+// src/main/java/com/chicu/neurotradebot/telegram/view/networksettingsmenu/NetworkSettingsViewBuilder.java
 package com.chicu.neurotradebot.telegram.view.networksettingsmenu;
 
 import com.chicu.neurotradebot.entity.ApiCredentials;
 import com.chicu.neurotradebot.entity.User;
-import com.chicu.neurotradebot.service.ApiCredentialsService;
+     // <-- нужен этот импорт
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
+import com.chicu.neurotradebot.service.ApiCredentialsService;
 import com.chicu.neurotradebot.service.UserService;
 import com.chicu.neurotradebot.telegram.BotContext;
+import com.chicu.neurotradebot.telegram.handler.MenuDefinition;
+import com.chicu.neurotradebot.telegram.navigation.NavigationHistoryService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 import java.util.List;
+import java.util.Set;
 
 @Component
-public class NetworkSettingsViewBuilder {
+public class NetworkSettingsViewBuilder implements MenuDefinition {
     private final UserService userService;
     private final AiTradeSettingsService settingsService;
     private final ApiCredentialsService credentialsService;
-
+    private final NavigationHistoryService history;
     public NetworkSettingsViewBuilder(UserService userService,
                                       AiTradeSettingsService settingsService,
-                                      ApiCredentialsService credentialsService) {
+                                      ApiCredentialsService credentialsService,
+                                      NavigationHistoryService history) {
         this.userService = userService;
         this.settingsService = settingsService;
         this.credentialsService = credentialsService;
+
+        this.history = history;
     }
 
+    @Override
+    public Set<String> keys() {
+        // уникальный ключ этого меню
+        return Set.of("network_settings");
+    }
+
+    @Override
     public String title() {
         Long chatId = BotContext.getChatId();
         User user = userService.getOrCreate(chatId);
@@ -35,7 +49,6 @@ public class NetworkSettingsViewBuilder {
         String exch = settings.getExchange() != null ? settings.getExchange() : "не выбрана";
         String mode = settings.isTestMode() ? "TESTNET" : "REAL";
 
-        // Смотрим, есть ли ключи именно для этих настроек
         List<ApiCredentials> creds = credentialsService.listCredentials(
                 user, exch, settings.isTestMode()
         );
@@ -54,7 +67,6 @@ public class NetworkSettingsViewBuilder {
                 boolean ok = credentialsService.testConnection(user, exch, settings.isTestMode());
                 status = ok ? "✅ Подключение успешно" : "❌ Ошибка подключения";
             } catch (Exception ex) {
-                // Выводим текст ошибки, не падаем
                 status = "❌ " + ex.getMessage();
             }
         }
@@ -66,10 +78,11 @@ public class NetworkSettingsViewBuilder {
                 + status;
     }
 
-    /**
-     * @param fromAi true — пришли из AI-меню; false — из Manual-меню
-     */
-    public InlineKeyboardMarkup markup(Long chatId, boolean fromAi) {
+    @Override
+    public InlineKeyboardMarkup markup(Long chatId) {
+        // регистрируем вход в меню
+        history.push(chatId, "network_settings");
+
         var settings = settingsService.getOrCreate(userService.getOrCreate(chatId));
 
         InlineKeyboardButton toggle = InlineKeyboardButton.builder()
@@ -87,9 +100,7 @@ public class NetworkSettingsViewBuilder {
                 .callbackData("api_setup_start")
                 .build();
 
-        String applyData = fromAi
-                ? "apply_network_settings_ai"
-                : "apply_network_settings_manual";
+        String applyData = "apply_network_settings_ai"; // или manual, если нужно
 
         InlineKeyboardButton apply = InlineKeyboardButton.builder()
                 .text("✅ Оставить текущие настройки")
@@ -98,7 +109,7 @@ public class NetworkSettingsViewBuilder {
 
         InlineKeyboardButton back = InlineKeyboardButton.builder()
                 .text("🔙 Отмена")
-                .callbackData(fromAi ? "ai_control" : "manual_trade_menu")
+                .callbackData("start_menu")
                 .build();
 
         return InlineKeyboardMarkup.builder()

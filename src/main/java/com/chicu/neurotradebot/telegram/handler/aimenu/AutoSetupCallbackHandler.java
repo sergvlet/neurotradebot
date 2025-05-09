@@ -26,7 +26,7 @@ public class AutoSetupCallbackHandler implements CallbackHandler {
 
     @Override
     public void handle(Update u) throws Exception {
-        var cq      = u.getCallbackQuery();
+        var cq = u.getCallbackQuery();
         Long chatId = cq.getMessage().getChatId();
         Integer msg = cq.getMessage().getMessageId();
 

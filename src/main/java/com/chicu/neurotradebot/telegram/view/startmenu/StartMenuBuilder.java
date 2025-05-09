@@ -14,7 +14,7 @@ public class StartMenuBuilder implements MenuDefinition {
 
     @Override
     public Set<String> keys() {
-        return Set.of(); // необязательно
+        return Set.of("start_menu");
     }
 
     public String title() {

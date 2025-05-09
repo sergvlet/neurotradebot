@@ -20,7 +20,7 @@ public class AiTradeMenuBuilder implements MenuDefinition {
 
     @Override
     public Set<String> keys() {
-        return Set.of("ai_control");
+        return Set.of("ai_control", "apply_network_settings_ai");
     }
 
     @Override
@@ -67,7 +67,7 @@ public class AiTradeMenuBuilder implements MenuDefinition {
         rows.add(List.of(profiles, autoConfig));
         rows.add(List.of(analytics, backtest));
         rows.add(List.of(positions, history));
-        rows.add(List.of(startStop)); // вставили наш ряд
+        rows.add(List.of(startStop));
         rows.add(List.of(help));
         rows.add(List.of(back));
 

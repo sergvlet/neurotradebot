@@ -1,5 +1,6 @@
-// src/main/java/com/chicu/neurotradebot/telegram/handler/AiControlCallbackHandler.java
+// src/main/java/com/chicu/neurotradebot/telegram/handler/aimenu/AiControlCallbackHandler.java
 package com.chicu.neurotradebot.telegram.handler.aimenu;
+
 
 import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.telegram.TelegramSender;
@@ -25,33 +26,33 @@ public class AiControlCallbackHandler implements CallbackHandler {
     @Override
     public boolean canHandle(Update update) {
         return update.hasCallbackQuery()
-            && KEY.equals(update.getCallbackQuery().getData());
+                && KEY.equals(update.getCallbackQuery().getData());
     }
 
     @Override
     public void handle(Update update) throws Exception {
-        var cq = update.getCallbackQuery();
-        Long chatId = cq.getMessage().getChatId();
+        var cq    = update.getCallbackQuery();
+        Long chat = cq.getMessage().getChatId();
         Integer msgId = cq.getMessage().getMessageId();
-        
+
         try {
-            // 1) Answer spinner
+            // 1) Ответ на spinner
             sender.execute(new AnswerCallbackQuery(cq.getId()));
 
-            // 2) Показываем сетевые настройки, fromAi = true
-            String text = networkBuilder.title();
-            var markup = networkBuilder.markup(chatId, true);
+            // 2) Рисуем меню сетевых настроек
+            String text   = networkBuilder.title();
+            var    markup = networkBuilder.markup(chat);  // <-- только chatId
 
-            // Редактируем текущее сообщение, если это callback из Inline меню
+            // Редактируем сообщение
             EditMessageText edit = EditMessageText.builder()
-                .chatId(chatId.toString())
-                .messageId(msgId)
-                .text(text)
-                .replyMarkup(markup)
-                .build();
+                    .chatId(chat.toString())
+                    .messageId(msgId)
+                    .text(text)
+                    .replyMarkup(markup)
+                    .build();
             sender.execute(edit);
 
-            log.info("Перешли в сетевые настройки из AI-меню, chatId={}", chatId);
+            log.info("Перешли в сетевые настройки из AI-меню, chatId={}", chat);
         } finally {
             BotContext.clear();
         }

@@ -37,7 +37,7 @@ public class RiskMenuBuilder implements MenuDefinition {
                 .build();
         var back = InlineKeyboardButton.builder()
                 .text("⬅️ Назад")
-                .callbackData("ai_control")
+                .callbackData("apply_network_settings_ai")
                 .build();
 
         return InlineKeyboardMarkup.builder()

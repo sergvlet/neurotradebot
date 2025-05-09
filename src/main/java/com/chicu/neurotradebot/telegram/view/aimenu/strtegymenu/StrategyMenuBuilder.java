@@ -57,7 +57,7 @@ public class StrategyMenuBuilder implements MenuDefinition {
         rows.add(List.of(
             InlineKeyboardButton.builder()
                 .text("⬅️ Назад")
-                .callbackData("ai_control")
+                .callbackData("apply_network_settings_ai")
                 .build()
         ));
 

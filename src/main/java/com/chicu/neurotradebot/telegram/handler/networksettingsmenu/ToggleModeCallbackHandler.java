@@ -1,4 +1,6 @@
+// src/main/java/com/chicu/neurotradebot/telegram/handler/networksettingsmenu/ToggleModeCallbackHandler.java
 package com.chicu.neurotradebot.telegram.handler.networksettingsmenu;
+
 
 import com.chicu.neurotradebot.entity.User;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
@@ -32,32 +34,31 @@ public class ToggleModeCallbackHandler implements CallbackHandler {
 
     @Override
     public void handle(Update update) throws Exception {
-        var cq = update.getCallbackQuery();
-        Long chatId = cq.getMessage().getChatId();
-        int msgId = cq.getMessage().getMessageId();
+        var cq    = update.getCallbackQuery();
+        Long chat = cq.getMessage().getChatId();
+        Integer msgId = cq.getMessage().getMessageId();
 
         try {
-            // 1) переключаем testMode в настройках
-            User user = userService.getOrCreate(chatId);
+            // 1) Переключаем testMode
+            User user = userService.getOrCreate(chat);
             var s = settingsService.getOrCreate(user);
             s.setTestMode(!s.isTestMode());
             settingsService.save(s);
 
-            // 2) отвечаем на callback и редактируем текущее сообщение
+            // 2) Ответ на callback и правка меню
             sender.execute(new AnswerCallbackQuery(cq.getId()));
 
-            // пока считаем, что меню вызвано из ручного режима
-            boolean fromAi = false;
-
-            sender.execute(EditMessageText.builder()
-                    .chatId(chatId.toString())
-                    .messageId(msgId)
-                    .text(viewBuilder.title())
-                    .replyMarkup(viewBuilder.markup(chatId, fromAi))
-                    .build()
+            sender.execute(
+                    EditMessageText.builder()
+                            .chatId(chat.toString())
+                            .messageId(msgId)
+                            .text(viewBuilder.title())
+                            .replyMarkup(viewBuilder.markup(chat))  // <-- только chatId
+                            .build()
             );
 
-            log.info("Переключили режим на {} для chatId={}", s.isTestMode() ? "TESTNET" : "REAL", chatId);
+            log.info("Переключили режим на {} для chatId={}",
+                    s.isTestMode() ? "TESTNET" : "REAL", chat);
         } finally {
             BotContext.clear();
         }

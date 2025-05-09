@@ -1,5 +1,5 @@
 // src/main/java/com/chicu/neurotradebot/telegram/view/PairsAddMethodMenuBuilder.java
-package com.chicu.neurotradebot.telegram.view.networksettingsmenu;
+package com.chicu.neurotradebot.telegram.view.aimenu;
 
 import com.chicu.neurotradebot.telegram.handler.MenuDefinition;
 import org.springframework.stereotype.Component;
@@ -53,7 +53,7 @@ public class PairsAddMethodMenuBuilder implements MenuDefinition {
                         List.of(
                                 InlineKeyboardButton.builder()
                                         .text("⬅️ Отмена")
-                                        .callbackData("ai_pairs")
+                                        .callbackData("apply_network_settings_ai")
                                         .build()
                         )
                 ))

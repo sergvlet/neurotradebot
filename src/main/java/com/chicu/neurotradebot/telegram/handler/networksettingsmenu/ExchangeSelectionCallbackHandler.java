@@ -1,9 +1,10 @@
-// src/main/java/com/chicu/neurotradebot/telegram/handler/ExchangeSelectionCallbackHandler.java
+// src/main/java/com/chicu/neurotradebot/telegram/handler/networksettingsmenu/ExchangeSelectionCallbackHandler.java
 package com.chicu.neurotradebot.telegram.handler.networksettingsmenu;
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
 import com.chicu.neurotradebot.entity.User;
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
+
 import com.chicu.neurotradebot.service.UserService;
 import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.telegram.TelegramSender;
@@ -30,7 +31,7 @@ public class ExchangeSelectionCallbackHandler implements CallbackHandler {
     @Override
     public boolean canHandle(Update update) {
         return update.hasCallbackQuery()
-            && update.getCallbackQuery().getData().startsWith(PREFIX);
+                && update.getCallbackQuery().getData().startsWith(PREFIX);
     }
 
     @Override
@@ -39,9 +40,8 @@ public class ExchangeSelectionCallbackHandler implements CallbackHandler {
         Long chat = cq.getMessage().getChatId();
         Integer msgId = cq.getMessage().getMessageId();
 
-
         try {
-            String market = cq.getData().substring(PREFIX.length()); // binance или ftx
+            String market = cq.getData().substring(PREFIX.length()); // например "binance"
             User user = userService.getOrCreate(chat);
             AiTradeSettings s = settingsService.getOrCreate(user);
             s.setExchange(market);
@@ -49,18 +49,16 @@ public class ExchangeSelectionCallbackHandler implements CallbackHandler {
 
             log.info("🌐 Биржа '{}' сохранена для user={}", market, chat);
 
-            // убрать спиннер
+            // убираем «spinner»
             sender.execute(new AnswerCallbackQuery(cq.getId()));
 
-            // перерисовать меню сетевых настроек
+            // перенастраиваем меню сетевых настроек
             EditMessageText edit = EditMessageText.builder()
-                .chatId(chat.toString())
-                .messageId(msgId)
-                .text(netBuilder.title())
-                // fromAi = true, если открывали из AI-меню, иначе false; 
-                // здесь подставьте вашу логику или храните флаг в AiTradeSettings
-                .replyMarkup(netBuilder.markup(chat, /*fromAi=*/ true))
-                .build();
+                    .chatId(chat.toString())
+                    .messageId(msgId)
+                    .text(netBuilder.title())
+                    .replyMarkup(netBuilder.markup(chat))   // <-- только один аргумент
+                    .build();
             sender.execute(edit);
 
         } finally {

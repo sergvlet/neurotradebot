@@ -1,6 +1,8 @@
+// src/main/java/com/chicu/neurotradebot/telegram/handler/networksettingsmenu/BackToNetworkSettingsCallbackHandler.java
 package com.chicu.neurotradebot.telegram.handler.networksettingsmenu;
 
 import com.chicu.neurotradebot.service.AiTradeSettingsService;
+
 import com.chicu.neurotradebot.service.UserService;
 import com.chicu.neurotradebot.telegram.BotContext;
 import com.chicu.neurotradebot.telegram.TelegramSender;
@@ -33,18 +35,14 @@ public class BackToNetworkSettingsCallbackHandler implements CallbackHandler {
         Long chatId = update.getCallbackQuery().getMessage().getChatId();
 
         try {
-            // Получаем текущие настройки (режим testMode уже в них хранится)
             settingsService.getOrCreate(userService.getOrCreate(chatId));
 
-            // Поскольку в текущей версии нет разделения AI/Manual, всегда считаем manual
-            boolean fromAi = false;
-
-            // Отправляем новое сообщение с меню сети
-            sender.execute(SendMessage.builder()
-                    .chatId(chatId.toString())
-                    .text(viewBuilder.title())
-                    .replyMarkup(viewBuilder.markup(chatId, fromAi))
-                    .build()
+            sender.execute(
+                    SendMessage.builder()
+                            .chatId(chatId.toString())
+                            .text(viewBuilder.title())
+                            .replyMarkup(viewBuilder.markup(chatId))  // <-- только chatId
+                            .build()
             );
         } catch (Exception e) {
             log.error("Ошибка при возврате в меню сетевых настроек", e);

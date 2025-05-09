@@ -1,4 +1,6 @@
+// src/main/java/com/chicu/neurotradebot/telegram/handler/networksettingsmenu/ApiSetupCallbackHandler.java
 package com.chicu.neurotradebot.telegram.handler.networksettingsmenu;
+
 
 import com.chicu.neurotradebot.entity.AiTradeSettings;
 import com.chicu.neurotradebot.entity.User;
@@ -39,45 +41,46 @@ public class ApiSetupCallbackHandler implements CallbackHandler {
     public void handle(Update u) throws Exception {
         var cq     = u.getCallbackQuery();
         Long chatId = cq.getMessage().getChatId();
-        int  msgId  = cq.getMessage().getMessageId();
+        Integer msgId  = cq.getMessage().getMessageId();
         String data = cq.getData();
 
-
         try {
-            // 1) ответ на callbackQuery (снимет спиннер)
+            // 1) Answer spinner
             sender.execute(AnswerCallbackQuery.builder()
                     .callbackQueryId(cq.getId())
                     .build());
 
-            // 2) достать cfg
+            // 2) Получаем настройки
             User user = userService.getOrCreate(chatId);
             AiTradeSettings cfg = cfgService.getOrCreate(user);
 
             switch (data) {
                 case "api_setup_start":
                 case "replace_api_key":
-                    // переключаем на ввод нового ключа
                     cfg.setApiSetupStep(ApiSetupStep.ENTER_KEY);
                     cfgService.save(cfg);
-                    // перерисуем это же сообщение: текст + клавиатура
-                    sender.execute(EditMessageText.builder()
-                            .chatId(chatId.toString())
-                            .messageId(msgId)
-                            .text(view.title())
-                            .replyMarkup(view.markup())
-                            .build());
+                    // перерисовать API-меню
+                    sender.execute(
+                            EditMessageText.builder()
+                                    .chatId(chatId.toString())
+                                    .messageId(msgId)
+                                    .text(view.title())
+                                    .replyMarkup(view.markup())   // если у ApiSetupMenuBuilder без параметров
+                                    .build()
+                    );
                     break;
 
                 case "keep_api_key":
-                    // отмена, возвращаемся в меню настроек
                     cfg.setApiSetupStep(ApiSetupStep.NONE);
                     cfgService.save(cfg);
-                    sender.execute(EditMessageText.builder()
-                            .chatId(chatId.toString())
-                            .messageId(msgId)
-                            .text(netView.title())
-                            .replyMarkup(netView.markup(chatId, /*fromAi=*/false))
-                            .build());
+                    sender.execute(
+                            EditMessageText.builder()
+                                    .chatId(chatId.toString())
+                                    .messageId(msgId)
+                                    .text(netView.title())
+                                    .replyMarkup(netView.markup(chatId))  // <-- теперь только chatId
+                                    .build()
+                    );
                     break;
             }
         } finally {

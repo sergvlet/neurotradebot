@@ -32,19 +32,18 @@ public class AiTradingCallbackHandler implements CallbackHandler {
         Long chat = cq.getMessage().getChatId();
         Integer msgId = cq.getMessage().getMessageId();
 
-
         try {
             // 1) удаляем главное меню
             sender.execute(DeleteMessage.builder()
-                .chatId(chat.toString())
-                .messageId(msgId)
-                .build());
+                    .chatId(chat.toString())
+                    .messageId(msgId)
+                    .build());
 
-            // 2) отправляем сетевые настройки, fromAi = true
+            // 2) отправляем сетевые настройки
             sender.sendMessage(
-                chat,
-                networkView.title(),
-                networkView.markup(chat, true)
+                    chat,
+                    networkView.title(),
+                    networkView.markup(chat)   // <-- только chatId
             );
         } finally {
             BotContext.clear();

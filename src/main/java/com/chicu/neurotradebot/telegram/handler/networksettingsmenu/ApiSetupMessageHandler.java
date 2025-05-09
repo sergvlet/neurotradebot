@@ -85,11 +85,13 @@ public class ApiSetupMessageHandler implements MessageHandler {
                 cfg.setApiSetupPromptMsgId(null);
                 cfgService.save(cfg);
 
-                sender.execute(SendMessage.builder()
-                    .chatId(chatId.toString())
-                    .text(netView.title())
-                    .replyMarkup(netView.markup(chatId, false))
-                    .build());
+                sender.execute(
+                        SendMessage.builder()
+                                .chatId(chatId.toString())
+                                .text(netView.title())
+                                .replyMarkup(netView.markup(chatId))   // <— здесь
+                                .build()
+                );
 
             // 4) Ветка ручного ввода пар
             } else if (cfg.getApiSetupStep() == ApiSetupStep.ENTER_PAIR_ADD) {
