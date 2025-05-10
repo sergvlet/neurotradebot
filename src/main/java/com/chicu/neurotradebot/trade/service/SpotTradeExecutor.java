@@ -5,20 +5,23 @@ import java.math.BigDecimal;
 public interface SpotTradeExecutor {
 
     /**
-     * Выставить ордер на покупку на спотовом рынке от имени пользователя.
-     *
-     * @param userId   идентификатор пользователя (для получения ключей)
-     * @param symbol   тикер пары, например "BTCUSDT"
-     * @param quantity объём в базовой валюте
+     * Классический спотовый ордер на покупку.
      */
     void buy(Long userId, String symbol, BigDecimal quantity);
 
     /**
-     * Выставить ордер на продажу на спотовом рынке от имени пользователя.
-     *
-     * @param userId   идентификатор пользователя (для получения ключей)
-     * @param symbol   тикер пары, например "BTCUSDT"
-     * @param quantity объём в базовой валюте
+     * Классический спотовый ордер на продажу.
      */
     void sell(Long userId, String symbol, BigDecimal quantity);
+
+    /**
+     * Выставить спотовый OCO-ордер (bracket-order) по абсолютным ценам TP/SL.
+     *
+     * @param userId   Telegram-chatId пользователя
+     * @param symbol   пара, например "BTCUSDT"
+     * @param quantity объём в базовой валюте
+     * @param tpPrice  абсолютная цена тейк-профита
+     * @param slPrice  абсолютная цена стоп-лосса
+     */
+    void placeBracketOrder(Long userId, String symbol, BigDecimal quantity, BigDecimal tpPrice, BigDecimal slPrice);
 }

@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 @Primary
 @Component
@@ -17,51 +19,74 @@ public class BinanceSpotTradeExecutor implements SpotTradeExecutor {
 
     private final BinanceClientProvider clientProvider;
 
-    /**
-     * @param chatId  Telegram-chatId пользователя (то же, что вы прокидываете в clientProvider)
-     * @param symbol  торговая пара, например "BTCUSDT"
-     * @param quantity  объём в базовой валюте (для BUY это кол-во котируемой валюты / price)
-     */
     @Override
     public void buy(Long chatId, String symbol, BigDecimal quantity) {
-        if (StringUtils.isBlank(symbol)) {
-            log.warn("BUY: пустая символ-пара для chatId={}", chatId);
-            return;
-        }
-        if (quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
-            log.warn("BUY: некорректный объём {} для {} (chatId={})", quantity, symbol, chatId);
+        if (StringUtils.isBlank(symbol) || quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
+            log.warn("BUY skip: {} qty={} chatId={}", symbol, quantity, chatId);
             return;
         }
         try {
-            // обратите внимание: передаём именно chatId, а не внутренний userId
-            var client = clientProvider.getClientForUser(chatId);
-            client.newOrder(symbol, "BUY", quantity);
-            log.info("BUY order placed: {} {}, chatId={}", symbol, quantity, chatId);
-        } catch (IllegalStateException ex) {
-            log.warn("Не удалось разместить BUY-ордер {} {} для chatId={}: {}", symbol, quantity, chatId, ex.getMessage());
+            clientProvider.getClientForUser(chatId)
+                          .newOrder(Map.of(
+                              "symbol", symbol,
+                              "side", "BUY",
+                              "type", "MARKET",
+                              "quantity", quantity
+                          ));
+            log.info("BUY market order: {} {} chatId={}", symbol, quantity, chatId);
         } catch (Exception ex) {
-            log.error("Ошибка при попытке BUY {} {} для chatId={}: {}", symbol, quantity, chatId, ex.toString());
+            log.error("BUY failed: {} {} chatId={} → {}", symbol, quantity, chatId, ex.getMessage());
         }
     }
 
     @Override
     public void sell(Long chatId, String symbol, BigDecimal quantity) {
-        if (StringUtils.isBlank(symbol)) {
-            log.warn("SELL: пустая символ-пара для chatId={}", chatId);
-            return;
-        }
-        if (quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
-            log.warn("SELL: некорректный объём {} для {} (chatId={})", quantity, symbol, chatId);
+        if (StringUtils.isBlank(symbol) || quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
+            log.warn("SELL skip: {} qty={} chatId={}", symbol, quantity, chatId);
             return;
         }
         try {
-            var client = clientProvider.getClientForUser(chatId);
-            client.newOrder(symbol, "SELL", quantity);
-            log.info("SELL order placed: {} {}, chatId={}", symbol, quantity, chatId);
-        } catch (IllegalStateException ex) {
-            log.warn("Не удалось разместить SELL-ордер {} {} для chatId={}: {}", symbol, quantity, chatId, ex.getMessage());
+            clientProvider.getClientForUser(chatId)
+                          .newOrder(Map.of(
+                              "symbol", symbol,
+                              "side", "SELL",
+                              "type", "MARKET",
+                              "quantity", quantity
+                          ));
+            log.info("SELL market order: {} {} chatId={}", symbol, quantity, chatId);
         } catch (Exception ex) {
-            log.error("Ошибка при попытке SELL {} {} для chatId={}: {}", symbol, quantity, chatId, ex.toString());
+            log.error("SELL failed: {} {} chatId={} → {}", symbol, quantity, chatId, ex.getMessage());
+        }
+    }
+
+    @Override
+    public void placeBracketOrder(Long chatId,
+                                  String symbol,
+                                  BigDecimal quantity,
+                                  BigDecimal tpPrice,
+                                  BigDecimal slPrice) {
+        if (StringUtils.isBlank(symbol) || quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
+            log.warn("OCO skip: {} qty={} chatId={}", symbol, quantity, chatId);
+            return;
+        }
+        try {
+            // Собираем параметры OCO-ордера
+            Map<String, Object> params = new HashMap<>();
+            params.put("symbol", symbol);
+            params.put("side", "BUY");                     // для simplicity — только BUY; можно условно SELL
+            params.put("type", "OCO");
+            params.put("quantity", quantity);
+            params.put("price", tpPrice);                  // лимит-цена TakeProfit
+            params.put("stopPrice", slPrice);              // цена активации StopLoss
+            params.put("stopLimitPrice", slPrice);         // лимит для StopLimit
+            params.put("stopLimitTimeInForce", "GTC");
+
+            clientProvider.getClientForUser(chatId).newOrder(params);
+
+            log.info("OCO order placed: {} qty={} TP@{} SL@{} chatId={}",
+                     symbol, quantity, tpPrice, slPrice, chatId);
+        } catch (Exception ex) {
+            log.error("OCO failed: {} {} chatId={} → {}", symbol, quantity, chatId, ex.getMessage());
         }
     }
 }

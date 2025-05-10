@@ -14,9 +14,15 @@ public enum StrategyType {
     VWAP("VWAP"),
     /** добавлены новые стратегии */
     DCA("DCA"),
-    SCALPING("Scalping");
+    SCALPING("Scalping"),
+    /** ML-TP/SL стратегия на основе REST-модели */
+    ML_TPSL("ML TP/SL");
 
     private final String displayName;
-    StrategyType(String displayName) { this.displayName = displayName; }
-    public String getDisplayName() { return displayName; }
+    StrategyType(String displayName) {
+        this.displayName = displayName;
+    }
+    public String getDisplayName() {
+        return displayName;
+    }
 }

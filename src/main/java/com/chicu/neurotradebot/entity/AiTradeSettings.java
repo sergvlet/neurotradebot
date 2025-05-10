@@ -1,4 +1,3 @@
-// src/main/java/com/chicu/neurotradebot/entity/AiTradeSettings.java
 package com.chicu.neurotradebot.entity;
 
 import com.chicu.neurotradebot.enums.ApiSetupStep;
@@ -9,9 +8,13 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "ai_trade_settings")
@@ -73,6 +76,12 @@ public class AiTradeSettings {
     @Builder.Default
     private boolean enabled = false;
 
+    /** Использовать ML для динамического расчёта TP/SL */
+    @Column(name = "use_ml_tp_sl", nullable = false)
+    @ColumnDefault("false")
+    @Builder.Default
+    private boolean useMlTpSl = false;
+
     /** Режим торговли */
     @Enumerated(EnumType.STRING)
     @Column(name = "trade_mode", nullable = false, length = 32)
@@ -111,6 +120,18 @@ public class AiTradeSettings {
     @Embedded
     @Builder.Default
     private RiskConfig riskConfig = new RiskConfig();
+
+
+    // ========== Конфиг ML-стратегии ==========
+    @Embedded
+    @Builder.Default
+    private MlStrategyConfig mlStrategyConfig = MlStrategyConfig.builder()
+            .totalCapitalUsd(BigDecimal.valueOf(100))
+            .lookbackPeriod(Duration.ofDays(30))
+            .predictUrl("http://localhost:5000/predict")
+            .build();
+    // ========================================
+
 
     // ========== Отдельные таблицы под стратегии ==========
 
