@@ -22,40 +22,40 @@ public class BinanceSpotTradeExecutor implements SpotTradeExecutor {
     @Override
     public void buy(Long chatId, String symbol, BigDecimal quantity) {
         if (StringUtils.isBlank(symbol) || quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
-            log.warn("BUY skip: {} qty={} chatId={}", symbol, quantity, chatId);
+            log.warn("BUY skip: symbol='{}', qty={} chatId={}", symbol, quantity, chatId);
             return;
         }
         try {
-            clientProvider.getClientForUser(chatId)
-                          .newOrder(Map.of(
-                              "symbol", symbol,
-                              "side", "BUY",
-                              "type", "MARKET",
-                              "quantity", quantity
-                          ));
+            Map<String, Object> params = new HashMap<>();
+            params.put("symbol",   symbol);
+            params.put("side",     "BUY");
+            params.put("type",     "MARKET");
+            params.put("quantity", quantity);
+
+            clientProvider.getClientForUser(chatId).newOrder(params);
             log.info("BUY market order: {} {} chatId={}", symbol, quantity, chatId);
         } catch (Exception ex) {
-            log.error("BUY failed: {} {} chatId={} → {}", symbol, quantity, chatId, ex.getMessage());
+            log.error("BUY failed: {} {} chatId={}", symbol, quantity, chatId, ex);
         }
     }
 
     @Override
     public void sell(Long chatId, String symbol, BigDecimal quantity) {
         if (StringUtils.isBlank(symbol) || quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
-            log.warn("SELL skip: {} qty={} chatId={}", symbol, quantity, chatId);
+            log.warn("SELL skip: symbol='{}', qty={} chatId={}", symbol, quantity, chatId);
             return;
         }
         try {
-            clientProvider.getClientForUser(chatId)
-                          .newOrder(Map.of(
-                              "symbol", symbol,
-                              "side", "SELL",
-                              "type", "MARKET",
-                              "quantity", quantity
-                          ));
+            Map<String, Object> params = new HashMap<>();
+            params.put("symbol",   symbol);
+            params.put("side",     "SELL");
+            params.put("type",     "MARKET");
+            params.put("quantity", quantity);
+
+            clientProvider.getClientForUser(chatId).newOrder(params);
             log.info("SELL market order: {} {} chatId={}", symbol, quantity, chatId);
         } catch (Exception ex) {
-            log.error("SELL failed: {} {} chatId={} → {}", symbol, quantity, chatId, ex.getMessage());
+            log.error("SELL failed: {} {} chatId={}", symbol, quantity, chatId, ex);
         }
     }
 
@@ -66,27 +66,25 @@ public class BinanceSpotTradeExecutor implements SpotTradeExecutor {
                                   BigDecimal tpPrice,
                                   BigDecimal slPrice) {
         if (StringUtils.isBlank(symbol) || quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
-            log.warn("OCO skip: {} qty={} chatId={}", symbol, quantity, chatId);
+            log.warn("OCO skip: symbol='{}', qty={} chatId={}", symbol, quantity, chatId);
             return;
         }
         try {
-            // Собираем параметры OCO-ордера
             Map<String, Object> params = new HashMap<>();
-            params.put("symbol", symbol);
-            params.put("side", "BUY");                     // для simplicity — только BUY; можно условно SELL
-            params.put("type", "OCO");
-            params.put("quantity", quantity);
-            params.put("price", tpPrice);                  // лимит-цена TakeProfit
-            params.put("stopPrice", slPrice);              // цена активации StopLoss
-            params.put("stopLimitPrice", slPrice);         // лимит для StopLimit
+            params.put("symbol",               symbol);
+            params.put("side",                 "BUY");  // или "SELL"
+            params.put("type",                 "OCO");
+            params.put("quantity",             quantity);
+            params.put("price",                tpPrice);
+            params.put("stopPrice",            slPrice);
+            params.put("stopLimitPrice",       slPrice);
             params.put("stopLimitTimeInForce", "GTC");
 
             clientProvider.getClientForUser(chatId).newOrder(params);
-
             log.info("OCO order placed: {} qty={} TP@{} SL@{} chatId={}",
-                     symbol, quantity, tpPrice, slPrice, chatId);
+                    symbol, quantity, tpPrice, slPrice, chatId);
         } catch (Exception ex) {
-            log.error("OCO failed: {} {} chatId={} → {}", symbol, quantity, chatId, ex.getMessage());
+            log.error("OCO failed: {} {} chatId={}", symbol, quantity, chatId, ex);
         }
     }
 }

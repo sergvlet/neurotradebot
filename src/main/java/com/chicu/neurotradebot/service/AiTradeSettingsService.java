@@ -33,5 +33,11 @@ public interface AiTradeSettingsService {
     ConfigWaiting getWaiting(Long chatId);
     void clearWaiting(Long chatId);
     void toggleStrategy(Long chatId, StrategyType type);
-    
+    void toggleMlTpSl(Long chatId);
+    void updateMlTotalCapital(Long chatId, double deltaUsd);
+    void updateMlEntryRsiThreshold(Long chatId, double deltaRsi);
+    void updateMlLookbackPeriod(Long chatId, int deltaHours);
+    void resetMlConfig(Long chatId);
+    // для ввода URL
+
 }

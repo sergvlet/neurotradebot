@@ -21,77 +21,102 @@ import java.util.List;
 @Slf4j
 public class MlTpSlStrategy {
 
-    private final MarketDataService marketDataService;
-    private final TpSlPredictor    predictor;
-    private final SpotTradeExecutor executor;
+    private static final int MIN_BARS_FOR_INDICATORS = 20;
 
+    private final MarketDataService marketDataService;
+    private final TpSlPredictor     predictor;
+    private final SpotTradeExecutor executor;
 
     public void execute(AiTradeSettings settings, Long chatId) {
         MlStrategyConfig cfg       = settings.getMlStrategyConfig();
         Duration scanInterval      = settings.getScanInterval();
         Duration lookbackPeriod    = cfg.getLookbackPeriod();
         List<String> pairs         = settings.getPairs();
+
         if (pairs.isEmpty()) {
-            log.info("ML_TPSL: список пар пуст, пропускаем");
+            log.warn("ML_TPSL: ни одной пары не выбрано, выходим");
             return;
         }
 
-        // рассчитываем число баров = lookbackPeriod / scanInterval, минимум 20
-        long lookbackSecs = lookbackPeriod.getSeconds();
-        long intervalSecs = scanInterval.getSeconds();
-        int  lookbackBars = (int) Math.max(lookbackSecs / intervalSecs, 20);
-        log.info("ML_TPSL: потребуется баров={}, интервал считывания={}", lookbackBars, scanInterval);
+        long millisInterval   = scanInterval.toMillis();
+        long millisLookback   = lookbackPeriod.toMillis();
+        if (millisInterval <= 0) {
+            log.error("ML_TPSL: неверный scanInterval={} (мс), выходим", millisInterval);
+            return;
+        }
+        if (millisLookback <= 0) {
+            log.error("ML_TPSL: неверный lookbackPeriod={} (мс), выходим", millisLookback);
+            return;
+        }
 
-        BigDecimal perPairUsd = cfg.getTotalCapitalUsd()
-                .divide(BigDecimal.valueOf(pairs.size()), 8, RoundingMode.DOWN);
+        int lookbackBars = (int)(millisLookback / millisInterval);
+        if (lookbackBars < MIN_BARS_FOR_INDICATORS) {
+            log.warn("ML_TPSL: рассчитано lookbackBars={} < {}, подменяем на {}", 
+                     lookbackBars, MIN_BARS_FOR_INDICATORS, MIN_BARS_FOR_INDICATORS);
+            lookbackBars = MIN_BARS_FOR_INDICATORS;
+        } else {
+            log.info("ML_TPSL: lookbackPeriod={} мс, scanInterval={} мс → lookbackBars={}", 
+                     millisLookback, millisInterval, lookbackBars);
+        }
+
+        BigDecimal totalCapitalUsd = cfg.getTotalCapitalUsd();
+        BigDecimal perPairUsd      = totalCapitalUsd
+            .divide(BigDecimal.valueOf(pairs.size()), 8, RoundingMode.DOWN);
 
         for (String symbol : pairs) {
-            log.info("ML_TPSL: запрашиваем {} баров для {}", lookbackBars, symbol);
-            List<Bar> bars = marketDataService.getHistoricalBars(symbol, scanInterval, lookbackBars, chatId);
-            int received = bars == null ? 0 : bars.size();
-            log.info("ML_TPSL: получено баров={} для {}", received, symbol);
-            if (bars == null || bars.size() < 20) {
-                log.info("ML_TPSL: недостаточно баров для {}, пропускаем", symbol);
+            List<Bar> bars;
+            try {
+                bars = marketDataService.getHistoricalBars(symbol, scanInterval, lookbackBars, chatId);
+            } catch (Exception ex) {
+                log.warn("ML_TPSL: не удалось получить {} баров для {}: {}", lookbackBars, symbol, ex.getMessage());
+                continue;
+            }
+
+            if (bars.size() < MIN_BARS_FOR_INDICATORS) {
+                log.info("ML_TPSL: получили {} баров для {}, а нужно хотя бы {}, пропускаем",
+                         bars.size(), symbol, MIN_BARS_FOR_INDICATORS);
                 continue;
             }
 
             var iv   = IndicatorCalculator.calculate(bars);
             var last = bars.get(bars.size() - 1);
-            log.info("ML_TPSL: индикаторы для {} → RSI={}, BB_низу={}, ATR={}, bodyRatio={}",
-                    symbol, iv.getRsi(), iv.getBbLower(), iv.getAtr(), iv.getBodyRatio());
 
             boolean entryCond = iv.getRsi() < cfg.getEntryRsiThreshold()
-                    && last.getClose().doubleValue() < iv.getBbLower()
-                    && last.getClose().compareTo(last.getOpen()) > 0;
-            log.info("ML_TPSL: условие входа для {} = {}", symbol, entryCond);
+                                && last.getClose().doubleValue() < iv.getBbLower()
+                                && last.getClose().compareTo(last.getOpen()) > 0;
             if (!entryCond) {
                 log.info("ML_TPSL: условие входа не выполнено для {}, пропускаем", symbol);
                 continue;
             }
 
-            TpSlResult ml = predictor.predict(iv, cfg.getPredictUrl());
-            log.info("ML_TPSL: ML вернул для {} → TP={}%, SL={}%",
-                    symbol, ml.getTpPercent(), ml.getSlPercent());
+            TpSlResult ml;
+            try {
+                ml = predictor.predict(iv, cfg.getPredictUrl());
+            } catch (Exception ex) {
+                log.warn("ML_TPSL: ошибка ML для {}: {}", symbol, ex.getMessage());
+                continue;
+            }
 
             BigDecimal entryPrice = last.getClose();
-            BigDecimal qty = perPairUsd
-                    .divide(entryPrice, 8, RoundingMode.DOWN);
-            log.info("ML_TPSL: для {} рассчитаны entryPrice={} и qty={}", symbol, entryPrice, qty);
-            if (qty.compareTo(BigDecimal.ZERO) <= 0) {
-                log.info("ML_TPSL: объём ≤0 для {}, пропускаем", symbol);
+            BigDecimal rawQty     = perPairUsd.divide(entryPrice, 8, RoundingMode.DOWN);
+            if (rawQty.compareTo(BigDecimal.ZERO) <= 0) {
+                log.info("ML_TPSL: rawQty={} для {} ≤0, пропускаем", rawQty, symbol);
                 continue;
             }
 
             BigDecimal tpPrice = entryPrice
-                    .multiply(BigDecimal.ONE.add(BigDecimal.valueOf(ml.getTpPercent()).divide(BigDecimal.valueOf(100))))
-                    .setScale(entryPrice.scale(), RoundingMode.HALF_UP);
+                .multiply(BigDecimal.ONE.add(BigDecimal.valueOf(ml.getTpPercent()).divide(BigDecimal.valueOf(100))))
+                .setScale(entryPrice.scale(), RoundingMode.HALF_UP);
             BigDecimal slPrice = entryPrice
-                    .multiply(BigDecimal.ONE.subtract(BigDecimal.valueOf(ml.getSlPercent()).divide(BigDecimal.valueOf(100))))
-                    .setScale(entryPrice.scale(), RoundingMode.HALF_UP);
-            log.info("ML_TPSL: выставляем OCO-ордер для {} → TP={}, SL={}", symbol, tpPrice, slPrice);
+                .multiply(BigDecimal.ONE.subtract(BigDecimal.valueOf(ml.getSlPercent()).divide(BigDecimal.valueOf(100))))
+                .setScale(entryPrice.scale(), RoundingMode.HALF_UP);
 
-            executor.placeBracketOrder(chatId, symbol, qty, tpPrice, slPrice);
-            log.info("ML_TPSL: ордер отправлен для {}", symbol);
+            try {
+                executor.placeBracketOrder(chatId, symbol, rawQty, tpPrice, slPrice);
+                log.info("ML_TPSL: OCO для {} qty={} TP={} SL={}", symbol, rawQty, tpPrice, slPrice);
+            } catch (Exception ex) {
+                log.error("ML_TPSL: не удалось отправить OCO для {}: {}", symbol, ex.getMessage());
+            }
         }
     }
 }
